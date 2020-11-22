@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML.NSXUserControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML"
+        mc:Ignorable="d"
+        x:Name="NSX"
+        DataContext="{StaticResource NSXCommand}"
+        Height="Auto" Width="Auto"
+        >
+
+
+    <Grid Height="Auto" Width="Auto">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="173*"/>
+            <ColumnDefinition Width="1009*"/>
+
+        </Grid.ColumnDefinitions>
+
+
+        <!--Mã Nhà Sản Xuất-->
+        <TextBox Grid.Row="1"
+                 materialDesign:HintAssist.Hint="Mã nhà Sản Xuất"
+                 FontSize="15"
+                  
+                 Margin="1,20,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding MaNSX}"
+                 Height="44" Grid.Column="1" />
+
+        <!--Tên nhà sản xuất-->
+        <TextBox Grid.Row="2"
+                 materialDesign:HintAssist.Hint="Tên nhà sản xuất"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="1,20,2,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding TenNSX}" Grid.Column="1" 
+                 />
+
+
+
+        <!--Địa Chỉ-->
+        <TextBox Grid.Row="3"
+                 VerticalAlignment="Top"
+                 Margin="1,20,2,0"
+                  
+                 
+                 FontWeight="Bold"
+                 FontSize="15"
+                 FontFamily="Sitka Subheading"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Height="44"
+                 Text="{Binding DiaChi}" Grid.Column="1" 
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Địa Chỉ</Bold> (₫)
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+
+
+
+
+
+        <!--Mô tả nhà sản xuất-->
+        <TextBlock Grid.Row="0" Grid.Column="1"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="32,8,3,8"
+            Text="Nhà Sản Xuất"
+            FontSize="16"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+            Height="25" Width="138"  />
+
+        <!--Danh sách loại sản phẩm-->
+        <materialDesign:Card Grid.Row="0" Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.538">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="533">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã nhà sản xuất" DisplayMemberBinding="{Binding IdNSX}"></GridViewColumn>
+                            <GridViewColumn Header="Tên nhà sản xuất" DisplayMemberBinding="{Binding TenNSX}"></GridViewColumn>
+                            <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+
+        <!--Button Thêm đơn hàng-->
+        <materialDesign:Card Grid.Row="6" Margin="5,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="360">
+            <WrapPanel>
+                <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
+                <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+    </Grid>
+</UserControl>
+ 
