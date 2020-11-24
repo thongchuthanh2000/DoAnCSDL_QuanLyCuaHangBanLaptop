@@ -48,10 +48,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new NSXUserControl());
                     break;
-                //case 1:
-                //    GridPrincipal.Children.Clear();
-                //    GridPrincipal.Children.Add(new UserControlEscolha());
-                //    break;
+                case 1:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new PhuongThucThanhToanUserControl());
+                    break;
                 default:
                     break;
             }

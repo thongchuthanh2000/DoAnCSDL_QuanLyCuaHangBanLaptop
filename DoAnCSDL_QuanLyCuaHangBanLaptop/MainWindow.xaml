@@ -22,10 +22,10 @@
         WindowStartupLocation="CenterScreen"
         
         Name="mainWindow"
-        DataContext="{StaticResource MainVM}"
-        Title="Phần mền bán Laptop" Height="813" Width="760" >
+        DataContext="{ StaticResource MainVM}"
+        Title="Phần mền bán Laptop" Height="830" Width="1018" >
 
-    <Grid Margin="0,0,0,10" Height="Auto">
+    <Grid Margin="0,0,10,-152" Height="Auto">
 
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
@@ -225,11 +225,11 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <TextBlock Text="Customer" HorizontalAlignment="Center"  FontSize="30"></TextBlock>
+                            <TextBlock Text="Customer" HorizontalAlignment="Center" Foreground="White" FontSize="30"></TextBlock>
                         </Grid>
                         <Grid Grid.Row="1">
                             <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
-                                                     Kind="Settings" />
+                                                     Kind="PersonBadge" Foreground="White" />
                         </Grid>
                     </Grid>
                 </Button>

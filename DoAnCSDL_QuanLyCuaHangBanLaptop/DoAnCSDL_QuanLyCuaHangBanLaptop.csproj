@@ -69,12 +69,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="KhachHangWindow.xaml.cs">
+      <DependentUpon>KhachHangWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="KhuyenMaiWindow.xaml.cs">
+      <DependentUpon>KhuyenMaiWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DonNhap.cs" />
+    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\KhachHang.cs" />
+    <Compile Include="Model\KhuyenMai.cs" />
     <Compile Include="Model\NhanVien.cs" />
+    <Compile Include="Model\Nhap.cs" />
     <Compile Include="Model\NSX.cs" />
+    <Compile Include="Model\PhanQuyen.cs" />
+    <Compile Include="Model\PhuongThucThanhToan.cs" />
     <Compile Include="Model\SanPham.cs" />
+    <Compile Include="Model\TaiKhoan.cs" />
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
     </Compile>
@@ -84,20 +98,38 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StoreWindow.xaml.cs">
+      <DependentUpon>StoreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlXAML\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlXAML\NSXUserControl.xaml.cs">
       <DependentUpon>NSXUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlXAML\PhuongThucThanhToanUserControl.xaml.cs">
+      <DependentUpon>PhuongThucThanhToanUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\KhachHangViewModel.cs" />
+    <Compile Include="ViewModel\KhuyenMaiViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NhanVienViewModel.cs" />
     <Compile Include="ViewModel\NSXViewModel.cs" />
+    <Compile Include="ViewModel\PhuongThucThanhToanViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\StoreViewModel.cs" />
+    <Page Include="KhachHangWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="KhuyenMaiWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,11 +162,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StoreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlXAML\ControlBarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlXAML\NSXUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlXAML\PhuongThucThanhToanUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

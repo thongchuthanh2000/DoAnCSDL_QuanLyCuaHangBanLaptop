@@ -35,12 +35,13 @@
                             <TextBlock Text="Nhà Sản Xuất" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                         </StackPanel>
                     </ListViewItem>
-                    <!--<ListViewItem Height="60">
+                    <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FoodForkDrink" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Escolha" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                            <materialDesign:PackIcon Kind="Barcode" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="PT THanh Toán" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                         </StackPanel>
                     </ListViewItem>
+                    <!--
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="FormatListBulleted" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>

@@ -10,14 +10,14 @@ using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 {
-    public class NhanVienViewModel:BaseViewModel
+    public class KhachHangViewModel : BaseViewModel
     {
-        private ObservableCollection<Model.NhanVien> _List;
-        public ObservableCollection<Model.NhanVien> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<Model.KhachHang> _List;
+        public ObservableCollection<Model.KhachHang> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
 
-        private NhanVien _SelectedItem;
-        public NhanVien SelectedItem
+        private KhachHang _SelectedItem;
+        public KhachHang SelectedItem
         {
             get => _SelectedItem;
             set
@@ -26,63 +26,57 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaNhanVien= SelectedItem.idNV;
-                    TenNhanVien = SelectedItem.HoTen;
-                    NgaySinh = (DateTime)SelectedItem.NgaySinh;
+                    MaKhachHang = SelectedItem.idKH;
+                    HoTen = SelectedItem.HoTen;
                     GioiTinh = SelectedItem.GioiTinh;
-                    
                     DiaChi = SelectedItem.DiaChi;
                     SDT = SelectedItem.SDT;
-                    ChucVu = SelectedItem.ChucVu;
+
                 }
             }
         }
 
 
-        private int _MaNhanVien;
-        public int MaNhanVien { get => _MaNhanVien; set { _MaNhanVien = value; OnPropertyChanged(); } }
+        private int _MaKhachHang;
+        public int MaKhachHang { get => _MaKhachHang; set { _MaKhachHang = value; OnPropertyChanged(); } }
 
-        private string _TenNhanVien;
-        public string TenNhanVien { get => _TenNhanVien; set { _TenNhanVien = value; OnPropertyChanged(); } }
+        private string _HoTen;
+        public string HoTen { get => _HoTen; set { _HoTen = value; OnPropertyChanged(); } }
 
 
         private string _GioiTinh;
         public string GioiTinh { get => _GioiTinh; set { _GioiTinh = value; OnPropertyChanged(); } }
-
-        private DateTime _ngaySinh;
-        public DateTime NgaySinh { get => _ngaySinh; set { _ngaySinh = value; OnPropertyChanged(); } }
 
         private string _DiaChi;
         public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
 
         private string _SDT;
         public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
-        private string _ChucVu;
-        public string ChucVu { get => _ChucVu; set { _ChucVu = value; OnPropertyChanged(); } }
+   
 
 
         //public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
-        private void LoadListNhanVien()
+        private void LoadListKhachHang()
         {
-            List = new ObservableCollection<NhanVien>();
+            List = new ObservableCollection<KhachHang>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NhanVien");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.KhachHang");
 
             foreach (DataRow item in data.Rows)
             {
-                NhanVien nhanvien = new NhanVien(item);
-                List.Add(nhanvien);
+                KhachHang khachhang = new KhachHang(item);
+                List.Add(khachhang);
             }
             OnPropertyChanged();
 
         }
 
-        public NhanVienViewModel()
+        public KhachHangViewModel()
         {
-            LoadListNhanVien();
+            LoadListKhachHang();
 
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -92,7 +86,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 string query = string.Format("");
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNhanVien();
+                LoadListKhachHang();
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -100,7 +94,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("Select * from NhanVien where  idNV = {0}", SelectedItem.idNV);
+                string query = string.Format("");
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -113,11 +107,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                LoadListNhanVien();
+                LoadListKhachHang();
 
             });
         }
 
     }
-
 }

@@ -23,8 +23,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="102*"/>
-            <ColumnDefinition Width="138*"/>
-            <ColumnDefinition Width="Auto" MinWidth="951"/>
+            <ColumnDefinition Width="1089*"/>
 
         </Grid.ColumnDefinitions>
 
@@ -75,12 +74,12 @@
                  FontFamily="Sitka Subheading"
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Text="{Binding MaNV}"
+                 Text="{Binding MaNhanVien}"
                  Height="44" Grid.Column="1" />
 
         <!--Tên sản phẩm-->
         <TextBox Grid.Row="2"
-                 materialDesign:HintAssist.Hint="Tên sản phẩm"
+                 materialDesign:HintAssist.Hint="Tên Nhân Viên"
                 VerticalAlignment="Top"
                  FontSize="15"
                  Margin="1,20,2,0"
@@ -90,39 +89,38 @@
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                   Height="44"
-                 Text="{Binding TenSanPham}" Grid.Column="1" 
+                 Text="{Binding TenNhanVien}" Grid.Column="1" 
                  />
 
+        <DatePicker
+            x:Name="FutureDatePicker"
+            Width="100" Grid.Row="3"  Grid.Column="1" 
+              Margin="1,29,1,9.538"
+             Height="44"
+            materialDesign:HintAssist.Hint="Ngày Sinh">
+            <DatePicker.SelectedDate>
+                <Binding
+                    Path="NgaySinh"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
 
 
-        <!--Giá bán-->
-        <TextBox Grid.Row="3"
-                 VerticalAlignment="Top"
-                 Margin="1,20,2,0"
-                  
-                 
-                 FontWeight="Bold"
+        <!--Tên sản phẩm-->
+        <TextBox Grid.Row="5"
+                 materialDesign:HintAssist.Hint="Địa Chỉ"
+                VerticalAlignment="Top"
                  FontSize="15"
+                 Margin="1,20.462,2,0"
+                  
+                 Background="Transparent"
                  FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Height="44"
-                 Text="{Binding GiaBan}" Grid.Column="1" 
-                 >
-            <materialDesign:HintAssist.Hint>
-                <TextBlock>
-                    <Bold>Giá sản phẩm</Bold> (₫)
-                </TextBlock>
-            </materialDesign:HintAssist.Hint>
-        </TextBox>
-
-        <!--Thương Hiệu-->
-
-        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5 5 15 5"  DisplayMemberPath="TenNSX" 
-                  ItemsSource="{Binding NSX}" SelectedItem="{Binding SelectedNSX, Mode=OneWay, 
-            UpdateSourceTrigger=PropertyChanged}"  materialDesign:HintAssist.Hint="Nhà cung cấp" IsEditable="True" 
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-        </ComboBox>
-
+                  Height="44"
+                 Text="{Binding DiaChi}" Grid.Column="1" 
+                 />
 
         <!--Số lượng-->
 
@@ -135,9 +133,8 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            materialDesign:HintAssist.Hint="Số lượng"
+            materialDesign:HintAssist.Hint="SDT"
          Text="{Binding SoLuong}"
              Height="44" Grid.Column="1"/>
         <!--Giá vốn-->
@@ -150,40 +147,25 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             Height="44"
-                 Text="{Binding GiaGoc}" Grid.Column="1"
+                 Text="{Binding GioiTinh}" Grid.Column="1"
                  >
             <materialDesign:HintAssist.Hint>
                 <TextBlock>
-                    <Bold>Giá vốn</Bold> (₫)
+                    <Bold>Giới Tính</Bold>
                 </TextBlock>
             </materialDesign:HintAssist.Hint>
         </TextBox>
 
-        <!--Tồn kho-->
-        <!--
-        <TextBox Grid.Row="2" Grid.Column="1"
-            Margin="11,20,11,0"
-             
-            FontSize="15"
-            FontWeight="Bold"
-            FontFamily="Sitka Subheading"
-            AcceptsReturn="True"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            materialDesign:HintAssist.Hint="Số lượng tồn kho"
-            Name="editAmount" Height="44"/>-->
+      
 
         <!--Mô tả sản phẩm-->
         <TextBlock Grid.Row="0"
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="97,6,5,10"
+            Margin="97,6,956,10"
             Text="Mô tả sản phẩm"
             FontSize="15"
             FontWeight="Bold"
@@ -191,31 +173,20 @@
             
             TextWrapping="Wrap"
            Height="25" Width="138" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <!--Tên CPU-->
-        <!--Tên CPU-->
-        <!--Tên CPU-->
-
-        <!--Tên CPU-->
-
-
-        <!--Ảnh sản phẩm-->
 
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="0" Grid.Column="3" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.538">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="392" Margin="10,23,0,82.231">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,10">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="951">
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="346" Width="1031">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Tên Sản Phẩm" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
-                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
-                            <GridViewColumn Header="Nhà Sản Xuất" DisplayMemberBinding="{Binding NSX.TenNSX}" ></GridViewColumn>
-                            <GridViewColumn Header="Số lương" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                            <GridViewColumn Header="Giá Gốc" DisplayMemberBinding="{Binding GiaGoc}"></GridViewColumn>
-                            <GridViewColumn Header="Ram" DisplayMemberBinding="{Binding RAM}"></GridViewColumn>
-                            <GridViewColumn Header="Màn Hình" DisplayMemberBinding="{Binding ManHinh}"></GridViewColumn>
-
-
+                            <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding NgaySinh}"></GridViewColumn>
+                            <GridViewColumn Header="Giới Tinh" DisplayMemberBinding="{Binding GioiTinh}" ></GridViewColumn>
+                            <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
+                            <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                            <GridViewColumn Header="Chức Vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
 
                         </GridView>
                     </ListView.View>
@@ -224,7 +195,7 @@
         </materialDesign:Card>
 
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="5,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="3" Height="52" Width="Auto">
+        <materialDesign:Card Grid.Row="6" Margin="143,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="Auto">
             <WrapPanel>
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>

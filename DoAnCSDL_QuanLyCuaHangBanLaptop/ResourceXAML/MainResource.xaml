@@ -1,11 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.ResourceXAML" 
-                    xmlns:viewmodel="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel">
+                    xmlns:viewmodel="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel"
+                    >
+                    
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:ProductViewModel x:Key="ProductVM"></viewmodel:ProductViewModel>
-    <viewmodel:NSXViewModel x:Key="NSXCommand"></viewmodel:NSXViewModel>
+    <viewmodel:NSXViewModel x:Key="NSXVM"></viewmodel:NSXViewModel>
 
-    
+    <viewmodel:PhuongThucThanhToanViewModel x:Key="PTThanhToanVM"></viewmodel:PhuongThucThanhToanViewModel>
+    <viewmodel:StoreViewModel x:Key="StoreVM"></viewmodel:StoreViewModel>
+    <viewmodel:KhuyenMaiViewModel x:Key="KhuyenMaiVM"></viewmodel:KhuyenMaiViewModel>
+    <viewmodel:KhachHangViewModel x:Key="KhachHangVM"></viewmodel:KhachHangViewModel>
+
 </ResourceDictionary>

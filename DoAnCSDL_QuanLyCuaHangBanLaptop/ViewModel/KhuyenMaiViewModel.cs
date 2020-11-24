@@ -10,14 +10,14 @@ using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 {
-    public class NSXViewModel : BaseViewModel
+    public class KhuyenMaiViewModel:BaseViewModel
     {
-        private ObservableCollection<Model.NSX> _List;
-        public ObservableCollection<Model.NSX> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<Model.KhuyenMai> _List;
+        public ObservableCollection<Model.KhuyenMai> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
 
-        private NSX _SelectedItem;
-        public NSX SelectedItem
+        private KhuyenMai _SelectedItem;
+        public KhuyenMai SelectedItem
         {
             get => _SelectedItem;
             set
@@ -26,59 +26,62 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaNSX = SelectedItem.IdNSX;
-                    TenNSX = SelectedItem.TenNSX;
-                    DiaChi = SelectedItem.DiaChi;
+                    MaKhuyenMai = SelectedItem.IdKhuyenMai;
+                    GiaTriKhuyenMai = SelectedItem.GiaTriKhuyenMai;
+                    NgBatDau = SelectedItem.NgayBatDau;
+                    NgKetThuc = SelectedItem.NgayKetThuc;
                 }
             }
         }
 
 
-        private int _MaNSX;
-        public int MaNSX { get => _MaNSX; set { _MaNSX = value; OnPropertyChanged(); } }
+        private int _MaKhuyenMai;
+        public int MaKhuyenMai { get => _MaKhuyenMai; set { _MaKhuyenMai = value; OnPropertyChanged(); } }
 
-        private string _TenNSX;
-        public string TenNSX { get => _TenNSX; set { _TenNSX = value; OnPropertyChanged(); } }
+        private int _GiaTriKhuyenMai;
+        public int GiaTriKhuyenMai { get => _GiaTriKhuyenMai; set { _GiaTriKhuyenMai = value; OnPropertyChanged(); } }
 
 
-        private string _DiaChi;
-        public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
+        private DateTime _NgBatDau;
+        public DateTime NgBatDau { get => _NgBatDau; set { _NgBatDau = value; OnPropertyChanged(); } }
 
+        private DateTime _NgKetThuc;
+        public DateTime NgKetThuc { get => _NgKetThuc; set { _NgKetThuc = value; OnPropertyChanged(); } }
 
         //public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
-       
 
-        private void LoadListNSX()
+
+        private void LoadListKM()
         {
-            List = new ObservableCollection<NSX>();
+            List = new ObservableCollection<KhuyenMai>();
 
             DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NSX");
 
             foreach (DataRow item in data.Rows)
             {
-                NSX nsx = new NSX(item);
-                List.Add(nsx);
+                KhuyenMai khuyenmai = new KhuyenMai(item);
+                List.Add(khuyenmai);
             }
             OnPropertyChanged();
 
         }
 
-        public NSXViewModel()
+        public KhuyenMaiViewModel()
         {
-            LoadListNSX();
+            LoadListKM();
 
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddNSX @idNSX = {0}, @TenNSX =N'{1}', @DiaChi =N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
+                string query = string.Format("");
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNSX();
+                LoadListKM();
             });
 
             EditCommand = new RelayCommand<object>((p) =>
@@ -86,7 +89,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("Select * from NSX where  idNSX = {0}", SelectedItem.IdNSX);
+                string query = string.Format("");
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -95,11 +98,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeNSX @idNSX = {0}, @TenNSX = N'{1}', @DiaChi = N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
+                string query = string.Format("");
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                
-                LoadListNSX();
+
+                LoadListKM();
 
             });
         }

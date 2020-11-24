@@ -24,7 +24,5 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML
         {
             InitializeComponent();
         }
-
-     
     }
 }

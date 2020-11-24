@@ -1,6 +1,4 @@
-﻿using DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML;
-using DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DoAnCSDL_QuanLyCuaHangBanLaptop
+namespace DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML
 {
     /// <summary>
-    /// Interaction logic for ProductDetailPage.xaml
+    /// Interaction logic for PhuongThucThanhToanUserControl.xaml
     /// </summary>
-    public partial class ProductDetailPage : Window
+    public partial class PhuongThucThanhToanUserControl : UserControl
     {
-        public ProductDetailPage()
+        public PhuongThucThanhToanUserControl()
         {
             InitializeComponent();
-            
         }
     }
 }

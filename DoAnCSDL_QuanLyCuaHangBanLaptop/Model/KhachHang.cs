@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
-    public class NhanVien
+    public class KhachHang
     {
-        public int idNV { get; set; }
+        public int idKH { get; set; }
 
         public string HoTen { get; set; }
-
-        public DateTime? NgaySinh { get; set; }
 
         public string GioiTinh { get; set; }
 
@@ -21,27 +19,21 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public string SDT { get; set; }
 
-        public string ChucVu { get; set; }
-
-        public NhanVien(int idNV, string hoTen, DateTime ngaySinh, string gioiTinh, string diaChi, string SDT, string chucVu)
+        public KhachHang(int idKH, string hoTen, string gioiTinh, string diaChi, string sDT)
         {
-            this.idNV = idNV;
+            this.idKH = idKH;
             this.HoTen = hoTen;
-            this.NgaySinh = ngaySinh;
             this.GioiTinh = gioiTinh;
             this.DiaChi = diaChi;
-            this.SDT = SDT;
-            this.ChucVu = chucVu;
+            this.SDT = sDT;
         }
-        public NhanVien(DataRow row)
+        public KhachHang(DataRow row)
         {
-            this.idNV = (int)row["idNV"];
+            this.idKH = (int)row["idBill"];
             this.HoTen = row["HoTen"].ToString();
-            this.NgaySinh = (DateTime)row["TenSP"];
             this.GioiTinh = row["GioiTinh"].ToString();
             this.DiaChi = row["DiaChi"].ToString();
             this.SDT = row["SDT"].ToString();
-            this.ChucVu = row["ChucVu"].ToString();
         }
     }
 }

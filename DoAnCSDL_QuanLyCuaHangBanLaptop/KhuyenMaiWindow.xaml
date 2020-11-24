@@ -1,0 +1,157 @@
+﻿<Window x:Class="DoAnCSDL_QuanLyCuaHangBanLaptop.KhuyenMaiWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop"
+        mc:Ignorable="d"
+         
+        Title="KhuyenMaiWindow" Height="450" Width="800"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         DataContext="{ StaticResource KhuyenMaiVM}"
+        >
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="117*"/>
+            <ColumnDefinition Width="668*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <!--Giá bán-->
+        <TextBox Grid.Row="2"
+                 VerticalAlignment="Top"
+                 Margin="1,20,2,0"
+                  
+                 
+                 FontWeight="Bold"
+                 FontSize="15"
+                 FontFamily="Sitka Subheading"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Height="44"
+                 Text="{Binding GiaTriKhuyenMai}" Grid.Column="1" 
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Giá Khuyến Mại</Bold> (₫)
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+
+
+        <!--Mã sản phẩm-->
+        <TextBox Grid.Row="1"
+                 materialDesign:HintAssist.Hint="Mã khuyến mại"
+                 FontSize="15"
+                  
+                 Margin="1,20,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding MaKhuyenMai}"
+                 Height="44" Grid.Column="1" />
+
+      
+        <DatePicker
+            x:Name="ngBatDauDate" Grid.Row="3"  Grid.Column="1" 
+              Margin="1,20,0,0"
+             Height="44"
+            materialDesign:HintAssist.Hint="Ngày Bắt Đầu">
+            <DatePicker.SelectedDate>
+                <Binding
+                    Path="NgBatDau"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+
+        <DatePicker
+            x:Name="ngKetThucDate" Grid.Row="4"  Grid.Column="1" 
+              Margin="1,20,0,0"
+             Height="44"
+            materialDesign:HintAssist.Hint="Ngày Kết Thúc">
+            <DatePicker.SelectedDate>
+                <Binding
+                    Path="ngKetThuc"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+                
+            </DatePicker.SelectedDate>
+        </DatePicker>
+
+        <!--Tên sản phẩm-->
+
+        <!--Số lượng-->
+        <!--Giá vốn-->
+
+        <!--Tồn kho-->
+        <!--
+        <TextBox Grid.Row="2" Grid.Column="1"
+            Margin="11,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            VerticalScrollBarVisibility="Auto"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            materialDesign:HintAssist.Hint="Số lượng tồn kho"
+            Name="editAmount" Height="44"/>-->
+
+        <!--Mô tả sản phẩm-->
+        <TextBlock
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+           
+            Text="Khuyễn mại"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+           Height="24" Width="138" Grid.ColumnSpan="2" />
+
+        <!--Danh sách loại sản phẩm-->
+        <materialDesign:Card Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="392" Margin="10,0,0,27">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,10">
+                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="325" Width="666">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã Khuyến Mãi" DisplayMemberBinding="{Binding MaKhuyenMai}"></GridViewColumn>
+                            <GridViewColumn Header="Giá Khuyến Mãi" DisplayMemberBinding="{Binding GiaKhuyenMai}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Bắt Đầu" DisplayMemberBinding="{Binding NgBatDau}" ></GridViewColumn>
+                            <GridViewColumn Header="Ngày Kết Thúc" DisplayMemberBinding="{Binding NgKetThuc}"></GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+
+        <!--Button Thêm đơn hàng-->
+        <materialDesign:Card Grid.Row="6" Margin="143,7,0,6" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="360">
+            <WrapPanel>
+                <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
+                <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+    </Grid>
+</Window>
