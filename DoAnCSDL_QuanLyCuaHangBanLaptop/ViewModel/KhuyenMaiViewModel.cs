@@ -58,7 +58,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         {
             List = new ObservableCollection<KhuyenMai>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NSX");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.KhuyenMai");
 
             foreach (DataRow item in data.Rows)
             {
@@ -78,7 +78,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec AddKhuyenMai @idKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
+                MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListKM();
@@ -89,7 +90,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("");
+
+                string query = string.Format("Select * from KhuyenMai where  IdKhuyenMai = {0}", SelectedItem.IdKhuyenMai);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -98,7 +100,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec ChangeKhuyenMai @idKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
+                MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 

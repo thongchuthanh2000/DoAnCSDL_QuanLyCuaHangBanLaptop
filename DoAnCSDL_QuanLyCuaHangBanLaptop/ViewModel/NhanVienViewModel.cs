@@ -34,6 +34,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     DiaChi = SelectedItem.DiaChi;
                     SDT = SelectedItem.SDT;
                     ChucVu = SelectedItem.ChucVu;
+                   
                 }
             }
         }
@@ -60,6 +61,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private string _ChucVu;
         public string ChucVu { get => _ChucVu; set { _ChucVu = value; OnPropertyChanged(); } }
 
+        private string _user;
+        public string User { get => _user; set { _user = value; OnPropertyChanged(); } }
+
+        private string _pass;
+        public string Pass { get => _pass; set { _pass = value; OnPropertyChanged(); } }
+
+        private string _Chan;
+        public string Chan { get => _Chan; set { _Chan = value; OnPropertyChanged(); } }
 
         //public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -89,7 +98,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec AddNhanVien @idNV = {0}, @Hoten ={1}, @NgaySinh =N'{2}',@GioiTinh= {3},@DiaChi={4},"
+                   + "@SDT ={5}, @ChucVu =N'{6}', @user=N'{7}', @pass=N'{8}', @chan=N'{9}'");
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListNhanVien();
@@ -109,10 +119,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec ChangeNhanVien @idNV = {0}, @Hoten ={1}, @NgaySinh =N'{2}',@GioiTinh= {3},@DiaChi={4},"
+                   + "@SDT ={5}, @ChucVu =N'{6}', @user=N'{7}', @pass=N'{8}', @chan=N'{9}'");
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-
                 LoadListNhanVien();
 
             });

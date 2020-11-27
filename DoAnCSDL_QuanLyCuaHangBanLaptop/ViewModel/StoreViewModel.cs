@@ -118,7 +118,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec AddDonNhap @idGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
+                idGiaoDich, NgayGiaoDich, TongTien);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListDonNhap();
             });
@@ -128,7 +129,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("");
+                string query = string.Format("Select * from DonNhap where  idGiaoDich = {0}", SelectedItem.idGiaoDich);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -137,7 +138,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec ChangeDonNhap @idGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
+                idGiaoDich, NgayGiaoDich, TongTien);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -146,7 +148,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             });
 
-            AddCommand = new RelayCommand<object>((p) =>
+            AddNhapCommand = new RelayCommand<object>((p) =>
             {
                 if (SelectedNhap == null)
                 {
@@ -155,17 +157,19 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec AddDonNhap @idGiaoDich = {0}, @idSP ={1}, @SoLuong={2}",
+                idGiaoDich, idSP, SoLuong);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadNhap(SelectedItem.idGiaoDich);
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
+            EditNhapCommand
+                = new RelayCommand<object>((p) =>
             {
                 if (SelectedNhap == null)
                     return false;
 
-                string query = string.Format("");
+                string query = string.Format("Select * from Nhap where  idGiaoDich = {0}", SelectedItem.idGiaoDich);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -174,7 +178,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("");
+                string query = string.Format("Exec ChangeDonNhap @idGiaoDich = {0}, @idSP ={1}, @SoLuong={2}",
+                idGiaoDich, idSP, SoLuong);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 

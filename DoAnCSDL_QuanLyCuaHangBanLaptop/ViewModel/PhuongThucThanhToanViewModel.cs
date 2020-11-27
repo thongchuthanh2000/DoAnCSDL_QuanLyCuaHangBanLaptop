@@ -29,7 +29,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     if (SelectedItem != null)
                     {
                         MaPhuongThucThanhToan = SelectedItem.idPT_ThanhToan;
-                        TenPhuonThucThanhToan = SelectedItem.TenPT_ThanhToan;
+                        TenPhuongThucThanhToan = SelectedItem.TenPT_ThanhToan;
                     }
                 }
             }
@@ -38,8 +38,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             private int _MaPhuongThucThanhToan;
             public int MaPhuongThucThanhToan { get => _MaPhuongThucThanhToan; set { _MaPhuongThucThanhToan = value; OnPropertyChanged(); } }
 
-            private string _TenPhuonThucThanhToan;
-            public string TenPhuonThucThanhToan { get => _TenPhuonThucThanhToan; set { _TenPhuonThucThanhToan = value; OnPropertyChanged(); } }
+            private string _TenPhuongThucThanhToan;
+            public string TenPhuongThucThanhToan { get => _TenPhuongThucThanhToan; set { _TenPhuongThucThanhToan = value; OnPropertyChanged(); } }
 
             //public ICommand DeleteCommand { get; set; }
             public ICommand EditCommand { get; set; }
@@ -51,7 +51,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 List = new ObservableCollection<PhuongThucThanhToan>();
 
-                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NSX");
+                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.PT_ThanhToan" +
+                    "");
 
                 foreach (DataRow item in data.Rows)
                 {
@@ -71,7 +72,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    string query = string.Format("");
+                    string query = string.Format("Exec AddKhachHang @idPT_ThanhToan = {0}, @TenPT_ThanhToan =N'{1}'",
+                    MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadListPTThanhToan();
@@ -82,7 +84,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     if (SelectedItem == null)
                         return false;
 
-                    string query = string.Format("");
+                    string query = string.Format("Select * from PT_ThanhToan where  idPT_ThanhToan = {0}", SelectedItem.idPT_ThanhToan);
                     var displayList = DataProvider.Instance.ExecuteQuery(query);
                     if (displayList != null)
                         return true;

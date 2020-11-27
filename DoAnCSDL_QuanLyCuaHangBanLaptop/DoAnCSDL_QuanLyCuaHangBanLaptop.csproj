@@ -88,7 +88,6 @@
     <Compile Include="Model\PhanQuyen.cs" />
     <Compile Include="Model\PhuongThucThanhToan.cs" />
     <Compile Include="Model\SanPham.cs" />
-    <Compile Include="Model\TaiKhoan.cs" />
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
     </Compile>

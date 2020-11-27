@@ -23,7 +23,13 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public string ChucVu { get; set; }
 
-        public NhanVien(int idNV, string hoTen, DateTime ngaySinh, string gioiTinh, string diaChi, string SDT, string chucVu)
+        public string users { get; set; }
+
+        public string pass { get; set; }
+
+        public string Chan { get; set; }
+
+        public NhanVien(int idNV, string hoTen, DateTime ngaySinh, string gioiTinh, string diaChi, string SDT, string chucVu, string users, string pass, string chan)
         {
             this.idNV = idNV;
             this.HoTen = hoTen;
@@ -32,6 +38,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.DiaChi = diaChi;
             this.SDT = SDT;
             this.ChucVu = chucVu;
+            this.users = users;
+            this.pass = pass;
+            this.Chan = chan;
         }
         public NhanVien(DataRow row)
         {
@@ -42,6 +51,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.DiaChi = row["DiaChi"].ToString();
             this.SDT = row["SDT"].ToString();
             this.ChucVu = row["ChucVu"].ToString();
+            this.users = row["users"].ToString();
+            this.pass = row["pass"].ToString();
+            this.Chan = row["Chan"].ToString();
         }
     }
 }
