@@ -29,7 +29,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         }
         public KhachHang(DataRow row)
         {
-            this.MaKH = (int)row["idBill"];
+            this.MaKH = (int)row["MaKH"];
             this.HoTen = row["HoTen"].ToString();
             this.GioiTinh = row["GioiTinh"].ToString();
             this.DiaChi = row["DiaChi"].ToString();

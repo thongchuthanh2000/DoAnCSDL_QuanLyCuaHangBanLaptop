@@ -13,5 +13,5 @@
     <viewmodel:StoreViewModel x:Key="StoreVM"></viewmodel:StoreViewModel>
     <viewmodel:KhuyenMaiViewModel x:Key="KhuyenMaiVM"></viewmodel:KhuyenMaiViewModel>
     <viewmodel:KhachHangViewModel x:Key="KhachHangVM"></viewmodel:KhachHangViewModel>
-
+    <viewmodel:BillViewModel x:Key="BillVM"></viewmodel:BillViewModel>
 </ResourceDictionary>

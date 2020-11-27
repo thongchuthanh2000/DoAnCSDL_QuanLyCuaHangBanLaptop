@@ -217,7 +217,7 @@
                     </Grid>
                 </Button>
 
-                <Button Command="{Binding CustomerCommand}" Grid.Column="1" 
+                <Button Command="{Binding KhachHangCommand}" Grid.Column="1" 
                         ToolTip="Customer" Height="Auto" Margin="10,10,10,10">
                     <Grid>
                         <Grid.RowDefinitions>

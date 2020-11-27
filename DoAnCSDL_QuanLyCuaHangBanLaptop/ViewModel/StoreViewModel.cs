@@ -20,7 +20,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
 
 
-        public int idSP { get; set; }
+        public int MaSP { get; set; }
         public int SoLuong { get; set; }
         private Model.Nhap _SelectedNhap;
         public Model.Nhap SelectedNhap
@@ -33,13 +33,13 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                 if (_SelectedNhap != null)
                 {
-                    idSP = _SelectedNhap.MaSP;
+                    MaSP = _SelectedNhap.MaSP;
                     SoLuong = _SelectedNhap.SoLuong;
                 }
             }
         }
 
-        public int idGiaoDich { get; set; }
+        public int MaGiaoDich { get; set; }
 
         public int TongTien { get; set; }
 
@@ -57,11 +57,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    idGiaoDich = SelectedItem.MaGiaoDich;
+                    MaGiaoDich = SelectedItem.MaGiaoDich;
                     TongTien = SelectedItem.TongTien;
                     NgayGiaoDich = SelectedItem.NgayGiaoDich;
                     ViTriKho = SelectedItem.ViTriKho;
-                    LoadNhap(idGiaoDich);
+                    LoadNhap(MaGiaoDich);
                 }
             }
         }
@@ -119,7 +119,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }, (p) =>
             {
                 string query = string.Format("Exec AddDonNhap @MaGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
-                idGiaoDich, NgayGiaoDich, TongTien);
+                MaGiaoDich, NgayGiaoDich, TongTien);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListDonNhap();
             });
@@ -139,7 +139,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }, (p) =>
             {
                 string query = string.Format("Exec ChangeDonNhap @MaGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
-                idGiaoDich, NgayGiaoDich, TongTien);
+                MaGiaoDich, NgayGiaoDich, TongTien);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -158,7 +158,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }, (p) =>
             {
                 string query = string.Format("Exec AddDonNhap @idGiaoDich = {0}, @idSP ={1}, @SoLuong={2}",
-                idGiaoDich, idSP, SoLuong);
+                MaGiaoDich, MaSP, SoLuong);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadNhap(SelectedItem.MaGiaoDich);
             });
@@ -179,7 +179,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }, (p) =>
             {
                 string query = string.Format("Exec ChangeDonNhap @idGiaoDich = {0}, @idSP ={1}, @SoLuong={2}",
-                idGiaoDich, idSP, SoLuong);
+                MaGiaoDich, MaSP, SoLuong);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
