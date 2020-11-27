@@ -9,23 +9,23 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class NSX
     {
-        private int _idNSX;
+        private int _maNSX;
         private string _tenNSX;
         private string _diaChi;
 
-        public int IdNSX { get => _idNSX; set => _idNSX = value; }
+        public int MaNSX { get => _maNSX; set => _maNSX = value; }
         public string TenNSX { get => _tenNSX; set => _tenNSX = value; }
         public string DiaChi { get => _diaChi; set => _diaChi = value; }
 
-        public NSX(int idNSX, string tenNSX, string diaChi)
+        public NSX(int maNSX, string tenNSX, string diaChi)
         {
-            this.IdNSX = idNSX;
+            this.MaNSX = maNSX;
             this.TenNSX = (string)tenNSX;
             this.DiaChi = (string)diaChi;
         }
         public NSX(DataRow row)
         {
-            this.IdNSX = (int)row["idNSX"];
+            this.MaNSX = (int)row["maNSX"];
             this.TenNSX = row["TenNSX"].ToString();
             this.DiaChi = row["DiaChi"].ToString();
 

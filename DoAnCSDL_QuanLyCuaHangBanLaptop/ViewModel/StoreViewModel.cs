@@ -33,7 +33,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                 if (_SelectedNhap != null)
                 {
-                    idSP = _SelectedNhap.idSP;
+                    idSP = _SelectedNhap.MaSP;
                     SoLuong = _SelectedNhap.SoLuong;
                 }
             }
@@ -57,7 +57,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    idGiaoDich = SelectedItem.idGiaoDich;
+                    idGiaoDich = SelectedItem.MaGiaoDich;
                     TongTien = SelectedItem.TongTien;
                     NgayGiaoDich = SelectedItem.NgayGiaoDich;
                     ViTriKho = SelectedItem.ViTriKho;
@@ -79,7 +79,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private void LoadNhap(int id)
         {
             Nhap = new ObservableCollection<Nhap>();
-            string query = string.Format("SELECT * FROM dbo.Nhap where idGiaoDich = {0}", id);
+            string query = string.Format("SELECT * FROM dbo.Nhap where MaGiaoDich = {0}", id);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
@@ -118,7 +118,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddDonNhap @idGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
+                string query = string.Format("Exec AddDonNhap @MaGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
                 idGiaoDich, NgayGiaoDich, TongTien);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListDonNhap();
@@ -129,7 +129,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("Select * from DonNhap where  idGiaoDich = {0}", SelectedItem.idGiaoDich);
+                string query = string.Format("Select * from DonNhap where  idGiaoDich = {0}", SelectedItem.MaGiaoDich);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -138,7 +138,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeDonNhap @idGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
+                string query = string.Format("Exec ChangeDonNhap @MaGiaoDich = {0}, @NgayGiaoDich =N'{1}', @TongTien={2}",
                 idGiaoDich, NgayGiaoDich, TongTien);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -160,7 +160,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 string query = string.Format("Exec AddDonNhap @idGiaoDich = {0}, @idSP ={1}, @SoLuong={2}",
                 idGiaoDich, idSP, SoLuong);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadNhap(SelectedItem.idGiaoDich);
+                LoadNhap(SelectedItem.MaGiaoDich);
             });
 
             EditNhapCommand
@@ -169,7 +169,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedNhap == null)
                     return false;
 
-                string query = string.Format("Select * from Nhap where  idGiaoDich = {0}", SelectedItem.idGiaoDich);
+                string query = string.Format("Select * from Nhap where  idGiaoDich = {0}", SelectedItem.MaGiaoDich);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -183,7 +183,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                LoadNhap(SelectedItem.idGiaoDich);
+                LoadNhap(SelectedItem.MaGiaoDich);
             });
 
 

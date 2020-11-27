@@ -9,22 +9,22 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class Nhap
     {
-        public int idGiaoDich { get; set; }
+        public int MaGiaoDich { get; set; }
 
-        public int idSP { get; set; }
+        public int MaSP { get; set; }
 
         public int SoLuong  { get; set; }
 
-        public Nhap(int idGiaoDich, int idSP, int soLuong)
+        public Nhap(int maGiaoDich, int maSP, int soLuong)
         {
-            this.idGiaoDich = idGiaoDich;
-            this.idSP = idSP;
+            this.MaGiaoDich = maGiaoDich;
+            this.MaSP = maSP;
             this.SoLuong = soLuong;
         }
         public Nhap(DataRow row)
         {
-            this.idGiaoDich = (int)row["idGiaoDich"];
-            this.idSP = (int)row["idSP"];
+            this.MaGiaoDich = (int)row["MaGiaoDich"];
+            this.MaSP = (int)row["MaSP"];
             this.SoLuong = (int)row["SoLuong"];
         }
     }

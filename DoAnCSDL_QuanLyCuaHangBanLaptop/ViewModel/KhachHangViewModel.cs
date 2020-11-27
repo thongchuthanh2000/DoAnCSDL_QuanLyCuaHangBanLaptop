@@ -26,7 +26,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaKhachHang = SelectedItem.idKH;
+                    MaKhachHang = SelectedItem.MaKH;
                     HoTen = SelectedItem.HoTen;
                     GioiTinh = SelectedItem.GioiTinh;
                     DiaChi = SelectedItem.DiaChi;
@@ -83,7 +83,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddKhachHang @idKH = {0}, @HoTen =N'{1}', @GioiTinh =N'{2}',@DiaChi= N'{3}',@SDT={4}",
+                string query = string.Format("Exec AddKhachHang @MaKH = {0}, @HoTen =N'{1}', @GioiTinh =N'{2}',@DiaChi= N'{3}',@SDT={4}",
                 MaKhachHang, HoTen, GioiTinh, DiaChi, SDT);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -95,7 +95,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("Select * from KhachHang where  idKH = {0}", SelectedItem.idKH);
+                string query = string.Format("Select * from KhachHang where  MaKH = {0}", SelectedItem.MaKH);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -104,7 +104,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeKhachHang @idKH = {0}, @HoTen =N'{1}', @GioiTinh =N'{2}',@DiaChi= N'{3}',@SDT={4}",
+                string query = string.Format("Exec ChangeKhachHang @MaKH = {0}, @HoTen =N'{1}', @GioiTinh =N'{2}',@DiaChi= N'{3}',@SDT={4}",
                 MaKhachHang, HoTen, GioiTinh, DiaChi, SDT);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);

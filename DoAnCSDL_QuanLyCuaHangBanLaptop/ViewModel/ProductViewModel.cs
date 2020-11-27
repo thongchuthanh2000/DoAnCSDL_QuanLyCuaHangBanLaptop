@@ -62,24 +62,24 @@ private SanPham _SelectedItem;
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaHang = SelectedItem.IdSP;
+                    MaHang = SelectedItem.MaSP;
                     TenSanPham = SelectedItem.TenSP;
                     SoLuong = SelectedItem.SoLuong;
                     GiaGoc = SelectedItem.GiaGoc;
                     GiaBan = SelectedItem.GiaBan;
-                    MaNSX = SelectedItem.IdNSX;
+                    MaNSX = SelectedItem.MaNSX;
                     RAM = SelectedItem.RAM;
                     CPU = SelectedItem.CPU;
                     PIN = SelectedItem.PIN;
                     ManHinh = SelectedItem.ManHinh;
                     SelectedNSX = SelectedItem.NSX;
-                    ChangeImage(SelectedItem.IdSP);
+                    ChangeImage(SelectedItem.MaSP);
                 }
             }
         }
         public void ChangeImage(int id)
         {
-            string query = string.Format("Select * from HangHoaImage where  idSP = {0}", id);
+            string query = string.Format("Select * from HangHoaImage where  MaSP = {0}", id);
             DataTable table = DataProvider.Instance.ExecuteQuery(query);
             foreach (DataRow item in table.Rows)
             {
@@ -143,7 +143,7 @@ private SanPham _SelectedItem;
             {
                 foreach (var temp in NSX)
                 {
-                    if (temp.IdNSX == (int)item["idNSX"])
+                    if (temp.MaNSX == (int)item["MaNSX"])
                     {
                         SanPham sanpham = new SanPham(item,temp);
                         List.Add(sanpham);
@@ -183,9 +183,9 @@ private SanPham _SelectedItem;
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddHangHoa @idSP = {0}, @idNSX ={1}, @TenSP =N'{2}',@giaGoc= {3},@giaBan={4},"
-                   + "@SoLuong ={5}, @CPU =N'{6}', @RAM =N'{7}', @ManHinh = N'{8}', @PIN=N'{9}'",
-                   MaHang, SelectedNSX.IdNSX, TenSanPham, GiaGoc, GiaBan, SoLuong, CPU.Trim(), RAM.Trim(), ManHinh.Trim(), PIN.Trim());
+                string query = string.Format("Exec AddHangHoa @MaNSX ={0}, @TenSP =N'{1}',@giaGoc= {2},@giaBan={3},"
+                   + "@SoLuong ={4}, @CPU =N'{5}', @RAM =N'{6}', @ManHinh = N'{7}', @PIN=N'{8}'",
+                   SelectedNSX.MaNSX, TenSanPham, GiaGoc, GiaBan, SoLuong, CPU.Trim(), RAM.Trim(), ManHinh.Trim(), PIN.Trim());
                 //AddImage();
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListSanPham();
@@ -196,7 +196,7 @@ private SanPham _SelectedItem;
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("Select * from HangHoa where  MaHang = {0}", SelectedItem.IdSP);
+                string query = string.Format("Select * from HangHoa where  MaHang = {0}", SelectedItem.MaSP);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -205,9 +205,9 @@ private SanPham _SelectedItem;
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeHangHoa @idSP = {0}, @idNSX ={1}, @TenSP =N'{2}',@giaGoc= {3},@giaBan={4},"
+                string query = string.Format("Exec ChangeHangHoa @MaSP = {0}, @MaNSX ={1}, @TenSP =N'{2}',@giaGoc= {3},@giaBan={4},"
                     +"@SoLuong ={5}, @CPU =N'{6}', @RAM =N'{7}', @ManHinh = N'{8}', @PIN=N'{9}'",
-                    MaHang, SelectedNSX.IdNSX, TenSanPham,GiaGoc,GiaBan,SoLuong,CPU.Trim(), RAM.Trim(),ManHinh.Trim(), PIN.Trim());
+                    MaHang, SelectedNSX.MaNSX, TenSanPham,GiaGoc,GiaBan,SoLuong,CPU.Trim(), RAM.Trim(),ManHinh.Trim(), PIN.Trim());
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -235,8 +235,8 @@ private SanPham _SelectedItem;
                     fs.Close();
 
 
-                    string query = string.Format("INSERT INTO HangHoaImage(idSP, Hinh) VALUES( @idSP , @image )");
-                    int x = DataProvider.Instance.ExecuteNonQuery(query, new Object[2] { SelectedItem.IdSP, ImageData });
+                    string query = string.Format("INSERT INTO HangHoaImage(MaSP, Hinh) VALUES( @MaSP , @image )");
+                    int x = DataProvider.Instance.ExecuteNonQuery(query, new Object[2] { SelectedItem.MaSP, ImageData });
 
                 }
 

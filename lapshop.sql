@@ -109,3 +109,60 @@ SoLuong INT NULL CHECK(SoLuong > 0),
 PRIMARY KEY(MaBill, MaSP)
 )
 GO
+----------------------------------------------
+GO
+alter PROCEDURE AddNSX(								@TenNSX NVARCHAR(50) ,
+								@DiaChi NVARCHAR(200))
+AS
+	INSERT INTO dbo.NSX
+	VALUES  (@TenNSX,@DiaChi)
+----------------------------------------------	
+GO
+Alter PROCEDURE AddHangHoa(
+						@MaNSX INT,
+						@TenSP NVARCHAR(50),
+						@CPU NVARCHAR(100),
+						@RAM NVARCHAR(50),
+						@ManHinh NVARCHAR(50),
+						@PIN NVARCHAR(20),
+						@GiaBan INT,
+						@GiaGoc INT,
+						@SoLuong INT
+					 )
+AS
+	INSERT INTO dbo.HangHoa
+	VALUES  ( @MaNSX, @TenSP, @CPU, @RAM, @ManHinh, @PIN, @GiaBan, @GiaGoc, @SoLuong) 
+
+-----------------------------------------------
+GO 
+Alter PROCEDURE ChangeHangHoa(	@MaSP INT, @MaNSX INT, @tenSP NVARCHAR(50), @CPU NVARCHAR(100), @RAM NVARCHAR(50), @ManHinh NVARCHAR(50),
+							@PIN NVARCHAR(20), @GiaBan INT, @GiaGoc INT, @SoLuong INT)
+AS	UPDATE	dbo.HangHoa
+	SET		MaNSX=@MaNSX,
+			TenSP=@tenSP,
+			CPU=@CPU,
+			RAM=@RAM,
+			ManHinh=@ManHinh,
+			PIN=@PIN,
+			GiaBan=@GiaBan,
+			GiaGoc=@GiaGoc,
+			SoLuong=@SoLuong
+	WHERE	MaSP=@MaSP
+
+----------------------------------------------
+
+GO
+ALTER PROCEDURE AddNhanVien(
+						@HoTen NVARCHAR(50),
+						@NgaySinh DATE,
+						@GioiTinh NVARCHAR(10),
+						@DiaChi NVARCHAR(200),
+						@SDT NVARCHAR(20),
+						@ChucVu NVARCHAR(50),
+						@TenTK NVARCHAR(20),
+						@MK NVARCHAR(20),
+						@Chan NVARCHAR(2) )
+AS
+	INSERT INTO dbo.NhanVien
+	VALUES  (@HoTen, @NgaySinh, @GioiTinh, @DiaChi, @SDT, @ChucVu, @TenTK, @MK, @Chan)
+	 

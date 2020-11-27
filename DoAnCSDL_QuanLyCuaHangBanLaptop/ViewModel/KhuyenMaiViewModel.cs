@@ -26,7 +26,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaKhuyenMai = SelectedItem.IdKhuyenMai;
+                    MaKhuyenMai = SelectedItem.MaKhuyenMai;
                     GiaTriKhuyenMai = SelectedItem.GiaTriKhuyenMai;
                     NgBatDau = SelectedItem.NgayBatDau;
                     NgKetThuc = SelectedItem.NgayKetThuc;
@@ -78,7 +78,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddKhuyenMai @idKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
+                string query = string.Format("Exec AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
                 MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -91,7 +91,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     return false;
 
 
-                string query = string.Format("Select * from KhuyenMai where  IdKhuyenMai = {0}", SelectedItem.IdKhuyenMai);
+                string query = string.Format("Select * from KhuyenMai where  MaKhuyenMai = {0}", SelectedItem.MaKhuyenMai);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -100,7 +100,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeKhuyenMai @idKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
+                string query = string.Format("Exec ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
                 MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);

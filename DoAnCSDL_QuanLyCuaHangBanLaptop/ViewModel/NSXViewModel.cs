@@ -26,7 +26,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaNSX = SelectedItem.IdNSX;
+                    MaNSX = SelectedItem.MaNSX;
                     TenNSX = SelectedItem.TenNSX;
                     DiaChi = SelectedItem.DiaChi;
                 }
@@ -75,7 +75,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddNSX @idNSX = {0}, @TenNSX =N'{1}', @DiaChi =N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
+                string query = string.Format("Exec AddNSX  @TenNSX =N'{0}', @DiaChi =N'{1}'",TenNSX.Trim(),DiaChi.Trim());
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListNSX();
@@ -86,7 +86,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (SelectedItem == null)
                     return false;
 
-                string query = string.Format("Select * from NSX where  idNSX = {0}", SelectedItem.IdNSX);
+                string query = string.Format("Select * from NSX where  MaNSX = {0}", SelectedItem.MaNSX);
                 var displayList = DataProvider.Instance.ExecuteQuery(query);
                 if (displayList != null)
                     return true;
@@ -95,7 +95,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeNSX @idNSX = {0}, @TenNSX = N'{1}', @DiaChi = N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
+                string query = string.Format("Exec ChangeNSX @MaNSX = {0}, @TenNSX = N'{1}', @DiaChi = N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 

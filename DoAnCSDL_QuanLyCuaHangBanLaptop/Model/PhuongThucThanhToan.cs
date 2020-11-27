@@ -9,19 +9,19 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class PhuongThucThanhToan
     {
-        public int idPT_ThanhToan { get; set; }
+        public int MaPTTT { get; set; }
 
-        public string TenPT_ThanhToan { get; set; }
+        public string TenPTTT { get; set; }
 
-        public PhuongThucThanhToan(int idPT_ThanhToan, string tenPT_ThanhToan)
+        public PhuongThucThanhToan(int maPT_ThanhToan, string tenPT_ThanhToan)
         {
-            this.idPT_ThanhToan = idPT_ThanhToan;
-            this.TenPT_ThanhToan = tenPT_ThanhToan;
+            this.MaPTTT = maPT_ThanhToan;
+            this.TenPTTT = tenPT_ThanhToan;
         }
         public PhuongThucThanhToan(DataRow row)
         {
-            this.idPT_ThanhToan = (int)row["idPT_ThanhToan"];
-            this.TenPT_ThanhToan = row["TenPT_ThanhToan"].ToString();
+            this.MaPTTT = (int)row["MaPT_ThanhToan"];
+            this.TenPTTT = row["TenPT_ThanhToan"].ToString();
         }
     }
 }

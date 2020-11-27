@@ -235,7 +235,7 @@
                 </Button>
 
                 <Button Command="{Binding LogoutCommand}" Grid.Column="2" 
-                        ToolTip="Logout" Height="Auto" Margin="10,10,10,10"
+                        ToolTip="Logout" Height="Auto" Margin="10.4,10"
                        >
                     <Grid >
                         <Grid.RowDefinitions>

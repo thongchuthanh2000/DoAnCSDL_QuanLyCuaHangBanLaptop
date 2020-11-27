@@ -10,8 +10,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class SanPham: BaseViewModel
     {
-        private int _idSP;
-        private int _idNSX;
+        private int _maSP;
+        private int _maNSX;
         private string _tenSP;
         private int _giaGoc;
         private int _giaBan;
@@ -22,8 +22,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         private string _pIN;
 
 
-        public int IdSP { get => _idSP; set => _idSP = value; }
-        public int IdNSX { get => _idNSX; set => _idNSX = value; }
+        public int MaSP { get => _maSP; set => _maSP = value; }
+        public int MaNSX { get => _maNSX; set => _maNSX = value; }
         public string TenSP { get => _tenSP; set => _tenSP = value; }
         public int GiaGoc { get => _giaGoc; set => _giaGoc = value; }
         public int SoLuong { get => _soLuong; set => _soLuong = value; }
@@ -33,10 +33,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         public string ManHinh { get => _manHinh; set => _manHinh = value; }
         public string PIN { get => _pIN; set => _pIN = value; }
 
-        public SanPham(int idSP,string tenSP,int giaBan,int  soLuong, int giaGoc, int idNSX, string cpu, string ram, string manhinh, string pin,NSX nsx)
+        public SanPham(int maSP,string tenSP,int giaBan,int  soLuong, int giaGoc, int maNSX, string cpu, string ram, string manhinh, string pin,NSX nsx)
         {
-            this.IdNSX = idNSX;
-            this.IdSP = idSP;
+            this.MaNSX = maNSX;
+            this.MaSP = maSP;
             this.TenSP = (string)tenSP;
             this.GiaGoc = giaGoc;
             this.SoLuong = soLuong;
@@ -50,8 +50,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         }
         public SanPham(DataRow row, NSX nsx)
         {
-            this.IdNSX = (int)row["idNSX"];
-            this.IdSP = (int)row["idSP"];
+            this.MaNSX = (int)row["MaNSX"];
+            this.MaSP = (int)row["MaSP"];
             this.TenSP = row["TenSP"].ToString();
             this.GiaGoc = (int)row["giagoc"];
             this.SoLuong = (int)row["SoLuong"];

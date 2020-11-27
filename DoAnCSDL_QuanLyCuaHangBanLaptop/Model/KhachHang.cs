@@ -9,7 +9,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class KhachHang
     {
-        public int idKH { get; set; }
+        public int MaKH { get; set; }
 
         public string HoTen { get; set; }
 
@@ -19,9 +19,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public string SDT { get; set; }
 
-        public KhachHang(int idKH, string hoTen, string gioiTinh, string diaChi, string sDT)
+        public KhachHang(int maKH, string hoTen, string gioiTinh, string diaChi, string sDT)
         {
-            this.idKH = idKH;
+            this.MaKH = maKH;
             this.HoTen = hoTen;
             this.GioiTinh = gioiTinh;
             this.DiaChi = diaChi;
@@ -29,7 +29,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         }
         public KhachHang(DataRow row)
         {
-            this.idKH = (int)row["idBill"];
+            this.MaKH = (int)row["idBill"];
             this.HoTen = row["HoTen"].ToString();
             this.GioiTinh = row["GioiTinh"].ToString();
             this.DiaChi = row["DiaChi"].ToString();

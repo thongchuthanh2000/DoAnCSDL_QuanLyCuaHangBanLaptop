@@ -28,8 +28,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     OnPropertyChanged();
                     if (SelectedItem != null)
                     {
-                        MaPhuongThucThanhToan = SelectedItem.idPT_ThanhToan;
-                        TenPhuongThucThanhToan = SelectedItem.TenPT_ThanhToan;
+                        MaPhuongThucThanhToan = SelectedItem.MaPTTT;
+                        TenPhuongThucThanhToan = SelectedItem.TenPTTT;
                     }
                 }
             }
@@ -72,7 +72,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     return true;
                 }, (p) =>
                 {
-                    string query = string.Format("Exec AddKhachHang @idPT_ThanhToan = {0}, @TenPT_ThanhToan =N'{1}'",
+                    string query = string.Format("Exec AddKhachHang @MaPTTT = {0}, @TenPTTT =N'{1}'",
                     MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -84,7 +84,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     if (SelectedItem == null)
                         return false;
 
-                    string query = string.Format("Select * from PT_ThanhToan where  idPT_ThanhToan = {0}", SelectedItem.idPT_ThanhToan);
+                    string query = string.Format("Select * from PT_ThanhToan where  MaPTTT = {0}", SelectedItem.MaPTTT);
                     var displayList = DataProvider.Instance.ExecuteQuery(query);
                     if (displayList != null)
                         return true;

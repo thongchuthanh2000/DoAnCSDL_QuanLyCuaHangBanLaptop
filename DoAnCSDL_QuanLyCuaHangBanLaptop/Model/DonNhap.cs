@@ -9,7 +9,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class DonNhap
     {
-        public int idGiaoDich { get; set; }
+        public int MaGiaoDich { get; set; }
 
         public int TongTien { get; set; }
 
@@ -17,16 +17,16 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public string ViTriKho { get; set; }
 
-        public DonNhap(int idGiaoDich, int tongTien, DateTime ngayGiaoDich, string viTriKho)
+        public DonNhap(int maGiaoDich, int tongTien, DateTime ngayGiaoDich, string viTriKho)
         {
-            this.idGiaoDich = idGiaoDich;
+            this.MaGiaoDich = maGiaoDich;
             this.TongTien = tongTien;
             this.NgayGiaoDich = ngayGiaoDich;
             this.ViTriKho = viTriKho;
         }
         public DonNhap(DataRow row)
         {
-            this.idGiaoDich = (int)row["idGiaoDich"];
+            this.MaGiaoDich = (int)row["MaGiaoDich"];
             this.TongTien = (int)row["TongTien"];
             this.NgayGiaoDich = (DateTime)row["NgayGiaoDich"];
             this.ViTriKho = row["ViTriKho"].ToString();

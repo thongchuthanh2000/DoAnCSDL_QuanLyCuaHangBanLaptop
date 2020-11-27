@@ -7,7 +7,9 @@
         mc:Ignorable="d"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
-        Title="NhanVienWindow" Height="568.421" Width="1210.111">
+        Title="NhanVienWindow" Height="568.421" Width="1210.111"
+         DataContext="{StaticResource NhanVienVM}"
+        >
 
     <Grid>
 
@@ -158,21 +160,21 @@
             </materialDesign:HintAssist.Hint>
         </TextBox>
 
-      
+
 
         <!--Mô tả sản phẩm-->
         <TextBlock Grid.Row="0"
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="97,6,956,10"
-            Text="Mô tả sản phẩm"
+            Margin="36.8,10,957,82.8"
+            Text="Thông Tin Nhân Viên"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
             
             TextWrapping="Wrap"
-           Height="25" Width="138" Grid.ColumnSpan="2" Grid.Column="1"/>
+           Height="32" Width="199" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
 
         <!--Danh sách loại sản phẩm-->
         <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="392" Margin="10,23,0,82.231">
