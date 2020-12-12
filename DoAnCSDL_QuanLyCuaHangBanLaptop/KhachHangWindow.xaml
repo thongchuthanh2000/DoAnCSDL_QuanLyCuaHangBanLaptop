@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop"
         mc:Ignorable="d"
-        Title="KhachHangWindow" Height="450" Width="1400"
-        
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="KhachHangWindow" Height="485" Width="959"
+        xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          DataContext="{ StaticResource KhachHangVM}"
         >
     <Grid>
@@ -22,134 +23,84 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="55*"/>
-            
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="1014.4"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="102*"/>
+            <ColumnDefinition Width="102*"/>
+
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="102*"/>
+
 
         </Grid.ColumnDefinitions>
 
-        <!--Nút backward-->
-        <!--
-        <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderBrush="#303030"
-            VerticalAlignment="Top"
-            Height="25" Width="25"
-            Command="{x:Static NavigationCommands.BrowseBack}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
-            <materialDesign:PackIcon
-                Kind="KeyboardArrowLeft"
-                Height="20"
-                Width="20" />
-        </Button>
-
-        -->
-        <!--Nút forward-->
-        <!--
-        <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderBrush="#303030"
-            VerticalAlignment="Top"
-            Height="25" Width="25"
-            Margin="28,0,0,0"
-            Command="{x:Static NavigationCommands.BrowseForward}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
-            <materialDesign:PackIcon
-                Kind="KeyboardArrowRight"
-                Height="20"
-                Width="20" />
-        </Button>-->
 
 
 
-        <!--Mã giao dịch-->
-        <TextBox Grid.Row="1" x:Name="idImage"
-                 materialDesign:HintAssist.Hint="Mã sản phẩm"
+
+        <!--Mã sản phẩm-->
+        <TextBox Grid.Row="1"
+                 materialDesign:HintAssist.Hint="Mã Khách Hàng"
                  FontSize="15"
                   
-                 Margin="0.8,20,3,0"
+                 Margin="1,20,2,0"
                  VerticalAlignment="Top"
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Text="{Binding MaHang}"
-                 Height="44" Grid.Column="1" Grid.ColumnSpan="2" />
+                 Text="{Binding MaKhachHang}"
+                 Height="44" Grid.Column="1" />
 
         <!--Tên sản phẩm-->
         <TextBox Grid.Row="2"
-                 materialDesign:HintAssist.Hint="Tên sản phẩm"
+                 materialDesign:HintAssist.Hint="Tên Khách Hàng"
                 VerticalAlignment="Top"
                  FontSize="15"
-                 Margin="0.8,20.2,3,0"
+                 Margin="1,20,2,0"
                   
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                   Height="44"
-                 Text="{Binding TenSanPham}" Grid.Column="1" Grid.ColumnSpan="2" 
+                 Text="{Binding HoTen}" Grid.Column="1" 
                  />
 
 
-
-        <!--Giá bán-->
-        <TextBox Grid.Row="3"
-                 VerticalAlignment="Top"
-                 Margin="0.8,20.4,3,0"
-                  
-                 
-                 FontWeight="Bold"
-                 FontSize="15"
-                 FontFamily="Sitka Subheading"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Height="44"
-                 Text="{Binding GiaBan}" Grid.Column="1" Grid.ColumnSpan="2" 
-                 >
-            <materialDesign:HintAssist.Hint>
-                <TextBlock>
-                    <Bold>Giá sản phẩm</Bold> (₫)
-                </TextBlock>
-            </materialDesign:HintAssist.Hint>
-        </TextBox>
-
-        <!--Thương Hiệu-->
-
-        <ComboBox Grid.Row="5" Grid.Column="1" Margin="4.8,12.8,16,13"  
-                  ItemsSource="{Binding Path=NSX}"
-                  DisplayMemberPath="TenNSX"
-                  SelectedValuePath="TemNSX"
-                  SelectedItem="{Binding SelectedNSX}"
-                  
-                  materialDesign:HintAssist.Hint="Nhà cung cấp" IsEditable="True" 
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Grid.ColumnSpan="2" Height="39">
-        </ComboBox>
-
-
-        <!--Số lượng-->
-
-        <TextBox Grid.Row="6" 
-             
-            Margin="19,20,12,0"
-            FontSize="15"
-            FontWeight="Bold"
-            FontFamily="Sitka Subheading"
-            AcceptsReturn="True"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            materialDesign:HintAssist.Hint="Số lượng"
-         Text="{Binding SoLuong}"
-             Height="44" Grid.ColumnSpan="3"/>
-        <!--Giá vốn-->
+        <!--Tên sản phẩm-->
         <TextBox Grid.Row="4"
-            Margin="19,20.6,12,0"
+                 materialDesign:HintAssist.Hint="Địa Chỉ"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="1,20.462,2,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding DiaChi}" Grid.Column="1" 
+                 />
+
+        <!--SDT-->
+
+        <TextBox Grid.Row="5" 
+             
+            Margin="0,20.462,11,0"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            materialDesign:HintAssist.Hint="SDT"
+            Text="{Binding SoLuong}"
+             Height="44" Grid.Column="1"/>
+
+        <!--Giá vốn-->
+        <TextBox Grid.Row="3"
+            Margin="0,20.462,11,0"
              
             FontSize="15"
             FontWeight="Bold"
@@ -157,58 +108,141 @@
             AcceptsReturn="True"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             Height="44"
-                 Text="{Binding GiaGoc}" Grid.ColumnSpan="3"
+                 Text="{Binding GioiTinh}" Grid.Column="1"
                  >
             <materialDesign:HintAssist.Hint>
                 <TextBlock>
-                    <Bold>Giá vốn</Bold> (₫)
+                    <Bold>Giới Tính(Nam Nu)</Bold>
                 </TextBlock>
             </materialDesign:HintAssist.Hint>
         </TextBox>
 
-        <!--Tồn kho-->
-        <!--
-        <TextBox Grid.Row="2" Grid.Column="1"
-            Margin="11,20,11,0"
-             
+        <!--Tong Chi Tieu-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Tổng Chi Tiêu Của Khách"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TongGiaTri}"
+                 Height="44" Grid.Column="2" />
+
+        <!--Mã hang hoa-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Tim Kiem Danh Sach Khach Hang Theo Ten"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TenKhachHang}"
+                 Height="44" Grid.Column="3" />
+
+        <!--Mô tả sản phẩm-->
+        <TextBlock Grid.Row="0"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="2,2,2,2"
+            Text="Thông Tin Khách Hàng"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
-            AcceptsReturn="True"
+            
             TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            materialDesign:HintAssist.Hint="Số lượng tồn kho"
-            Name="editAmount" Height="44"/>-->
+           Height="32" Width="199" Grid.Column="1" />
+
+        <!--Mô tả sản phẩm-->
+        <TextBlock Grid.Row="0"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="2,2,2,2"
+            Text="Sắp xếp Khách hàng"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+           Height="32" Width="199" Grid.Column="4" />
 
 
-        <!--Ảnh sản phẩm-->
-        <Grid Grid.Column="2" Grid.Row="4"
-              Grid.RowSpan="3" Name="InImage" Width="Auto" Height="Auto" Margin="124.6,64.6,0,-0.2">
-            <Button Height="Auto" 
-                Command="{Binding ImageCommand}" Margin="0,147,0,0" />
+        <ComboBox Grid.Column="4"  Grid.Row="1"
+            materialDesign:HintAssist.Hint="Search"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <!--<ComboBoxItem
+                IsSelected="True"
+                DataContext="{Binding TongHangCommand}" >
+                Tổng hàng hóa mua:
+            </ComboBoxItem>-->
+            <ComboBoxItem
+                IsSelected="True"
+                DataContext="{Binding TongGiaTriCommand}"
+                >
+                Tổng giá trị mua:
+            </ComboBoxItem>
+
+        </ComboBox>
+
+        <Grid Grid.Column="4"  Grid.Row="2">
+            <materialDesign:Card Background="#03a9f4"  Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0" Width="150">
+                <Grid Height="59" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="2 2 2 4"     
+                                                       Text="Tang" HorizontalAlignment="Center"
+                                                       >
+
+                    </TextBlock>
+
+
+                    <ToggleButton  Grid.Row="1" VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                    ToolTip="MaterialDesignSwitchDarkToggleButton"
+                 
+                                   Margin="10,10,10,10" 
+                    Width="100"  >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding Path=CheckedCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding Path=UncheckedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </ToggleButton>
+                </Grid>
+            </materialDesign:Card>
         </Grid>
 
+
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="0" Grid.Column="5" Grid.RowSpan="7"  VerticalAlignment="Center" Height="452" Margin="2.8,-48,-7.4,16.8">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,-13" Height="465" VerticalAlignment="Top">
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" VerticalAlignment="Center" MaxHeight="800"  Height="312" Margin="2,2,0,2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,2">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="375" Width="951">
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="312" Width="600" MaxHeight="800" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Tên Sản Phẩm" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
-                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
-                            <GridViewColumn Header="Nhà Sản Xuất" DisplayMemberBinding="{Binding NSX.TenNSX}" ></GridViewColumn>
-                            <GridViewColumn Header="Số lương" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                            <GridViewColumn Header="Giá Gốc" DisplayMemberBinding="{Binding GiaGoc}"></GridViewColumn>
-                            <GridViewColumn Header="Ram" DisplayMemberBinding="{Binding RAM}"></GridViewColumn>
-                            <GridViewColumn Header="Màn Hình" DisplayMemberBinding="{Binding ManHinh}"></GridViewColumn>
-
-
+                            <GridViewColumn Header="Tên Khách Hàng" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                            <GridViewColumn Header="Giới Tinh" DisplayMemberBinding="{Binding GioiTinh}" ></GridViewColumn>
+                            <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
+                            <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
 
                         </GridView>
                     </ListView.View>
@@ -217,13 +251,17 @@
         </materialDesign:Card>
 
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="1.8,7,0,5.8" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="5" Height="52" Width="360">
+        <materialDesign:Card Grid.Row="6" Margin="10,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Grid.ColumnSpan="2"  Height="52" Width="Auto">
             <WrapPanel>
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding LoadCommand}" Content="Load" Margin="10" Width="100"></Button>
+
             </WrapPanel>
         </materialDesign:Card>
+        <Button Command="{Binding SearchCommand}" Content="Search" Grid.Column="3" HorizontalAlignment="Left" Margin="378,3,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding SapXepCommand}" Content="Sắp Xếp" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="137" Height="49"/>
 
     </Grid>
 </Window>

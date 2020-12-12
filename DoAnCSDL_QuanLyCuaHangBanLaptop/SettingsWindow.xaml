@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          WindowStartupLocation="CenterScreen" 
         Title="SettingsWindow" 
-        Height="584" Width="662"
+            WindowState="Maximized"
         >
 
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
@@ -16,7 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid RenderTransformOrigin="0.349,0.499" Margin="0,0,0,0.4" >
+        <Grid RenderTransformOrigin="0.349,0.499" Margin="0,0,24,0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="45*"/>
                 <ColumnDefinition Width="83*"/>

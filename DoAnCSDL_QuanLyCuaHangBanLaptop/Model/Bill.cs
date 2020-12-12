@@ -44,5 +44,15 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.MaKhuyenMai = (int)row["MaKhuyenMai"];
             this.DiaChi = row["DiaChi"].ToString();
         }
+
+
+        private KhachHang _KhachHang;
+        public KhachHang khachHang { get => _KhachHang; set { _KhachHang = value; OnPropertyChanged(); } }
+
+        private PT_ThanhToan _PT_ThanhToan;
+        public PT_ThanhToan PT_ThanhToan { get => _PT_ThanhToan; set { _PT_ThanhToan = value; OnPropertyChanged(); } }
+
+        private KhuyenMai _KhuyenMai;
+        public KhuyenMai KhuyenMai { get => _KhuyenMai; set { _KhuyenMai = value; OnPropertyChanged(); } }
     }
 }

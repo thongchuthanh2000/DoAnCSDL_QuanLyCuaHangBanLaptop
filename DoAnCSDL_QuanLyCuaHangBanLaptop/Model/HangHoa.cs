@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
-    public class SanPham: BaseViewModel
+    public class HangHoa: BaseViewModel
     {
         private int _maSP;
         private int _maNSX;
@@ -20,7 +20,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         private string _rAM;
         private string _manHinh;
         private string _pIN;
-
+        private byte[] _bitmapImage;
 
         public int MaSP { get => _maSP; set => _maSP = value; }
         public int MaNSX { get => _maNSX; set => _maNSX = value; }
@@ -32,8 +32,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         public string RAM { get => _rAM; set => _rAM = value; }
         public string ManHinh { get => _manHinh; set => _manHinh = value; }
         public string PIN { get => _pIN; set => _pIN = value; }
-
-        public SanPham(int maSP,string tenSP,int giaBan,int  soLuong, int giaGoc, int maNSX, string cpu, string ram, string manhinh, string pin,NSX nsx)
+        public byte[] BitmapImage { get => _bitmapImage; set => _bitmapImage = value; }
+        public HangHoa(int maSP,string tenSP,int giaBan,int  soLuong, int giaGoc, int maNSX, string cpu, string ram, string manhinh, string pin, byte[] bitmapImage, NSX nsx)
         {
             this.MaNSX = maNSX;
             this.MaSP = maSP;
@@ -45,10 +45,12 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.RAM = ram;
             this.ManHinh = manhinh;
             this.PIN = pin;
+            this.BitmapImage = bitmapImage;
             this.NSX = nsx;
 
+
         }
-        public SanPham(DataRow row, NSX nsx)
+        public HangHoa(DataRow row, NSX nsx)
         {
             this.MaNSX = (int)row["MaNSX"];
             this.MaSP = (int)row["MaSP"];
@@ -61,6 +63,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.RAM  = row["ram"].ToString();
             this.ManHinh = row["manhinh"].ToString();
             this.PIN  = row["pin"].ToString();
+            this.BitmapImage = (byte[])row["Hinh"];
             this.NSX = nsx;
         }
 

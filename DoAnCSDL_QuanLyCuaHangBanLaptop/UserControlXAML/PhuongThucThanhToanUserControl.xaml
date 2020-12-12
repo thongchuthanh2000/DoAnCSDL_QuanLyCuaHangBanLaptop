@@ -19,15 +19,13 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+          
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="173*"/>
-            <ColumnDefinition Width="1009*"/>
-
+            <ColumnDefinition Width="909*"/>
+            <ColumnDefinition Width="173*"/>
         </Grid.ColumnDefinitions>
 
 
@@ -61,13 +59,6 @@
                  />
 
 
-
-        <!--Địa Chỉ-->
-
-
-
-
-
         <!--Mô tả nhà sản xuất-->
         <TextBlock Grid.Row="0" Grid.Column="1"
             TextAlignment="Center"
@@ -82,10 +73,24 @@
             TextWrapping="Wrap"
             Height="25" Width="138"  />
 
+        <!--Tổng giá sản phẩm sử dụng PTTT-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Tổng PTTT"
+                 FontSize="15"
+                  
+                 Margin="1,20,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TongPTTT}"
+                 Height="44" Grid.Column="2" />
+
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="0" Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.538">
+        <materialDesign:Card Grid.Row="1" Grid.Column="2"  Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.538">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="533">
+                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="533" SelectionChanged="ListView_SelectionChanged">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mã PT Thanh Toán" DisplayMemberBinding="{Binding  MaPhuongThucThanhToan}"></GridViewColumn>

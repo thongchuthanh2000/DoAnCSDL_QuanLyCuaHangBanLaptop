@@ -23,5 +23,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
         {
             InitializeComponent();
         }
+
+        
     }
 }

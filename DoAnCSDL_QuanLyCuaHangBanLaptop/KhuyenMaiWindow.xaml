@@ -13,7 +13,7 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.8*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -24,7 +24,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="117*"/>
-            <ColumnDefinition Width="668*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="128*"/>
 
         </Grid.ColumnDefinitions>
 
@@ -63,10 +66,11 @@
                  Text="{Binding MaKhuyenMai}"
                  Height="44" Grid.Column="1" />
 
-      
+
         <DatePicker
             x:Name="ngBatDauDate" Grid.Row="3"  Grid.Column="1" 
-              Margin="1,20,0,0"
+            Loaded ="ngBatDauDate_Loaded"
+              Margin="1,20.923,0,0.077"
              Height="44"
             materialDesign:HintAssist.Hint="Ngày Bắt Đầu">
             <DatePicker.SelectedDate>
@@ -79,38 +83,20 @@
 
         <DatePicker
             x:Name="ngKetThucDate" Grid.Row="4"  Grid.Column="1" 
+            Loaded="ngKetThucDate_Loaded"
               Margin="1,20,0,0"
              Height="44"
             materialDesign:HintAssist.Hint="Ngày Kết Thúc">
             <DatePicker.SelectedDate>
                 <Binding
-                    Path="ngKetThuc"
+                    Path="NgKetThuc"
                     UpdateSourceTrigger="PropertyChanged">
                 </Binding>
-                
+
             </DatePicker.SelectedDate>
         </DatePicker>
 
-        <!--Tên sản phẩm-->
 
-        <!--Số lượng-->
-        <!--Giá vốn-->
-
-        <!--Tồn kho-->
-        <!--
-        <TextBox Grid.Row="2" Grid.Column="1"
-            Margin="11,20,11,0"
-             
-            FontSize="15"
-            FontWeight="Bold"
-            FontFamily="Sitka Subheading"
-            AcceptsReturn="True"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            VerticalScrollBarVisibility="Auto"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            materialDesign:HintAssist.Hint="Số lượng tồn kho"
-            Name="editAmount" Height="44"/>-->
 
         <!--Mô tả sản phẩm-->
         <TextBlock
@@ -118,7 +104,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
            
-            Text="Khuyễn mại"
+            Text="Khuyến mại"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
@@ -126,14 +112,128 @@
             TextWrapping="Wrap"
            Height="24" Width="138" Grid.ColumnSpan="2" />
 
+        <!--Tong so khuyen mai-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Số Thẻ Khuyến Mãi Được Sử Dụng"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TongMaKM}"
+                 Height="40" Grid.Column="2" />
+
+        <Grid Grid.Column="5" Grid.Row="0">
+            <materialDesign:Card Background="#03a9f4" Margin="2"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.4*" />
+                        <RowDefinition Height="0.4*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+
+                        <DatePicker
+                            x:Name="ngBatDauXet" Grid.Row="4"  Grid.Column="1" 
+                            Loaded="ngKetThucDate_Loaded"
+                            Margin="1,2,0,0"
+                            
+                            materialDesign:HintAssist.Hint="Ngày Bắt Đầu">
+                            <DatePicker.SelectedDate>
+                                <Binding
+                                     Path="ngBatDauXet"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                </Binding>
+
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="26*"/>
+                            <ColumnDefinition Width="75*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <DatePicker
+                             x:Name="ngKetThucXet" 
+                            Margin="1,2,0,0"
+                           
+                            materialDesign:HintAssist.Hint="Ngày Kết Thúc" Grid.ColumnSpan="2">
+                            <DatePicker.SelectedDate>
+                                <Binding
+                                    Path="ngKetThucXet"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                </Binding>
+
+                            </DatePicker.SelectedDate>
+                        </DatePicker>
+
+                    </Grid>
+
+
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+
+        <!--so tien thu loi-->
+
+        <!--Tong so khuyen mai-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Chênh Lệch"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding ChenhLech}"
+                 Height="40" Grid.Column="3" />
+
+        <!--Tong so khuyen mai-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Lời"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding Loi }"
+                 Height="40" Grid.Column="4" />
+        <Button
+        
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Width="128"
+            HorizontalAlignment="Left"
+            Command="{Binding LoadThongKeCommand}"
+            Grid.Row="1" Grid.Column="5"
+            ToolTip="Resource name: MaterialDesignRaisedButton"
+            Content="Load Thống Kê"
+            >
+
+        </Button>
+
+
+
+
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="392" Margin="10,0,0,27">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,10">
+        <materialDesign:Card Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5" Grid.Row="1"  VerticalAlignment="Top" Height="Auto" Margin="0,0,0,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="325" Width="666">
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="350" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã Khuyến Mãi" DisplayMemberBinding="{Binding MaKhuyenMai}"></GridViewColumn>
+
                             <GridViewColumn Header="Giá Khuyến Mãi" DisplayMemberBinding="{Binding GiaKhuyenMai}"></GridViewColumn>
                             <GridViewColumn Header="Ngày Bắt Đầu" DisplayMemberBinding="{Binding NgBatDau}" ></GridViewColumn>
                             <GridViewColumn Header="Ngày Kết Thúc" DisplayMemberBinding="{Binding NgKetThuc}"></GridViewColumn>
@@ -145,11 +245,13 @@
         </materialDesign:Card>
 
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="143,7,0,6" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="360">
+        <materialDesign:Card Grid.Row="6" Grid.ColumnSpan="3" Margin="0,7,0,6" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="500">
             <WrapPanel>
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding LoadListCommand}" Content="Load Full List" Margin="5" Width="120"></Button>
+
             </WrapPanel>
         </materialDesign:Card>
 

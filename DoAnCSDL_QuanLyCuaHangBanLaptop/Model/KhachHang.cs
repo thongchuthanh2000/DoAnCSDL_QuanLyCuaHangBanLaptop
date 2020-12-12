@@ -19,13 +19,15 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public string SDT { get; set; }
 
-        public KhachHang(int maKH, string hoTen, string gioiTinh, string diaChi, string sDT)
+        public int TongTien{get; set;}
+        public KhachHang(int maKH, string hoTen, string gioiTinh, string diaChi, string sDT, int TongTien)
         {
             this.MaKH = maKH;
             this.HoTen = hoTen;
             this.GioiTinh = gioiTinh;
             this.DiaChi = diaChi;
             this.SDT = sDT;
+            this.TongTien = TongTien;
         }
         public KhachHang(DataRow row)
         {
@@ -34,6 +36,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.GioiTinh = row["GioiTinh"].ToString();
             this.DiaChi = row["DiaChi"].ToString();
             this.SDT = row["SDT"].ToString();
+            this.TongTien =(int) row["TongTien"];
         }
     }
 }

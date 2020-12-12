@@ -15,15 +15,15 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private ObservableCollection<Model.DonNhap> _List;
         public ObservableCollection<Model.DonNhap> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<Model.Nhap> _Nhap;
-        public ObservableCollection<Model.Nhap> Nhap { get => _Nhap; set { _Nhap = value; OnPropertyChanged(); } }
+        private ObservableCollection<Model.DonNhapInfo> _Nhap;
+        public ObservableCollection<Model.DonNhapInfo> Nhap { get => _Nhap; set { _Nhap = value; OnPropertyChanged(); } }
 
 
 
         public int MaSP { get; set; }
         public int SoLuong { get; set; }
-        private Model.Nhap _SelectedNhap;
-        public Model.Nhap SelectedNhap
+        private Model.DonNhapInfo _SelectedNhap;
+        public Model.DonNhapInfo SelectedNhap
         {
             get => _SelectedNhap;
             set
@@ -78,13 +78,13 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private void LoadNhap(int id)
         {
-            Nhap = new ObservableCollection<Nhap>();
+            Nhap = new ObservableCollection<DonNhapInfo>();
             string query = string.Format("SELECT * FROM dbo.Nhap where MaGiaoDich = {0}", id);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
             {
-                Nhap nhap = new Nhap(item);
+                DonNhapInfo nhap = new DonNhapInfo(item);
                 Nhap.Add(nhap);
             }
             OnPropertyChanged();

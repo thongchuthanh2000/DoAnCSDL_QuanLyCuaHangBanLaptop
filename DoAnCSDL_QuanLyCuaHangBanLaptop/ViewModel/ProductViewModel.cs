@@ -20,8 +20,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
     public class ProductViewModel:BaseViewModel
     {
 
-        private ObservableCollection<Model.SanPham> _List;
-        public ObservableCollection<Model.SanPham> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<Model.HangHoa> _List;
+        public ObservableCollection<Model.HangHoa> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
         private ObservableCollection<Model.NSX> _NSX;
         public ObservableCollection<Model.NSX> NSX { get => _NSX; set { _NSX = value; OnPropertyChanged(); } }
@@ -39,21 +39,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         }
 
 
-        private Model.Image _SelectedImage;
-        public Model.Image SelectedImage
-        {
-            get => _SelectedImage;
-            set
-            {
-                _SelectedImage = value;
-                OnPropertyChanged();
-            }
-        }
         public ICommand ImageCommand { get; set; }
 
       
-private SanPham _SelectedItem;
-        public SanPham SelectedItem
+private HangHoa _SelectedItem;
+        public HangHoa SelectedItem
         {
             get => _SelectedItem;
             set
@@ -120,7 +110,7 @@ private SanPham _SelectedItem;
 
 
 
-        //public ICommand DeleteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
@@ -135,20 +125,23 @@ private SanPham _SelectedItem;
 
         private void LoadListSanPham()
         {
-            List = new ObservableCollection<SanPham>();
+            List = new ObservableCollection<HangHoa>();
             
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.HangHoa");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_LIST_Laptop");
 
             foreach (DataRow item in data.Rows)
             {
-                foreach (var temp in NSX)
-                {
-                    if (temp.MaNSX == (int)item["MaNSX"])
-                    {
-                        SanPham sanpham = new SanPham(item,temp);
-                        List.Add(sanpham);
-                    }
-                }
+                string query = string.Format("Exec fn_TimKiemNSXByMaNSX @MaNSX = {0}", (int)item["MaNSX"]);
+
+                DataTable dataNSX = DataProvider.Instance.ExecuteQuery(query);
+             
+                NSX nsx = new NSX(dataNSX.Rows[0]);
+                    
+                
+                HangHoa sanpham = new HangHoa(item, nsx);
+                List.Add(sanpham);
+                 
+                
                 
             }
             OnPropertyChanged();
@@ -183,10 +176,9 @@ private SanPham _SelectedItem;
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddHangHoa @MaNSX ={0}, @TenSP =N'{1}',@giaGoc= {2},@giaBan={3},"
-                   + "@SoLuong ={4}, @CPU =N'{5}', @RAM =N'{6}', @ManHinh = N'{7}', @PIN=N'{8}'",
-                   SelectedNSX.MaNSX, TenSanPham, GiaGoc, GiaBan, SoLuong, CPU.Trim(), RAM.Trim(), ManHinh.Trim(), PIN.Trim());
-                //AddImage();
+                string query = string.Format("Exec sp_AddHangHoa @MaNSX ={0}, @TenSP =N'{1}', @CPU =N'{2}', @RAM =N'{3}', @ManHinh = N'{4}', @PIN=N'{5}',@giaGoc= {6},@giaBan={7},@SoLuong ={8}",
+                   SelectedNSX.MaNSX, TenSanPham, CPU.Trim(), RAM.Trim(), ManHinh.Trim(), PIN.Trim(), GiaGoc, GiaBan, SoLuong);
+                
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
                 LoadListSanPham();
             });
@@ -205,9 +197,8 @@ private SanPham _SelectedItem;
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeHangHoa @MaSP = {0}, @MaNSX ={1}, @TenSP =N'{2}',@giaGoc= {3},@giaBan={4},"
-                    +"@SoLuong ={5}, @CPU =N'{6}', @RAM =N'{7}', @ManHinh = N'{8}', @PIN=N'{9}'",
-                    MaHang, SelectedNSX.MaNSX, TenSanPham,GiaGoc,GiaBan,SoLuong,CPU.Trim(), RAM.Trim(),ManHinh.Trim(), PIN.Trim());
+                string query = string.Format("Exec sp_ChangeHangHoa @MaSP = {0}, @MaNSX ={1}, @TenSP =N'{2}',@CPU =N'{3}', @RAM =N'{4}', @ManHinh = N'{5}', @PIN=N'{6}', @giaGoc= {7},@giaBan={8},@SoLuong ={9}",
+                    MaHang, SelectedNSX.MaNSX, TenSanPham,CPU.Trim(), RAM.Trim(),ManHinh.Trim(), PIN.Trim(), GiaGoc, GiaBan, SoLuong);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -215,7 +206,19 @@ private SanPham _SelectedItem;
 
 
             });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                    return true;
+            }, (p) =>
+            {
+                string query = string.Format("Exec sp_DeleteHangHoa @MaSP = {0}", MaHang);
 
+                var Object = DataProvider.Instance.ExecuteNonQuery(query);
+
+                LoadListSanPham();
+
+
+            });
 
             ImageCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
 
@@ -235,8 +238,8 @@ private SanPham _SelectedItem;
                     fs.Close();
 
 
-                    string query = string.Format("INSERT INTO HangHoaImage(MaSP, Hinh) VALUES( @MaSP , @image )");
-                    int x = DataProvider.Instance.ExecuteNonQuery(query, new Object[2] { SelectedItem.MaSP, ImageData });
+                    string query = string.Format("EXEC sp_ChangeImage @MaSp ={0}, @Image = {1}", SelectedItem.MaSP,ImageData);
+                    DataProvider.Instance.ExecuteNonQuery(query);
 
                 }
 

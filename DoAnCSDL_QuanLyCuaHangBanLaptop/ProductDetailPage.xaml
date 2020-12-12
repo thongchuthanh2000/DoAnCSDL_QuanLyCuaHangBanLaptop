@@ -27,46 +27,13 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="102*"/>
-            <ColumnDefinition Width="138*"/>
-            <ColumnDefinition Width="Auto" MinWidth="951"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="57*"/>
+            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="Auto" MinWidth="800"/>
+            <ColumnDefinition Width="200*"/>
 
         </Grid.ColumnDefinitions>
-
-        <!--Nút backward-->
-        <!--
-        <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderBrush="#303030"
-            VerticalAlignment="Top"
-            Height="25" Width="25"
-            Command="{x:Static NavigationCommands.BrowseBack}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
-            <materialDesign:PackIcon
-                Kind="KeyboardArrowLeft"
-                Height="20"
-                Width="20" />
-        </Button>
-
-        -->
-        <!--Nút forward-->
-        <!--
-        <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderBrush="#303030"
-            VerticalAlignment="Top"
-            Height="25" Width="25"
-            Margin="28,0,0,0"
-            Command="{x:Static NavigationCommands.BrowseForward}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
-            <materialDesign:PackIcon
-                Kind="KeyboardArrowRight"
-                Height="20"
-                Width="20" />
-        </Button>-->
 
 
 
@@ -89,7 +56,7 @@
                  materialDesign:HintAssist.Hint="Tên sản phẩm"
                 VerticalAlignment="Top"
                  FontSize="15"
-                 Margin="1,20,2,0"
+                 Margin="1,20.385,2,0"
                   
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
@@ -104,7 +71,7 @@
         <!--Giá bán-->
         <TextBox Grid.Row="3"
                  VerticalAlignment="Top"
-                 Margin="1,20,2,0"
+                 Margin="1,20.385,2,0"
                   
                  
                  FontWeight="Bold"
@@ -123,14 +90,14 @@
 
         <!--Thương Hiệu-->
 
-        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5 5 15 5"  
+        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5,21.769,15,21.231"  
                   ItemsSource="{Binding Path=NSX}"
                   DisplayMemberPath="TenNSX"
                   SelectedValuePath="TemNSX"
                   SelectedItem="{Binding SelectedNSX}"
                   
                   materialDesign:HintAssist.Hint="Nhà cung cấp" IsEditable="True" 
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="40">
         </ComboBox>
 
 
@@ -138,7 +105,7 @@
 
         <TextBox Grid.Row="6" 
              
-            Margin="0,20.462,11,0"
+            Margin="0,19.769,11,0"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
@@ -152,7 +119,7 @@
              Height="44" Grid.Column="1"/>
         <!--Giá vốn-->
         <TextBox Grid.Row="4"
-            Margin="0,20.462,11,0"
+            Margin="0,20.385,11,0"
              
             FontSize="15"
             FontWeight="Bold"
@@ -193,14 +160,14 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="97,6,5,10"
+            Margin="44,6,903,10"
             Text="Mô tả sản phẩm"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
             
             TextWrapping="Wrap"
-           Height="25" Width="138" Grid.ColumnSpan="2" Grid.Column="1"/>
+           Height="25" Width="138" Grid.ColumnSpan="3" Grid.Column="1"/>
         <!--Tên CPU-->
         <TextBox Grid.Row="1" Grid.Column="2" 
                  materialDesign:HintAssist.Hint="CPU"
@@ -220,7 +187,7 @@
                  materialDesign:HintAssist.Hint="RAM"
                 VerticalAlignment="Top"
                  FontSize="15"
-                 Margin="12,20,2,0"
+                 Margin="12,20.385,2,0"
                   
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
@@ -235,7 +202,7 @@
                  materialDesign:HintAssist.Hint="Display"
                 VerticalAlignment="Top"
                  FontSize="15"
-                 Margin="12,20,2,0"
+                 Margin="12,20.385,2,0"
                   
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
@@ -251,7 +218,7 @@
                  materialDesign:HintAssist.Hint="Pin"
                 VerticalAlignment="Top"
                  FontSize="15"
-                 Margin="12,20.462,2,0"
+                 Margin="12,20.385,2,0"
                   
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
@@ -264,18 +231,18 @@
 
 
         <!--Ảnh sản phẩm-->
-        <Grid Grid.Column="2" Grid.Row="5"
-              Grid.RowSpan="2" Name="InImage" Width="Auto" Height="Auto">
+        <Grid Grid.Column="2" Grid.Row="4"
+              Grid.RowSpan="3" Name="InImage" Width="Auto" Height="Auto" Margin="0,82.385,0,-1.769">
             <Image Source="{ Binding SelectedImage.BitmapImage}"></Image>
             <Button Height="Auto" 
                 Command="{Binding ImageCommand}" Margin="0,147,0,0" />
         </Grid>
 
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="0" Grid.Column="3" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.538">
+        <materialDesign:Card Grid.Row="1" Grid.Column="3" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,23,0,22.231">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="951">
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="800">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Tên Sản Phẩm" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
@@ -295,13 +262,101 @@
         </materialDesign:Card>
 
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="5,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="3" Height="52" Width="Auto">
-            <WrapPanel>
+        <materialDesign:Card Grid.Row="6" Margin="5,16.769,0,14.231" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="3" Height="52" Width="496">
+            <WrapPanel Margin="0,0,-201,0">
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding LoadCommand}" Content="Load" Margin="10" Width="100"></Button>
+
             </WrapPanel>
         </materialDesign:Card>
+
+
+
+        <!--Mã hang hoa-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Tim Kiem Danh Sach SP Theo Ten"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TenKhachHang}"
+                 Height="44" Grid.Column="3" />
+        <Button Command="{Binding SearchCommand}" Content="Search" Grid.Column="3" HorizontalAlignment="Left" Margin="378,3,0,0" VerticalAlignment="Top" Width="75"/>
+
+        <!--Mô tả sản phẩm-->
+        <TextBlock Grid.Row="0"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="2,2,2,2"
+            Text="Sắp xếp Khách hàng"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+           Height="32" Width="199" Grid.Column="4" />
+
+        <ComboBox Grid.Column="4"  Grid.Row="1"
+            materialDesign:HintAssist.Hint="Search"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <ComboBoxItem
+               
+                DataContext="{Binding HangConCommand }" >
+                Hàng Còn
+            </ComboBoxItem>
+            <ComboBoxItem
+               
+                DataContext="{Binding HangConCommand }" >
+                Hết Hàng
+            </ComboBoxItem>
+           
+
+        </ComboBox>
+
+        <ComboBox Grid.Column="4"  Grid.Row="1"
+            materialDesign:HintAssist.Hint="Search"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <ComboBoxItem
+               
+                DataContext="{Binding HangConCommand }" >
+                Tồn Kho
+            </ComboBoxItem>
+            <ComboBoxItem
+                IsSelected="True"
+                DataContext="{Binding BanChayCommand}"
+                >
+                Bán Chạy Gần Đây
+            </ComboBoxItem>
+
+
+        </ComboBox>
+       
+        
+        <!--TongSP-->
+        <TextBox Grid.Row="3" Grid.Column="2"
+                 materialDesign:HintAssist.Hint="Display"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="12,20.385,2,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding ManHinh}"
+                 
+                 />
+
 
     </Grid>
 </Window>

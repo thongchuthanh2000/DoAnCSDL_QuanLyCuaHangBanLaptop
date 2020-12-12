@@ -31,12 +31,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     GioiTinh = SelectedItem.GioiTinh;
                     DiaChi = SelectedItem.DiaChi;
                     SDT = SelectedItem.SDT;
-
+                    TongGiaTri = SelectedItem.TongTien;
                 }
             }
         }
-
-
+        private int _TongGiaTri;
+        public int TongGiaTri { get => _TongGiaTri; set { _TongGiaTri = value; OnPropertyChanged(); } }
+        private bool _TangDan;
+        public bool TangDan { get => _TangDan; set { _TangDan = value; OnPropertyChanged(); } }
         private int _MaKhachHang;
         public int MaKhachHang { get => _MaKhachHang; set { _MaKhachHang = value; OnPropertyChanged(); } }
 
@@ -46,24 +48,66 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private string _GioiTinh;
         public string GioiTinh { get => _GioiTinh; set { _GioiTinh = value; OnPropertyChanged(); } }
-
+        private string _TenKhachHang;
+        public string TenKhachHang { get => _TenKhachHang; set { _TenKhachHang = value; OnPropertyChanged(); } }
         private string _DiaChi;
         public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
 
         private string _SDT;
         public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
-   
+
+        public ICommand CheckedCommand { get; private set; }
+        
+        public ICommand UncheckedCommand { get; private set; }
+        public ICommand SearchCommand { get; private set; }
 
 
-        //public ICommand DeleteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
-
+        public ICommand LoadCommand { get; set; }
+        public ICommand SapXepCommand { get; set; }
+        public ICommand TongGiaTriCommand { get; set; }
         private void LoadListKhachHang()
         {
             List = new ObservableCollection<KhachHang>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.KhachHang");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_LIST_KhachHang");
+
+            foreach (DataRow item in data.Rows)
+            {
+                KhachHang khachhang = new KhachHang(item);
+                List.Add(khachhang);
+            }
+            OnPropertyChanged();
+
+        }
+        private void SapXepKhachHang()
+        {
+            List = new ObservableCollection<KhachHang>();
+            string query = "";
+            if (TangDan)
+            {
+                query = string.Format("EXEC dbo.sp_KhachHangChiNhieuNhatvsItNhat @Tang = 0 ");
+            }
+            else
+            {
+                query = string.Format("EXEC dbo.sp_KhachHangChiNhieuNhatvsItNhat @Tang = 1 " );
+            }
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                KhachHang khachhang = new KhachHang(item);
+                List.Add(khachhang);
+            }
+            OnPropertyChanged();
+        }
+        private void LoadListKhachHangTheoTen(String tenKhachHang)
+        {
+            List = new ObservableCollection<KhachHang>();
+            string query = string.Format("SELECT * FROM Fn_GetKhachHangtByHoTen (N'{0}') ", tenKhachHang);
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
             {
@@ -77,7 +121,24 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         public KhachHangViewModel()
         {
             LoadListKhachHang();
+            TangDan = true;
+            DeleteCommand = new RelayCommand<object>((p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    string query = string.Format("Exec DeleteKhachHang @MaKH = {0}",  MaKhachHang);
 
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListKhachHang();
+                });
+            SapXepCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                SapXepKhachHang();
+            });
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -112,7 +173,42 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 LoadListKhachHang();
 
             });
-        }
+            SearchCommand = new  RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                LoadListKhachHangTheoTen(TenKhachHang);
+            });
+            TongGiaTriCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                
+            });
+          
+            LoadCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                LoadListKhachHang();
+            });
+            UncheckedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TangDan = false;
+            }); CheckedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TangDan = true;
+            });
 
+        }
     }
 }

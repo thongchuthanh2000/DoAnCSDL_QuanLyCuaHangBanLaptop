@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
-    public class PhuongThucThanhToan
+    public class PT_ThanhToan
     {
         public int MaPTTT { get; set; }
 
         public string TenPTTT { get; set; }
 
-        public PhuongThucThanhToan(int maPT_ThanhToan, string tenPT_ThanhToan)
+        public PT_ThanhToan(int maPT_ThanhToan, string tenPT_ThanhToan)
         {
             this.MaPTTT = maPT_ThanhToan;
             this.TenPTTT = tenPT_ThanhToan;
         }
-        public PhuongThucThanhToan(DataRow row)
+        public PT_ThanhToan(DataRow row)
         {
             this.MaPTTT = (int)row["MaPT_ThanhToan"];
             this.TenPTTT = row["TenPT_ThanhToan"].ToString();

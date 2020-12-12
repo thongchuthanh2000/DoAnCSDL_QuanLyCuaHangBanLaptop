@@ -12,10 +12,12 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         private int _maNSX;
         private string _tenNSX;
         private string _diaChi;
+ 
 
         public int MaNSX { get => _maNSX; set => _maNSX = value; }
         public string TenNSX { get => _tenNSX; set => _tenNSX = value; }
         public string DiaChi { get => _diaChi; set => _diaChi = value; }
+     
 
         public NSX(int maNSX, string tenNSX, string diaChi)
         {

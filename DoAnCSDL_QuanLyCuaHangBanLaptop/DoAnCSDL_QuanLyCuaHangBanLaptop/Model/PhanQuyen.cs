@@ -9,21 +9,21 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class PhanQuyen
     {
-        public int MaPQ { get; set; }
+        public int idPQ { get; set; }
 
         public int LoaiQuyen { get; set; }
 
         public string TenPQ { get; set; }
 
-        public PhanQuyen(int maPQ, int loaiQuyen, string tenPQ)
+        public PhanQuyen(int idPQ, int loaiQuyen, string tenPQ)
         {
-            this.MaPQ = maPQ;
+            this.idPQ = idPQ;
             this.LoaiQuyen = loaiQuyen;
             this.TenPQ = tenPQ;
         }
         public PhanQuyen(DataRow row)
         {
-            this.MaPQ = (int)row["MaPQ"];
+            this.idPQ = (int)row["idPQ"];
             this.LoaiQuyen = (int)row["LoaiQuyen"];
             this.TenPQ = row["TenPQ"].ToString();
         }

@@ -24,5 +24,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML
         {
             InitializeComponent();
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
