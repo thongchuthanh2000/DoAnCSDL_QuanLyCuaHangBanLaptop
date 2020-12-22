@@ -110,7 +110,7 @@
             VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             materialDesign:HintAssist.Hint="SDT"
-         Text="{Binding SoLuong}"
+         Text="{Binding SDT}"
              Height="44" Grid.Column="1"/>
 
         <TextBox Grid.Row="6" 
@@ -264,7 +264,7 @@
                             <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
                             <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
                             <GridViewColumn Header="Quyen" DisplayMemberBinding="{Binding TenPQ}"></GridViewColumn>
-                            <GridViewColumn Header="Chức Vụ" DisplayMemberBinding="{Binding Chan}"></GridViewColumn>
+                            <GridViewColumn Header="Chan" DisplayMemberBinding="{Binding Chan}"></GridViewColumn>
 
 
                         </GridView>

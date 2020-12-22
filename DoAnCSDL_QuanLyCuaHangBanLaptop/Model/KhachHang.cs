@@ -36,7 +36,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.GioiTinh = row["GioiTinh"].ToString();
             this.DiaChi = row["DiaChi"].ToString();
             this.SDT = row["SDT"].ToString();
-            this.TongTien =(int) row["TongTien"];
+            try
+            {
+                this.TongTien = (int)row["TongTien"];
+            }
+            catch
+            {
+                this.TongTien = 0;
+            }
         }
     }
 }

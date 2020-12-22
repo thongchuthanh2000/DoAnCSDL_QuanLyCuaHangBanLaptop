@@ -10,26 +10,28 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class DonNhapInfo:BaseViewModel
     {
-        public int MaGiaoDich { get; set; }
+        public int MaDonNhap { get; set; }
 
         public int MaSP { get; set; }
 
         public int SoLuong  { get; set; }
 
-        public DonNhapInfo(int maGiaoDich, int maSP, int soLuong, HangHoa hangHoa)
+
+        public string TenSP { get; set; }
+        public DonNhapInfo(int maDonNhap, int maSP, int soLuong, string tenSP)
         {
-            this.MaGiaoDich = maGiaoDich;
+            this.MaDonNhap = maDonNhap;
             this.MaSP = maSP;
             this.SoLuong = soLuong;
-            this.HangHoa = hangHoa;
+            this.TenSP = tenSP;
         }
         public DonNhapInfo(DataRow row)
         {
-            this.MaGiaoDich = (int)row["MaGiaoDich"];
+            this.MaDonNhap = (int)row["MaDonNhap"];
             this.MaSP = (int)row["MaSP"];
             this.SoLuong = (int)row["SoLuong"];
+            this.TenSP = row["TenSP"].ToString();
         }
-        private HangHoa _HangHoa;
-        public HangHoa HangHoa { get => _HangHoa; set { _HangHoa = value; OnPropertyChanged(); } }
+      
     }
 }

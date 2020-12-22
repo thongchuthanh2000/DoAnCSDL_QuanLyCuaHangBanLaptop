@@ -5,8 +5,260 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop"
         mc:Ignorable="d"
-        Title="BillWindow" Height="450" Width="800">
+        DataContext="{StaticResource BillVM}"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="BillWindow" Height="600" Width="1210">
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="83*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="184*"/>
+            <ColumnDefinition Width="297*" MinWidth="123"/>
+            <ColumnDefinition Width="Auto" MinWidth="561"/>
+            <ColumnDefinition Width="700*" MinWidth="300"/>
+
+        </Grid.ColumnDefinitions>
+
+
+
+
+        <!--Mã giao dịch-->
+        <TextBox Grid.Row="1" x:Name="idImage"
+                 materialDesign:HintAssist.Hint="Mã Bill"
+                 FontSize="15"
+                  
+                 Margin="1,21,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding MaBill}"
+                 Height="44" Grid.Column="1" />
+
+
+        <DatePicker
+            x:Name="FutureDatePicker" Grid.Row="2"  Grid.Column="1" 
+              Margin="1,31,1,0"
+             Height="44"
+            materialDesign:HintAssist.Hint="ThoiGian" VerticalAlignment="Top">
+            <DatePicker.SelectedDate>
+                <Binding
+                    Path="ThoiGian"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+
+
+
+        <!--ViTriKho -->
+        <TextBox Grid.Row="3"
+                 VerticalAlignment="Top"
+                 Margin="1,20,2,0"
+                 FontWeight ="Bold"
+                 FontSize="15"
+                 FontFamily="Sitka Subheading"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Height="44"
+                 Text="{Binding MaKH }" Grid.Column="1" 
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>MaKH</Bold>
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+
+        <!--Thương Hiệu-->
+
+
+        <!--Số lượng-->
+        <!--Giá vốn-->
+        <TextBox Grid.Row="4"
+            Margin="0,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Height="44"
+                 Text="{Binding TongTien}" Grid.Column="1"
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Tổng tiền</Bold> (₫)
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+
+        <!--Tồn kho-->
+        <!--
+        <TextBox Grid.Row="2" Grid.Column="1"
+            Margin="11,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            VerticalScrollBarVisibility="Auto"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            materialDesign:HintAssist.Hint="Số lượng tồn kho"
+            Name="editAmount" Height="44"/>-->
+
+        <!--Nhập hàng-->
+        <TextBlock Grid.Row="0"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="58,6,285,10"
+            Text="Nhập kho"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+           Height="25" Width="138" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <!--Tên CPU-->
+        <!--Giá vốn-->
+        <TextBox Grid.Row="1" 
+            Margin="0,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Height="44"
+                 Text="{Binding MaSP}" Grid.Column="2"
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Mã Hàng</Bold>
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+        <!--Giá vốn-->
+        <TextBox Grid.Row="2" 
+            Margin="0,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Height="44"
+                 Text="{Binding SoLuong}" Grid.Column="2"
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Số lượng</Bold> ()
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+        <!--Button Thêm đơn hàng-->
+
+        <!--Ảnh sản phẩm-->
+
+        <!--Danh sách loại sản phẩm-->
+        <materialDesign:Card Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,23,0,22.231">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="600" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Tên Sản Phẩm" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
+                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
+                            <GridViewColumn Header="Nhà Sản Xuất" DisplayMemberBinding="{Binding NSX.TenNSX}" ></GridViewColumn>
+                            <GridViewColumn Header="Số lương" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
+                            <GridViewColumn Header="Ram" DisplayMemberBinding="{Binding RAM}"></GridViewColumn>
+                            <GridViewColumn Header="Màn Hình" DisplayMemberBinding="{Binding ManHinh}"></GridViewColumn>
+
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </materialDesign:Card>
+
+
+        <!--Danh sách loại sản phẩm-->
+        <materialDesign:Card Grid.Row="0" Grid.Column="4" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.545">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="21,0,0,0">
+                <ListView ItemsSource="{Binding BillInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedItem="{Binding SelectedBillInfo, Mode=TwoWay}" Height="436" Width="326">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID SanPHam" DisplayMemberBinding="{Binding MaSP}"></GridViewColumn>
+                            <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
+                            <GridViewColumn Header="TenSP" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+
+
+
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="6"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="4" Height="52" Width="356" Margin="0,19,0,21">
+            <WrapPanel Margin="0,0,-18,0">
+                <Button Command="{Binding AddBillInfoCommand}" Content="Thêm" Margin="10" Width="100"></Button>
+                <Button Command="{Binding DeleteBillInfoCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding SuaBillInfoCommand}" Content="Sua" Margin="10" Width="100"/>
+
+            </WrapPanel>
+        </materialDesign:Card>
+
+
+        <!--Button Thêm đơn hàng-->
+        <materialDesign:Card Grid.Row="6" Margin="5,16.455,0,14.545" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="3" Height="52" Width="360">
+            <WrapPanel>
+                <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
+                <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+            </WrapPanel>
+        </materialDesign:Card>
+
+        <ComboBox Grid.Row="5" Grid.Column="1" Margin="5,21.769,15,21.231"  
+                  ItemsSource="{Binding Path=ListKhuyenMai}"
+                  DisplayMemberPath="MaKhuyenMai"
+                  SelectedValuePath="MaKhuyenMai"
+                  SelectedItem="{Binding SelectedKhuyenMai}"
+                  
+                  materialDesign:HintAssist.Hint="KhuyenMai" IsEditable="True" 
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="40">
+        </ComboBox>
+
+        <ComboBox Grid.Row="6" Grid.Column="1" Margin="5,21.769,15,21.231"  
+                  ItemsSource="{Binding Path=ListPTThanhToan}"
+                  DisplayMemberPath="TenPTTT"
+                  SelectedValuePath="MaPTTT"
+                  SelectedItem="{Binding SelectedPT_ThanhToan}"
+                  
+                  materialDesign:HintAssist.Hint="PTTT" IsEditable="True" 
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="40">
+        </ComboBox>
     </Grid>
 </Window>

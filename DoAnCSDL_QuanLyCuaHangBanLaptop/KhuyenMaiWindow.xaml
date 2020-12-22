@@ -234,9 +234,9 @@
                     <ListView.View>
                         <GridView>
 
-                            <GridViewColumn Header="Giá Khuyến Mãi" DisplayMemberBinding="{Binding GiaKhuyenMai}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày Bắt Đầu" DisplayMemberBinding="{Binding NgBatDau}" ></GridViewColumn>
-                            <GridViewColumn Header="Ngày Kết Thúc" DisplayMemberBinding="{Binding NgKetThuc}"></GridViewColumn>
+                            <GridViewColumn Header="Giá Khuyến Mãi" DisplayMemberBinding="{Binding GiaTriKhuyenMai}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Bắt Đầu" DisplayMemberBinding="{Binding NgayBatDau}" ></GridViewColumn>
+                            <GridViewColumn Header="Ngày Kết Thúc" DisplayMemberBinding="{Binding NgayKetThuc}"></GridViewColumn>
 
                         </GridView>
                     </ListView.View>

@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
@@ -43,21 +45,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private int _MaNhanVien;
         public int MaNhanVien { get => _MaNhanVien; set { _MaNhanVien = value; OnPropertyChanged(); } }
 
-
         private int _Quyen;
         public int Quyen { get => _Quyen; set { _Quyen = value; OnPropertyChanged(); } }
-
 
         private string _TenNhanVien;
         public string TenNhanVien { get => _TenNhanVien; set { _TenNhanVien = value; OnPropertyChanged(); } }
 
-        private string _MK;
-        public string MK { get => _MK; set { _MK = value; OnPropertyChanged(); } }
+       
 
-        private string _MKMoi;
-        public string MKMoi { get => _MKMoi; set { _MKMoi = value; OnPropertyChanged(); } }
-        private string _MKMoiXacNhan;
-        public string MKMoiXacNhan { get => _MKMoiXacNhan; set { _MKMoiXacNhan = value; OnPropertyChanged(); } }
         private string _GioiTinh;
         public string GioiTinh { get => _GioiTinh; set { _GioiTinh = value; OnPropertyChanged(); } }
 
@@ -74,21 +69,29 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private string _tenTK;
         public string TenTK { get => _tenTK; set { _tenTK = value; OnPropertyChanged(); } }
-
+        
+        private string _Chan;
+        public string Chan { get => _Chan; set { _Chan = value; OnPropertyChanged(); } }
 
 
         private int _SXKhoa;
         public int SXKhoa { get => _SXKhoa; set { _SXKhoa = value; OnPropertyChanged(); } }
 
-
         private string _SXQuyen;
         public string SXQuyen { get => _SXQuyen; set { _SXQuyen = value; OnPropertyChanged(); } }
 
-
-        private string _Chan;
-        public string Chan { get => _Chan; set { _Chan = value; OnPropertyChanged(); } }
         private string _TenNhanVienTimKiem;
         public string TenNhanVienTimKiem { get => _TenNhanVienTimKiem; set { _TenNhanVienTimKiem = value; OnPropertyChanged(); } }
+
+        
+        private string _MK;
+        public string MK { get => _MK; set { _MK = value; OnPropertyChanged(); } }
+
+        private string _MKMoi;
+        public string MKMoi { get => _MKMoi; set { _MKMoi = value; OnPropertyChanged(); } }
+
+        private string _MKMoiXacNhan;
+        public string MKMoiXacNhan { get => _MKMoiXacNhan; set { _MKMoiXacNhan = value; OnPropertyChanged(); } }
 
         public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -107,87 +110,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private void LoadListNhanVien()
         {
-            List = new ObservableCollection<NhanVien>();
-            string query = string.Format("SELECT * FROM  fn_DanhSachNV @TenNV =N'{0}', @Khoa ={1}, @Quyen =N'{2}'", "", SXKhoa, SXQuyen);
-            DataTable data = DataProvider.Instance.ExecuteQuery(query);
-
-            foreach (DataRow item in data.Rows)
-            {
-                NhanVien nhanvien = new NhanVien(item);
-                List.Add(nhanvien);
-            }
-            OnPropertyChanged();
-
-        }
-
-        public NhanVienViewModel()
-        {
-            LoadListNhanVien();
-            SXKhoa = -1;
-            SXQuyen = "All";
-            AddCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                string query = string.Format("Exec sp_AddNhanVien @MaNV ={0}, @Hoten =N'{1}', @NgaySinh ={2},@GioiTinh= N'{3}',@DiaChi=N'{4}',"
-                   + "@SDT =N'{5}', @TenTK=N'{6}'",
-                   MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DiaChi, SDT, TenTK);
-
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNhanVien();
-            });
-
-            EditCommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem == null)
-                    return false;
-
-                string query = string.Format("Select * from NhanVien where  MaNV = {0}", SelectedItem.MaNV);
-                var displayList = DataProvider.Instance.ExecuteQuery(query);
-                if (displayList != null)
-                    return true;
-
-                return false;
-
-            }, (p) =>
-            {
-                string query = string.Format("Exec sp_ChangeThongTinNhanVien @MaNV = {0}, @Hoten ={1}, @NgaySinh =N'{2}',@GioiTinh= {3},@DiaChi={4},"
-                   + "@SDT ={5}, @TenTK = {6}", MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DiaChi, SDT, TenTK);
-
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNhanVien();
-
-            });
-            DeleteCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-             {
-                 string query = string.Format("Exec sp_DeleteNhanVien @MaNV = {0}", MaNhanVien);
-
-                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                 LoadListNhanVien();
-             }
-            );
-            ChanCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                string query = string.Format("Exec sp_ChangeChanNhanVien @MaNV = {0}", MaNhanVien);
-
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNhanVien();
-            }
-           );
-            SearchCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
+            try
             {
                 List = new ObservableCollection<NhanVien>();
-                string query = string.Format("SELECT * FROM  fn_DanhSachNV @TenNV =N'{0}', @Khoa ={1}, @Quyen =N'{2}'", TenNhanVienTimKiem, SXKhoa, SXQuyen);
+                string query = string.Format("SELECT * FROM  fn_DanhSachNV @TenNV =N'{0}', @Khoa ={1}, @Quyen =N'{2}'", "", SXKhoa, SXQuyen);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
                 foreach (DataRow item in data.Rows)
@@ -197,7 +123,119 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 OnPropertyChanged();
             }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
+        }
+
+        public NhanVienViewModel()
+        {
+            LoadListNhanVien();
+            SXKhoa = -1;
+            SXQuyen = "All";
+
+            AddCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("Exec sp_AddNhanVien @MaNV ={0}, @Hoten =N'{1}', @NgaySinh ='{2}',@GioiTinh= N'{3}',@DiaChi=N'{4}',"
+                       + "@SDT =N'{5}', @TenTK=N'{6}'",
+                       MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DiaChi, SDT, TenTK);
+
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListNhanVien();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            });
+
+            EditCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("Exec dbo.sp_ChangeThongTinNhanVien @MaNV = {0}, @Hoten =N'{1}', @NgaySinh ='{2}',@GioiTinh='{3}',@DiaChi=N{4}',"
+                       + "@SDT ='{5}', @TenTK = N'{6}'", MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DiaChi, SDT, TenTK);
+
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListNhanVien();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+             {
+                 try
+                 {
+                     string query = string.Format("Exec sp_DeleteNhanVien @MaNV = {0}", MaNhanVien);
+
+                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                     LoadListNhanVien();
+                 }
+                 catch (SqlException sqlEx)
+                 {
+                     MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                 }
+             }
+            );
+
+            ChanCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("Exec sp_ChangeChanNhanVien @MaNV = {0}", MaNhanVien);
+
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListNhanVien();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+
+            }
+            );
+            SearchCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    List = new ObservableCollection<NhanVien>();
+                    string query = string.Format("SELECT * FROM  fn_DanhSachNV @TenNV =N'{0}', @Khoa ={1}, @Quyen =N'{2}'", TenNhanVienTimKiem, SXKhoa, SXQuyen);
+                    DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+                    foreach (DataRow item in data.Rows)
+                    {
+                        NhanVien nhanvien = new NhanVien(item);
+                        List.Add(nhanvien);
+                    }
+                    OnPropertyChanged();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            }
            );
+
             LoadCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -206,26 +244,42 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 LoadListNhanVien();
             }
            );
+
             QuyenCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec sp_ChangeQuyenNhanVien  @MaNV = {0}, @TenPQ = {1}", MaNhanVien, TenPQ);
+                try
+                {
+                    string query = string.Format("Exec sp_ChangeQuyenNhanVien  @MaNV = {0}, @TenPQ = {1}", MaNhanVien, TenPQ);
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNhanVien();
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListNhanVien();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             }
            );
+
             MKCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec sp_ChangeMatKhauNhanVien  @TenTK = N'{0}', @MK = N'{1}', @MKMoi = N'{2}', @MKMoiXacNhan=N'{3}'", TenTK, MK, MKMoi, MKMoiXacNhan);
+                try
+                {
+                    string query = string.Format("Exec sp_ChangeMatKhauNhanVien  @TenTK = N'{0}', @MK = N'{1}', @MKMoi = N'{2}', @MKMoiXacNhan=N'{3}'", TenTK, MK, MKMoi, MKMoiXacNhan);
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNhanVien();
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListNhanVien();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             }
            );
 
@@ -235,9 +289,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }, (p) =>
             {
                 SXQuyen = "Admin";
-
             }
-           );
+            );
             NhanVienCommand =
             AdminCommand = new RelayCommand<object>((p) =>
             {
@@ -255,6 +308,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 SXQuyen = "All";
 
             });
+            
+            
             AllKhoaCommand = new RelayCommand<object>((p) =>
             {
                 return true;

@@ -103,9 +103,6 @@
     <Compile Include="StoreWindow.xaml.cs">
       <DependentUpon>StoreWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlXAML\ControlBarUC.xaml.cs">
-      <DependentUpon>ControlBarUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControlXAML\NSXUserControl.xaml.cs">
       <DependentUpon>NSXUserControl.xaml</DependentUpon>
     </Compile>
@@ -114,7 +111,6 @@
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
-    <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\KhachHangViewModel.cs" />
     <Compile Include="ViewModel\KhuyenMaiViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -123,7 +119,6 @@
     <Compile Include="ViewModel\NSXViewModel.cs" />
     <Compile Include="ViewModel\PhuongThucThanhToanViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
-    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\StoreViewModel.cs" />
     <Page Include="BillWindow.xaml">
       <SubType>Designer</SubType>
@@ -170,10 +165,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StoreWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControlXAML\ControlBarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

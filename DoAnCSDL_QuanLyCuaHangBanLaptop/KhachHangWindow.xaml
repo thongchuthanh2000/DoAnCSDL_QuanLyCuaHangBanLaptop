@@ -14,13 +14,13 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
@@ -49,7 +49,7 @@
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Text="{Binding MaKhachHang}"
-                 Height="44" Grid.Column="1" />
+                 Height="44" Grid.Column="1" Grid.RowSpan="2" />
 
         <!--Tên sản phẩm-->
         <TextBox Grid.Row="2"
@@ -72,7 +72,7 @@
                  materialDesign:HintAssist.Hint="Địa Chỉ"
                 VerticalAlignment="Top"
                  FontSize="15"
-                 Margin="1,20.462,2,0"
+                 Margin="1,20,2,0"
                   
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
@@ -86,7 +86,7 @@
 
         <TextBox Grid.Row="5" 
              
-            Margin="0,20.462,11,0"
+            Margin="0,20,11,0"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
@@ -95,12 +95,12 @@
             VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             materialDesign:HintAssist.Hint="SDT"
-            Text="{Binding SoLuong}"
+            Text="{Binding SDT}"
              Height="44" Grid.Column="1"/>
 
         <!--Giá vốn-->
         <TextBox Grid.Row="3"
-            Margin="0,20.462,11,0"
+            Margin="0,20,11,0"
              
             FontSize="15"
             FontWeight="Bold"
@@ -131,7 +131,7 @@
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Text="{Binding TongGiaTri}"
-                 Height="44" Grid.Column="2" />
+                 Height="44" Grid.Column="2" Grid.RowSpan="2" />
 
         <!--Mã hang hoa-->
         <TextBox Grid.Row="0"
@@ -145,41 +145,41 @@
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Text="{Binding TenKhachHang}"
-                 Height="44" Grid.Column="3" />
+                 Height="44" Grid.Column="3" Grid.RowSpan="2" />
 
         <!--Mô tả sản phẩm-->
         <TextBlock Grid.Row="0"
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="2,2,2,2"
+            Margin="-4,4,136,8"
             Text="Thông Tin Khách Hàng"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
             
             TextWrapping="Wrap"
-           Height="32" Width="199" Grid.Column="1" />
+           Height="32" Width="199" Grid.ColumnSpan="3" />
 
         <!--Mô tả sản phẩm-->
         <TextBlock Grid.Row="0"
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="2,2,2,2"
+            Margin="442,4,-21,8"
             Text="Sắp xếp Khách hàng"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
             
             TextWrapping="Wrap"
-           Height="32" Width="199" Grid.Column="4" />
+           Height="32" Width="199" Grid.Column="3" Grid.ColumnSpan="2" />
 
 
         <ComboBox Grid.Column="4"  Grid.Row="1"
             materialDesign:HintAssist.Hint="Search"
             IsEditable="True"
-            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="40" Margin="0,10,0,11">
             <!--<ComboBoxItem
                 IsSelected="True"
                 DataContext="{Binding TongHangCommand}" >
@@ -233,7 +233,7 @@
 
 
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" VerticalAlignment="Center" MaxHeight="800"  Height="312" Margin="2,2,0,2">
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" VerticalAlignment="Center" MaxHeight="800"  Height="312" Margin="2,12,0,16">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,2">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="312" Width="600" MaxHeight="800" >
@@ -251,7 +251,7 @@
         </materialDesign:Card>
 
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="10,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Grid.ColumnSpan="2"  Height="52" Width="Auto">
+        <materialDesign:Card Grid.Row="6" Margin="10,9,0,9" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Grid.ColumnSpan="2"  Height="52" Width="480">
             <WrapPanel>
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>

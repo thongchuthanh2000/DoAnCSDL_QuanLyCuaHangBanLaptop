@@ -13,20 +13,21 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         private int _maBill;
         private int _maSP;
         private int _soLuong;
+        private string _TenSP;
 
-       
+
         public int MaBill { get => _maBill; set => _maBill = value; }
         public int MaSP { get => _maSP; set => _maSP = value; }
         public int SoLuong { get => _soLuong; set => _soLuong = value; }
-       
+       public string TenSP { get; set; }
 
-        public BillInfo( int maBill, int maSP, int soLuong, HangHoa hangHoa)
+        public BillInfo( int maBill, int maSP, int soLuong, string tenSP)
         {
             
             this.MaBill = maBill;
             this.MaSP = maSP;
             this.SoLuong = soLuong;
-            this.HangHoa = hangHoa;
+            this.TenSP = tenSP;
 
         }
         public BillInfo(DataRow row)
@@ -35,9 +36,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.MaBill = (int)row["MaBill"];
             this.MaSP = (int)row["MaSP"];
             this.SoLuong = (int)row["SoLuong"];
-        
+            this.TenSP = row["TenSP"].ToString();
         }
-        private HangHoa _HangHoa;
-        public HangHoa HangHoa { get => _HangHoa; set { _HangHoa = value; OnPropertyChanged(); } }
+      
     }
 }

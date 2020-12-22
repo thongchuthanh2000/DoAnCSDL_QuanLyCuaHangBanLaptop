@@ -10,13 +10,12 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         x:Name="NSX"
-        DataContext="{StaticResource NSXVM}"
-        Width="1200"
-       Height="600" 
+        DataContext="{StaticResource NSXVM}" Height="572.5" Width="1250.5"
+      
         >
 
 
-    <Grid Margin="166,88,80,10" >
+    <Grid Margin="2,2,2,2" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
@@ -31,7 +30,7 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="116*"/>
             <ColumnDefinition Width="116*"/>
-            <ColumnDefinition Width="609*"/>
+            <ColumnDefinition Width="200*"/>
             <ColumnDefinition Width="200*"/>
 
         </Grid.ColumnDefinitions>
@@ -97,14 +96,14 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="4,7,90,7"
+            Margin="4,7,2,7"
             Text="Nhà Sản Xuất"
             FontSize="16"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
             
             TextWrapping="Wrap"
-            Height="25" Width="138" Grid.ColumnSpan="2"  />
+            Height="25" Width="138"  />
 
 
 
@@ -136,11 +135,11 @@
                  Height="44" Grid.Column="3"  />
         <!--Danh sách loại sản phẩm-->
         <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="400" Margin="0,31,0,32">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="4,0,0,4">
-                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="400" Width="600">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="4,0,10,0">
+                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="400" Width="714">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã nhà sản xuất" DisplayMemberBinding="{Binding IdNSX}"></GridViewColumn>
+                            <GridViewColumn Header="Mã nhà sản xuất" DisplayMemberBinding="{Binding MaNSX}"></GridViewColumn>
                             <GridViewColumn Header="Tên nhà sản xuất" DisplayMemberBinding="{Binding TenNSX}"></GridViewColumn>
                             <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
 
@@ -204,7 +203,7 @@
                     Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
                     ToolTip="MaterialDesignSwitchDarkToggleButton"
                  
-                                   Margin="10,10,10,10" 
+                                   Margin="2,2,2,2" 
                     Width="100" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Checked">
@@ -219,7 +218,7 @@
                 </Grid>
             </materialDesign:Card>
         </Grid>
-        <Button Command="{Binding SapXepCommand}" Content="Sắp Xếp" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="137" Height="49"/>
+        <Button Command="{Binding SapXepCommand}" Content="Sắp Xếp" Grid.Column="4" HorizontalAlignment="Left" Margin="49,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="137" Height="49"/>
 
 
         <!--Button Thêm đơn hàng-->

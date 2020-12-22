@@ -9,9 +9,7 @@
        
        
         DataContext="{StaticResource PTThanhToanVM}"
-        Height="Auto" Width="Auto"
-             
-             >
+        Height="Auto" Width="Auto" >
     <Grid Height="Auto" Width="Auto">
 
         <Grid.RowDefinitions>
@@ -55,7 +53,7 @@
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                   Height="44"
-                 Text="{Binding TenPhuonThucThanhToan}" Grid.Column="1" 
+                 Text="{Binding TenPhuongThucThanhToan}" Grid.Column="1" 
                  />
 
 
@@ -69,16 +67,15 @@
             FontSize="16"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
-            
             TextWrapping="Wrap"
             Height="25" Width="138"  />
 
         <!--Tổng giá sản phẩm sử dụng PTTT-->
         <TextBox Grid.Row="0"
                  materialDesign:HintAssist.Hint="Tổng PTTT"
-                 FontSize="15"
+                 FontSize="19"
                   
-                 Margin="1,20,2,0"
+                 Margin="1,2,2,0"
                  VerticalAlignment="Top"
                  Background="Transparent"
                  FontFamily="Sitka Subheading"
@@ -93,8 +90,8 @@
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="533" SelectionChanged="ListView_SelectionChanged">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã PT Thanh Toán" DisplayMemberBinding="{Binding  MaPhuongThucThanhToan}"></GridViewColumn>
-                            <GridViewColumn Header="Tên PT Thanh Toán" DisplayMemberBinding="{Binding TenPhuonThucThanhToan }"></GridViewColumn>
+                            <GridViewColumn Header="Mã PT Thanh Toán" DisplayMemberBinding="{Binding  MaPTTT}"></GridViewColumn>
+                            <GridViewColumn Header="Tên PT Thanh Toán" DisplayMemberBinding="{Binding TenPTTT }"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

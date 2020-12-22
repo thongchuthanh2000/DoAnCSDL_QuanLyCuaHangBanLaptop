@@ -9,7 +9,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class DonNhap
     {
-        public int MaGiaoDich { get; set; }
+        public int MaDonNhap { get; set; }
 
         public int TongTien { get; set; }
 
@@ -19,17 +19,17 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public DonNhap(int maGiaoDich, int tongTien, DateTime ngayGiaoDich, string viTriKho)
         {
-            this.MaGiaoDich = maGiaoDich;
+            this.MaDonNhap = maGiaoDich;
             this.TongTien = tongTien;
             this.NgayGiaoDich = ngayGiaoDich;
             this.ViTriKho = viTriKho;
         }
         public DonNhap(DataRow row)
         {
-            this.MaGiaoDich = (int)row["MaGiaoDich"];
+            this.MaDonNhap = (int)row["MaDonNhap"];
             this.TongTien = (int)row["TongTien"];
-            this.NgayGiaoDich = (DateTime)row["NgayGiaoDich"];
-            this.ViTriKho = row["ViTriKho"].ToString();
+            this.NgayGiaoDich = (DateTime)row["ThoiGian"];
+            this.ViTriKho = row["DiaChi"].ToString();
         }
     }
 }

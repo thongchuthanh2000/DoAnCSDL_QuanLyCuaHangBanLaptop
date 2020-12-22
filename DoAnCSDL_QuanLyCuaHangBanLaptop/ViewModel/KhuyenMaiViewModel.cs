@@ -1,17 +1,23 @@
 ﻿using DoAnCSDL_QuanLyCuaHangBanLaptop.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 {
-    public class KhuyenMaiViewModel:BaseViewModel
+    public class KhuyenMaiViewModel : BaseViewModel
     {
+        public static T GetValue<T>(object value)
+        {
+            if (value == null || value == DBNull.Value)
+                return default(T);
+            else
+                return (T)value;
+        }
+
         private ObservableCollection<Model.KhuyenMai> _List;
         public ObservableCollection<Model.KhuyenMai> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
@@ -36,30 +42,18 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
         }
 
-        
-             private int _LoiNhuan;
+
+        private int _LoiNhuan;
         public int LoiNhuan { get => _LoiNhuan; set { _LoiNhuan = value; OnPropertyChanged(); } }
-        private int _MaKhuyenMai;
-        public int MaKhuyenMai { get => _MaKhuyenMai; set { _MaKhuyenMai = value; OnPropertyChanged(); } }
-
-        private int _GiaTriKhuyenMai;
-        public int GiaTriKhuyenMai { get => _GiaTriKhuyenMai; set { _GiaTriKhuyenMai = value; OnPropertyChanged(); } }
-
+        
         private int _TongMaKM;
         public int TongMaKM { get => _TongMaKM; set { _TongMaKM = value; OnPropertyChanged(); } }
-
+        
         private int _Loi;
         public int Loi { get => _Loi; set { _Loi = value; OnPropertyChanged(); } }
 
         private int _ChenhLech;
         public int ChenhLech { get => _ChenhLech; set { _ChenhLech = value; OnPropertyChanged(); } }
-
-        private DateTime _NgBatDau;
-        public DateTime NgBatDau { get => _NgBatDau; set { _NgBatDau = value; OnPropertyChanged(); } }
-
-        private DateTime _NgKetThuc;
-        public DateTime NgKetThuc { get => _NgKetThuc; set { _NgKetThuc = value; OnPropertyChanged(); } }
-
 
         private DateTime _NgBatDauXet;
         public DateTime NgBatDauXet { get => _NgBatDauXet; set { _NgBatDauXet = value; OnPropertyChanged(); } }
@@ -68,79 +62,122 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         public DateTime NgKetThucXet { get => _NgKetThucXet; set { _NgKetThucXet = value; OnPropertyChanged(); } }
 
 
+
+        private int _MaKhuyenMai;
+        public int MaKhuyenMai { get => _MaKhuyenMai; set { _MaKhuyenMai = value; OnPropertyChanged(); } }
+
+        private int _GiaTriKhuyenMai;
+        public int GiaTriKhuyenMai { get => _GiaTriKhuyenMai; set { _GiaTriKhuyenMai = value; OnPropertyChanged(); } }
+
+        private DateTime _NgBatDau;
+        public DateTime NgBatDau { get => _NgBatDau; set { _NgBatDau = value; OnPropertyChanged(); } }
+
+        private DateTime _NgKetThuc;
+        public DateTime NgKetThuc { get => _NgKetThuc; set { _NgKetThuc = value; OnPropertyChanged(); } }
+
+
         public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
-
         public ICommand LoadListCommand { get; set; }
         public ICommand LoadThongKeCommand { get; set; }
-        
+
 
         private void LoadListKM()
         {
-            List = new ObservableCollection<KhuyenMai>();
-
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.KhuyenMai");
-
-            foreach (DataRow item in data.Rows)
+            try
             {
-                KhuyenMai khuyenmai = new KhuyenMai(item);
-                List.Add(khuyenmai);
+                List = new ObservableCollection<KhuyenMai>();
+
+                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.KhuyenMai");
+
+                foreach (DataRow item in data.Rows)
+                {
+                    KhuyenMai khuyenmai = new KhuyenMai(item);
+                    List.Add(khuyenmai);
+                }
+                OnPropertyChanged();
             }
-            OnPropertyChanged();
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
+
 
         }
         private void LoadListKM(DateTime? dateBatDau = null, DateTime? dateKetThuc = null)
         {
-            List = new ObservableCollection<KhuyenMai>();
-            string query = string.Format("EXEC dbo.sp_TimKiemKhuyenMai @NgayBatDau = {0} ,@NgayKetThuc = {1}", dateBatDau, dateKetThuc);
-            DataTable data = DataProvider.Instance.ExecuteQuery(query);
-
-            foreach (DataRow item in data.Rows)
+            try
             {
-                KhuyenMai khuyenmai = new KhuyenMai(item);
-                List.Add(khuyenmai);
+                List = new ObservableCollection<KhuyenMai>();
+                string query = string.Format("EXEC dbo.sp_TimKiemKhuyenMai @NgayBatDau = {0} ,@NgayKetThuc = {1}", dateBatDau, dateKetThuc);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+                foreach (DataRow item in data.Rows)
+                {
+                    KhuyenMai khuyenmai = new KhuyenMai(item);
+                    List.Add(khuyenmai);
+                }
+                OnPropertyChanged();
             }
-            OnPropertyChanged();
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
 
         }
-        private void SoLuongTheKhuyenMai(DateTime? dateBatDau =null, DateTime? dateKetThuc=null){
-            if (dateBatDau == null)
+        private void SoLuongTheKhuyenMai(DateTime? dateBatDau = null, DateTime? dateKetThuc = null)
+        {
+            try
             {
-                dateBatDau = new DateTime(0001, 01, 01);
+                if (dateBatDau == null)
+                {
+                    dateBatDau = new DateTime(0001, 01, 01);
+                }
+                if (dateKetThuc == null)
+                {
+                    dateKetThuc = new DateTime(3000, 01, 01);
+                }
+                string query = string.Format(" Select * From fn_SoLuongTheKhuyenMai('{0}','{1}')", dateBatDau, dateKetThuc);
+
+                DataTable table = DataProvider.Instance.ExecuteQuery(query);
+
+                TongMaKM = (int)table.Rows[0][0];
             }
-            if (dateKetThuc == null)
+            catch (SqlException sqlEx)
             {
-                dateKetThuc = new DateTime(3000, 01, 01);
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
             }
-            string query = string.Format(" Select * From fn_SoLuongTheKhuyenMai({0},{1})", dateBatDau, dateKetThuc);
-
-            DataTable table = DataProvider.Instance.ExecuteQuery(query);
-
-            TongMaKM = (int)table.Rows[0][0];
             return;
 
         }
-        
+
         private void TinhLoiNhuan(DateTime? dateBatDau = null, DateTime? dateKetThuc = null)
         {
-            if (dateBatDau == null)
+            try
             {
-                dateBatDau = new DateTime(0001, 01, 01);
+                if (dateBatDau == null)
+                {
+                    dateBatDau = new DateTime(0001, 01, 01);
+                }
+                if (dateKetThuc == null)
+                {
+                    dateKetThuc = new DateTime(3000, 01, 01);
+                }
+
+                string query = string.Format(" Select * From fn_LoiNhuanKhuyenMai({0},'{1}','{2}')", MaKhuyenMai, dateBatDau, dateKetThuc);
+                DataTable table = DataProvider.Instance.ExecuteQuery(query);
+
+                ChenhLech = (int)table.Rows[0][0];
+                Loi = GetValue<int>(table.Rows[0][1]);
             }
-            if (dateKetThuc == null)
+            catch (SqlException sqlEx)
             {
-                dateKetThuc = new DateTime(3000, 01, 01);
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
             }
-
-            string query = string.Format(" Select * From fn_LoiNhuanKhuyenMai({0},{1},{2})", MaKhuyenMai,dateBatDau, dateKetThuc);
-            DataTable table = DataProvider.Instance.ExecuteQuery(query);
-
-            ChenhLech = (int)table.Rows[0][0];
-            Loi = (int)table.Rows[0][1];
             return;
         }
-       
+
         public KhuyenMaiViewModel()
         {
             LoadListKM();
@@ -150,14 +187,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-
                 LoadListKM();
             });
+
             LoadThongKeCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
-            {    
+            {
                 LoadListKM(NgBatDauXet, NgKetThucXet);
             });
 
@@ -167,45 +204,49 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
-                MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
+                try
+                {
+                    string query = string.Format("Exec sp_AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
+                    MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListKM();
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListKM();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
-                    return false;
-
-
-                string query = string.Format("Select * from KhuyenMai where  MaKhuyenMai = {0}", SelectedItem.MaKhuyenMai);
-                var displayList = DataProvider.Instance.ExecuteQuery(query);
-                if (displayList != null)
                     return true;
-
-                return false;
-
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai =N'{1}', @NgayBatDau =N'{2}',@NgayKetThuc= N'{3}'",
-                               MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
+                try
+                {
+                    string query = string.Format("Exec sp_ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
+                                   MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                LoadListKM();
-
+                    LoadListKM();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
 
             });
 
             DeleteCommand = new RelayCommand<object>((p) =>
             {
-               
-                    return true;
+
+                return true;
             }, (p) =>
             {
-                string query = string.Format("Exec sp_DeleteKhuyenMai  @MaKhuyenMai = {0}",MaKhuyenMai);
+                string query = string.Format("Exec sp_DeleteKhuyenMai  @MaKhuyenMai = {0}", MaKhuyenMai);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -214,7 +255,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             });
 
-         
+
         }
 
 

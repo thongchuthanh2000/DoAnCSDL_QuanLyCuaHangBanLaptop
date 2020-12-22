@@ -12,14 +12,12 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 {
     public class BillViewModel : BaseViewModel
     {
-        private ObservableCollection<Model.Bill> _List;
-        public ObservableCollection<Model.Bill> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+        private ObservableCollection<Model.HangHoa> _List;
+        public ObservableCollection<Model.HangHoa> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<Model.BillInfo> _BillInfo;
-        public ObservableCollection<Model.BillInfo> BillInfo { get => _BillInfo; set { _BillInfo = value; OnPropertyChanged(); } }
 
-        private Bill _SelectedItem;
-        public Bill SelectedItem
+        private HangHoa _SelectedItem;
+        public HangHoa SelectedItem
         {
             get => _SelectedItem;
             set
@@ -28,20 +26,94 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaBill = SelectedItem.MaBill;
-                    TongTien = SelectedItem.TongTien;
-                    ThoiGian = SelectedItem.ThoiGian;
-                    MaKH = SelectedItem.MaKH;
-                    MaPTTT = SelectedItem.MaPTTT;
-                    MaKhuyenMai = SelectedItem.MaKhuyenMai;
-                    DiaChi = SelectedItem.DiaChi;
-                    LoadBillInfo(MaBill);
+                    MaHang = SelectedItem.MaSP;
+                    TenSanPham = SelectedItem.TenSP;
+                    SL = SelectedItem.SoLuong;
+                    GiaGoc = SelectedItem.GiaGoc;
+                    GiaBan = SelectedItem.GiaBan;
+                    MaNSX = SelectedItem.MaNSX;
+                    RAM = SelectedItem.RAM;
+                    CPU = SelectedItem.CPU;
+                    PIN = SelectedItem.PIN;
+                    ManHinh = SelectedItem.ManHinh;
                 }
             }
         }
+       
+        private void LoadListSanPham()
+        {
+            List = new ObservableCollection<HangHoa>();
 
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_LIST_Laptop");
+
+            foreach (DataRow item in data.Rows)
+            {
+                string qu = string.Format("Select * From  fn_TimKiemNSXByMaNSX ({0})", (int)item["MaNSX"]);
+
+                DataTable dataNSX = DataProvider.Instance.ExecuteQuery(qu);
+                NSX nsx = new NSX(dataNSX.Rows[0]);
+
+                HangHoa sanpham = new HangHoa(item, nsx);
+                List.Add(sanpham);
+            }
+            OnPropertyChanged();
+
+        }
+        private int _MaNSX;
+        public int MaNSX { get => _MaNSX; set { _MaNSX = value; OnPropertyChanged(); } }
+
+        private int _MaHang;
+        public int MaHang { get => _MaHang; set { _MaHang = value; OnPropertyChanged(); } }
+
+
+        private string _TenSanPham;
+        public string TenSanPham { get => _TenSanPham; set { _TenSanPham = value; OnPropertyChanged(); } }
+
+
+        private int _SL;
+        public int SL { get => _SL; set { _SL = value; OnPropertyChanged(); } }
+
+
+        private int _GiaGoc;
+        public int GiaGoc { get => _GiaGoc; set { _GiaGoc = value; OnPropertyChanged(); } }
+
+
+        private int _GiaBan;
+        public int GiaBan { get => _GiaBan; set { _GiaBan = value; OnPropertyChanged(); } }
+
+        private string _rAM;
+        private string _manHinh;
+        private string _cPU;
+        private string _pIN;
+        public string RAM { get => _rAM; set { _rAM = value; OnPropertyChanged(); } }
+        public string ManHinh { get => _manHinh; set { _manHinh = value; OnPropertyChanged(); } }
+        public string CPU { get => _cPU; set { _cPU = value; OnPropertyChanged(); } }
+        public string PIN { get => _pIN; set { _pIN = value; OnPropertyChanged(); } }
+        
+        private ObservableCollection<Model.NSX> _NSX;
+        public ObservableCollection<Model.NSX> NSX { get => _NSX; set { _NSX = value; OnPropertyChanged(); } }
+
+        private void LoadListNSX()
+        {
+            NSX = new ObservableCollection<NSX>();
+
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NSX");
+
+            foreach (DataRow item in data.Rows)
+            {
+                NSX nsx = new NSX(item);
+                NSX.Add(nsx);
+            }
+            OnPropertyChanged();
+        }
+
+        private ObservableCollection<Model.BillInfo> _BillInfo;
+        public ObservableCollection<Model.BillInfo> BillInfo { get => _BillInfo; set { _BillInfo = value; OnPropertyChanged(); } }
+
+   
         public int MaSP { get; set; }
         public int SoLuong { get; set; }
+   
 
         private Model.BillInfo _SelectedBillInfo;
         public Model.BillInfo SelectedBillInfo
@@ -56,6 +128,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 {
                     MaSP = _SelectedBillInfo.MaSP;
                     SoLuong = _SelectedBillInfo.SoLuong;
+                    TenSP = _SelectedBillInfo.TenSP;
                 }
             }
         }
@@ -65,6 +138,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private int _TongTien;
         public int TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
+        private string _TenSP;
+        public string TenSP { get => _TenSP; set { _TenSP = value; OnPropertyChanged(); } }
 
 
         private DateTime? _ThoiGian;
@@ -79,35 +154,46 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private int _MaKhuyenMai;
         public int MaKhuyenMai { get => _MaKhuyenMai; set { _MaKhuyenMai = value; OnPropertyChanged(); } }
 
-        private string _DiaChi;
-        public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
+
+
+        private ObservableCollection<Model.KhuyenMai> _KhuyenMai;
+        public ObservableCollection<Model.KhuyenMai> KhuyenMai { get => _KhuyenMai; set { _KhuyenMai = value; OnPropertyChanged(); } }
+        private Model.KhuyenMai _SelectedKhuyenMai;
+        public Model.KhuyenMai SelectedKhuyenMai
+        {
+            get => _SelectedKhuyenMai;
+            set
+            {
+                _SelectedKhuyenMai = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<Model.PT_ThanhToan> _PT_ThanhToan;
+        public ObservableCollection<Model.PT_ThanhToan> PT_ThanhToan { get => _PT_ThanhToan; set { _PT_ThanhToan = value; OnPropertyChanged(); } }
+        private Model.PT_ThanhToan _SelectedPT_ThanhToan;
+        public Model.PT_ThanhToan SelectedPT_ThanhToan
+        {
+            get => _SelectedPT_ThanhToan;
+            set
+            {
+                _SelectedPT_ThanhToan = value;
+                OnPropertyChanged();
+            }
+        }
 
 
 
-        //public ICommand DeleteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditBillInfoCommand { get; set; }
         public ICommand AddBillInfoCommand { get; set; }
 
-        private void LoadListBill()
-        {
-            List = new ObservableCollection<Bill>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill");
-
-            foreach (DataRow item in data.Rows)
-            {
-                Bill Bill = new Bill(item);
-                List.Add(Bill);
-            }
-            OnPropertyChanged();
-
-        }
-        private void LoadBillInfo(int id)
+        private void LoadBillInfo(int Ma)
         {
             BillInfo = new ObservableCollection<BillInfo>();
-            string query = string.Format("SELECT * FROM dbo.Bill_info where MaBll = {0}", id);
+            string query = string.Format("EXec sp_BillInfo @Ma = {0}", Ma);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
@@ -120,40 +206,33 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         }
         public BillViewModel()
         {
-            LoadListBill();
+            LoadListNSX();
+            LoadListKM();
+            LoadListPTThanhToan();
+            LoadListSanPham();
 
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddBill  @TongTien ={0}, @ThoiGian ={1},@MaKH= {2},@MaPTTT={3}, @MaKhuyenMai={4}, @DiaChi=N'{5}'",
-                TongTien, ThoiGian, MaKH, MaPTTT, MaKhuyenMai, DiaChi);
+                string query = string.Format("Exec AddBill  @MaBill ={0},@MaKH ={1},@MaPTTT= {2},@MaKhuyenMai={3}, @MaNV=N{4}",
+                MaBill, MaKH, MaPTTT, MaKhuyenMai, 0);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListBill();
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
-                    return false;
-
-                string query = string.Format("Select * from Bill where  MaBill= {0}", SelectedItem.MaBill);
-                var displayList = DataProvider.Instance.ExecuteQuery(query);
-                if (displayList != null)
                     return true;
-
-                return false;
-
             }, (p) =>
             {
-                string query = string.Format("Exec AddBill  @TongTien ={0}, @ThoiGian ={1},@MaKH= {2},@MaPTTT={3}, @MaKhuyenMai={4}, @DiaChi=N'{5}",
-                MaBill, TongTien, ThoiGian, MaKH, MaPTTT, MaKhuyenMai, DiaChi);
+                string query = string.Format("Exec sp_ChangeBill  @MaBill = {0}, @ThoiGian ={1},@MaKH= {2},@MaPTTT={3}, @MaKhuyenMai={4}",
+                MaBill, TongTien, ThoiGian, MaKH, MaPTTT, MaKhuyenMai);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                LoadListBill();
+                //LoadListBill();
 
             });
 
@@ -166,38 +245,64 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddBillInfo @MaBill={0},@MaSP ={1}, @SoLuong={2}",
+                string query = string.Format("Exec sp_AddKiemTraBillInfo @MaBill={0},@MaSP ={1}, @SoLuong={2}",
                 MaBill, MaSP, SoLuong);
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadBillInfo(SelectedItem.MaBill);
+                LoadBillInfo(MaBill);
             });
 
-            EditBillInfoCommand
-                = new RelayCommand<object>((p) =>
+            EditBillInfoCommand = new RelayCommand<object>((p) =>
                 {
-                    if (SelectedBillInfo == null)
-                        return false;
-
-                    string query = string.Format("Select * from BillInfo where  MaBill = {0}", SelectedItem.MaBill);
-                    var displayList = DataProvider.Instance.ExecuteQuery(query);
-                    if (displayList != null)
                         return true;
-
-                    return false;
-
                 }, (p) =>
                 {
-                    string query = string.Format("Exec ChangeBillInfo @MaBill = {0}, @MaSP ={1}, @SoLuong={2}",
+                    string query = string.Format("Exec sp_ChangeBillInfo @MaBill = {0}, @MaSP ={1}, @SoLuong={2}",
                     MaBill, MaSP, SoLuong);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                    LoadBillInfo(SelectedItem.MaBill);
+                    LoadBillInfo(MaBill);
                 });
         }
-    
+
+        private void LoadListPTThanhToan()
+        {
+            ListPTThanhToan = new ObservableCollection<PT_ThanhToan>();
+
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_LIST_PhuongThucThanhToan");
+
+            foreach (DataRow item in data.Rows)
+            {
+                PT_ThanhToan ptThanhToan = new PT_ThanhToan(item);
+                ListPTThanhToan.Add(ptThanhToan);
+            }
+            OnPropertyChanged();
+        }
+                private ObservableCollection<Model.PT_ThanhToan> _ListPTThanhToan;
+        public ObservableCollection<Model.PT_ThanhToan> ListPTThanhToan { get => _ListPTThanhToan; set { _ListPTThanhToan = value; OnPropertyChanged(); } }
+
+
+
+        private ObservableCollection<Model.KhuyenMai> _ListKhuyenMai;
+        public ObservableCollection<Model.KhuyenMai> ListKhuyenMai { get => _ListKhuyenMai; set { _ListKhuyenMai = value; OnPropertyChanged(); } }
+        private void LoadListKM()
+        {
+            ListKhuyenMai = new ObservableCollection<KhuyenMai>();
+
+            DataTable data = DataProvider.Instance.ExecuteQuery("EXec sp_KhuyenMaiHienTai");
+
+            foreach (DataRow item in data.Rows)
+            {
+                KhuyenMai khuyenmai = new KhuyenMai(item);
+                ListKhuyenMai.Add(khuyenmai);
+            }
+            OnPropertyChanged();
+
+        }
 
     }
+
+    
 }
     
 

@@ -13,15 +13,15 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public string TenPTTT { get; set; }
 
-        public PT_ThanhToan(int maPT_ThanhToan, string tenPT_ThanhToan)
+        public PT_ThanhToan(int maPTTT, string tenPTTT)
         {
-            this.MaPTTT = maPT_ThanhToan;
-            this.TenPTTT = tenPT_ThanhToan;
+            this.MaPTTT = maPTTT;
+            this.TenPTTT = tenPTTT;
         }
         public PT_ThanhToan(DataRow row)
         {
-            this.MaPTTT = (int)row["MaPT_ThanhToan"];
-            this.TenPTTT = row["TenPT_ThanhToan"].ToString();
+            this.MaPTTT = (int)row["MaPTTT"];
+            this.TenPTTT = row["TenPTTT"].ToString();
         }
     }
 }
