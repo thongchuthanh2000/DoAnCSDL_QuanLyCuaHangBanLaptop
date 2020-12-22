@@ -18,7 +18,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         public ICommand EmployeeCommand { get; set; }
         public ICommand KhuyenMaiCommand { get; set; }
         public ICommand StoreCommand { get; set; }
-
+        public ICommand KhachHangCommand { get; set; }
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -53,8 +53,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             ProductCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ProductDetailPage wd = new ProductDetailPage(); wd.ShowDialog(); });
             SettingsCommand = new RelayCommand<object>((p) => { return true; }, (p) => { SettingsWindow wd = new SettingsWindow(); wd.ShowDialog(); });
             EmployeeCommand = new RelayCommand<object>((p) => { return true; }, (p) => { NhanVienWindow wd = new NhanVienWindow(); wd.ShowDialog(); });
-            KhuyenMaiCommand = new RelayCommand<object>((p) => { return true; }, (p) => { NhanVienWindow wd = new NhanVienWindow(); wd.ShowDialog(); });
+            KhuyenMaiCommand = new RelayCommand<object>((p) => { return true; }, (p) => { KhuyenMaiWindow wd = new KhuyenMaiWindow(); wd.ShowDialog(); });
             StoreCommand = new RelayCommand<object>((p) => { return true; }, (p) => {StoreWindow  wd = new StoreWindow(); wd.ShowDialog(); });
+            KhachHangCommand = new RelayCommand<object>((p) => { return true; }, (p) => { KhachHangWindow wd = new KhachHangWindow(); wd.ShowDialog(); });
         }
 
 

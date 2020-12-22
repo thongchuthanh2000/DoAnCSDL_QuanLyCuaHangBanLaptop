@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 {
+    
     public class NSXViewModel : BaseViewModel
     {
         private ObservableCollection<Model.NSX> _List;
@@ -26,12 +29,40 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    MaNSX = SelectedItem.IdNSX;
+                    MaNSX = SelectedItem.MaNSX;
                     TenNSX = SelectedItem.TenNSX;
                     DiaChi = SelectedItem.DiaChi;
+                    LoadSoLuong(SelectedItem.MaNSX);
+                    LoadGiaTriThuongHieu(SelectedItem.MaNSX);
                 }
             }
         }
+        public void LoadGiaTriThuongHieu(int maNSX)
+        {
+            String query = string.Format("Select dbo.fn_GiaTriThuongHieuCuaNSXX({0})", maNSX );
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+            GiaTriThuongHieu = (int)data.Rows[0][0];
+        }
+        public void LoadSoLuong(int maNSX)
+        {
+
+            String query = string.Format("Select dbo.fn_TongHangHoaCuaNSX({0})", maNSX);
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+            TongSP = (int)data.Rows[0][0];
+        }
+        
+        private int _TangDan;
+        public int TangDan { get => _TangDan; set { _TangDan = value; OnPropertyChanged(); } }
+       
+        private int _Theo;
+        public int Theo { get => _Theo; set { _Theo = value; OnPropertyChanged(); } }
+
+
+        private int _GiaTriThuongHieu;
+        public int GiaTriThuongHieu{ get => _GiaTriThuongHieu; set { _GiaTriThuongHieu = value; OnPropertyChanged(); } }
+                
+        private int _TongSP;
+        public int TongSP { get => _TongSP; set { _TongSP = value; OnPropertyChanged(); } }
 
 
         private int _MaNSX;
@@ -40,69 +71,210 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private string _TenNSX;
         public string TenNSX { get => _TenNSX; set { _TenNSX = value; OnPropertyChanged(); } }
 
-
         private string _DiaChi;
         public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
 
 
-        //public ICommand DeleteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
-
-       
+        public ICommand TongHangCommand { get; set; }
+        public ICommand CheckedCommand { get; set; }
+        public ICommand LoadCommand { get; set; }
+        public ICommand UncheckedCommand { get; set; }
+        public ICommand TheoCommand { get; set; }
+        public ICommand SapXepCommand { get; set; }
 
         private void LoadListNSX()
         {
+            try { 
             List = new ObservableCollection<NSX>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NSX");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_List_NSX");
+
 
             foreach (DataRow item in data.Rows)
             {
                 NSX nsx = new NSX(item);
+
                 List.Add(nsx);
             }
             OnPropertyChanged();
+            }
+             catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
+        }
+        private void LoadListTheoTongHang()
+        {
+            try
+            {
+                List = new ObservableCollection<NSX>();
+                string query = string.Format("EXEC sp_SapXepHangHoaTongHangCuaNSX @Tang ={0}", TangDan);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+
+                foreach (DataRow item in data.Rows)
+                {
+                    NSX nsx = new NSX(item);
+
+                    List.Add(nsx);
+                }
+                OnPropertyChanged();
+
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
 
         }
+        private void LoadListGiaTriThuongHieu()
+        {
+            try
+            {
+                List = new ObservableCollection<NSX>();
+                string query = string.Format("EXEC sp_GiaTriThuongHieu @Tang ={0}", TangDan);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
+
+                foreach (DataRow item in data.Rows)
+                {
+                    NSX nsx = new NSX(item);
+
+                    List.Add(nsx);
+                }
+                OnPropertyChanged();
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
+        }
         public NSXViewModel()
         {
             LoadListNSX();
-
+            TangDan = 0;
+            Theo = 0;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec AddNSX @idNSX = {0}, @TenNSX =N'{1}', @DiaChi =N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
+                try
+                {
+                    string query = string.Format("Exec sp_AddNSX @MaNSX = {0}, @TenNSX =N'{1}', @DiaChi =N'{2}'", MaNSX, TenNSX.Trim(), DiaChi.Trim());
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListNSX();
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListNSX();
+                }
+                catch(SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             });
 
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("Exec sp_DeleteNSX @MaNSX = {0}", MaNSX);
+
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+
+                    LoadListNSX();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+
+            });
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
-                    return false;
 
-                string query = string.Format("Select * from NSX where  idNSX = {0}", SelectedItem.IdNSX);
-                var displayList = DataProvider.Instance.ExecuteQuery(query);
-                if (displayList != null)
-                    return true;
-
-                return false;
+                return true;
 
             }, (p) =>
             {
-                string query = string.Format("Exec ChangeNSX @idNSX = {0}, @TenNSX = N'{1}', @DiaChi = N'{2}'",MaNSX,TenNSX.Trim(),DiaChi.Trim());
+                try
+                {
+                    string query = string.Format("Exec dbo.sp_ChangeNSX @MaNSX = {0}, @TenNSX = N'{1}', @DiaChi = N'{2}'", MaNSX, TenNSX.Trim(), DiaChi.Trim());
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                
-                LoadListNSX();
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+
+                    LoadListNSX();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
 
             });
-        }
 
+            LoadCommand = new RelayCommand<object>((p) =>
+            {
+
+                return true;
+
+            }, (p) =>
+            {
+                try
+                {
+                    LoadListNSX();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            });
+
+            TheoCommand = new RelayCommand<object>((p) =>
+            {
+
+                return true;
+
+            }, (p) =>
+            {
+                Theo = 1 - Theo;
+
+            });
+            SapXepCommand = new RelayCommand<object>((p) =>
+            {
+
+                return true;
+
+            }, (p) =>
+            {
+                if (Theo==0)
+                {
+                    LoadListTheoTongHang();
+                }
+                else
+                {
+                    LoadListGiaTriThuongHieu();
+                }
+            });
+
+            UncheckedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TangDan = 0;
+            }); 
+            CheckedCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                TangDan = 1;
+            });
+
+        }
     }
 }

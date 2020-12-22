@@ -6,14 +6,16 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
         xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML"
+         xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         x:Name="NSX"
-        DataContext="{StaticResource NSXVM}"
-        Height="Auto" Width="Auto"
+        DataContext="{StaticResource NSXVM}" Height="572.5" Width="1250.5"
+      
         >
 
 
-    <Grid Height="Auto" Width="Auto">
+    <Grid Margin="2,2,2,2" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
@@ -26,8 +28,10 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="173*"/>
-            <ColumnDefinition Width="1009*"/>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
 
         </Grid.ColumnDefinitions>
 
@@ -92,7 +96,7 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="32,8,3,8"
+            Margin="4,7,2,7"
             Text="Nhà Sản Xuất"
             FontSize="16"
             FontWeight="Bold"
@@ -101,13 +105,41 @@
             TextWrapping="Wrap"
             Height="25" Width="138"  />
 
+
+
+        <!--Tông Sản phẩm của từng NSX-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Tổng Sản Phẩm"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TongSP}"
+                 Height="44" Grid.Column="2" />
+        <!--GiaTriThuongHieu-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Gia Tri Thuong Hieu"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding GiaTriThuongHieu}"
+                 Height="44" Grid.Column="3"  />
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="0" Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.538">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="533">
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="400" Margin="0,31,0,32">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="4,0,10,0">
+                <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="400" Width="714">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mã nhà sản xuất" DisplayMemberBinding="{Binding IdNSX}"></GridViewColumn>
+                            <GridViewColumn Header="Mã nhà sản xuất" DisplayMemberBinding="{Binding MaNSX}"></GridViewColumn>
                             <GridViewColumn Header="Tên nhà sản xuất" DisplayMemberBinding="{Binding TenNSX}"></GridViewColumn>
                             <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
 
@@ -117,12 +149,86 @@
             </ScrollViewer>
         </materialDesign:Card>
 
+
+        <!--Mô tả sản phẩm-->
+        <TextBlock Grid.Row="0"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="2,4,2,2"
+            Text="Sắp xếp NSX theo:"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+           Height="32" Width="200" Grid.Column="4" />
+
+
+        <ComboBox Grid.Column="4"  Grid.Row="1"
+            materialDesign:HintAssist.Hint="Search"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="40" Margin="0,19">
+            <ComboBoxItem
+                IsSelected="True"
+                DataContext="{Binding TongHangCommand}" >
+                Tổng sản phẩm
+            </ComboBoxItem>
+            <ComboBoxItem
+                DataContext="{Binding TongGiaTriCommand}"
+                >
+                Tổng  giá trị thương hiệu:
+            </ComboBoxItem>
+
+        </ComboBox>
+
+        <Grid Grid.Column="4"  Grid.Row="2">
+            <materialDesign:Card Background="#03a9f4"  Margin="5"
+                                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                                         Padding="0" Width="150">
+                <Grid Height="59" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="2 2 2 4"     
+                                                       Text="Tang" HorizontalAlignment="Center"
+                                                       >
+
+                    </TextBlock>
+
+
+                    <ToggleButton  Grid.Row="1" VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                    ToolTip="MaterialDesignSwitchDarkToggleButton"
+                 
+                                   Margin="2,2,2,2" 
+                    Width="100" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding Path=CheckedCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding Path=UncheckedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </ToggleButton>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+        <Button Command="{Binding SapXepCommand}" Content="Sắp Xếp" Grid.Column="4" HorizontalAlignment="Left" Margin="49,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="137" Height="49"/>
+
+
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="5,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="360">
+        <materialDesign:Card Grid.Row="6" Grid.ColumnSpan="2" Margin="5,13,0,12" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="493">
             <WrapPanel>
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding LoadCommand}" Content="Load" Margin="10" Width="100"></Button>
+
             </WrapPanel>
         </materialDesign:Card>
 

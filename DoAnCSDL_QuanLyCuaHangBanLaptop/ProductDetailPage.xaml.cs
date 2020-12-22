@@ -26,5 +26,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
             InitializeComponent();
             
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

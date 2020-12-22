@@ -7,7 +7,9 @@
         mc:Ignorable="d"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
-        Title="NhanVienWindow" Height="568.421" Width="1210.111">
+        Title="NhanVienWindow" Height="568.421" Width="1210.111"
+         DataContext="{StaticResource NhanVienVM}"
+        >
 
     <Grid>
 
@@ -23,43 +25,16 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="102*"/>
-            <ColumnDefinition Width="1089*"/>
+            <ColumnDefinition Width="202*"/>
+
+            <ColumnDefinition Width="789*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="200*"/>
+
 
         </Grid.ColumnDefinitions>
 
-        <!--Nút backward-->
-        <!--
-        <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderBrush="#303030"
-            VerticalAlignment="Top"
-            Height="25" Width="25"
-            Command="{x:Static NavigationCommands.BrowseBack}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
-            <materialDesign:PackIcon
-                Kind="KeyboardArrowLeft"
-                Height="20"
-                Width="20" />
-        </Button>
 
-        -->
-        <!--Nút forward-->
-        <!--
-        <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderBrush="#303030"
-            VerticalAlignment="Top"
-            Height="25" Width="25"
-            Margin="28,0,0,0"
-            Command="{x:Static NavigationCommands.BrowseForward}"
-            Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}">
-            <materialDesign:PackIcon
-                Kind="KeyboardArrowRight"
-                Height="20"
-                Width="20" />
-        </Button>-->
 
 
 
@@ -135,8 +110,22 @@
             VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             materialDesign:HintAssist.Hint="SDT"
-         Text="{Binding SoLuong}"
+         Text="{Binding SDT}"
              Height="44" Grid.Column="1"/>
+
+        <TextBox Grid.Row="6" 
+             
+            Margin="0,20.462,11,0"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            materialDesign:HintAssist.Hint="TenTK"
+         Text="{Binding TenTK}"
+             Height="44" Grid.Column="2"/>
         <!--Giá vốn-->
         <TextBox Grid.Row="4"
             Margin="0,20.462,11,0"
@@ -158,27 +147,115 @@
             </materialDesign:HintAssist.Hint>
         </TextBox>
 
-      
+
 
         <!--Mô tả sản phẩm-->
         <TextBlock Grid.Row="0"
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="97,6,956,10"
-            Text="Mô tả sản phẩm"
+            Margin="36.8,10,957,82.8"
+            Text="Thông Tin Nhân Viên"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
             
             TextWrapping="Wrap"
-           Height="25" Width="138" Grid.ColumnSpan="2" Grid.Column="1"/>
+           Height="32" Width="199" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
+
+        <!--Mã hang hoa-->
+        <TextBox Grid.Row="0"
+                 materialDesign:HintAssist.Hint="Tim Kiem Danh Sach Nhan Vien Theo Ten"
+                 FontSize="15"
+                  
+                 Margin="1,2,2,0"
+                 VerticalAlignment="Top"
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Text="{Binding TenNhanVienTimKiem}"
+                 Height="44" Grid.Column="3" />
+        <Button Command="{Binding SearchCommand}" Content="Search" Grid.Column="3" HorizontalAlignment="Left" Margin="378,3,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding QuyenCommand}" Content="Thay Doi Quyen" Grid.Column="4" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="2" VerticalAlignment="Top" Width="137" Height="49"/>
+        <Button Command="{Binding MKCommand}" Content="Thay Doi MK" Grid.Column="4" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="6" VerticalAlignment="Top" Width="137" Height="49"/>
+        <!--Mô tả NV-->
+        <TextBlock Grid.Row="0"
+            TextAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="2,2,2,2"
+            Text="Sắp xếp Nhan Vien"
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            
+            TextWrapping="Wrap"
+           Height="32" Width="199" Grid.Column="5" />
+        <!--Quyen-->
+        <TextBox Grid.Row="1"
+                 materialDesign:HintAssist.Hint="Quyen"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="1,20.462,2,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding TenPQ}" Grid.Column="4" 
+                 />
+        <!--MKCu-->
+        <TextBox Grid.Row="3"
+                 materialDesign:HintAssist.Hint="MKCu"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="5,20,158,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding MK}" Grid.Column="4" Grid.ColumnSpan="2" 
+                 />
+
+        <!--MK-->
+        <TextBox Grid.Row="4"
+                 materialDesign:HintAssist.Hint="MK"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="5,20,158,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding MKMoi}" Grid.Column="4" Grid.ColumnSpan="2" 
+                 />
+
+        <!--MKMoi-->
+        <TextBox Grid.Row="5"
+                 materialDesign:HintAssist.Hint="XacNhanMK"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="10,20.385,153,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding MKMoiXacNhan}" Grid.Column="4" Grid.ColumnSpan="2" 
+                 />
 
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="6"  VerticalAlignment="Center" Height="392" Margin="10,23,0,82.231">
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Grid.RowSpan="6" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="392" Margin="10,23,0,82.231">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,10">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="346" Width="1031">
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="346" Width="750">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
@@ -186,7 +263,9 @@
                             <GridViewColumn Header="Giới Tinh" DisplayMemberBinding="{Binding GioiTinh}" ></GridViewColumn>
                             <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
                             <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
-                            <GridViewColumn Header="Chức Vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
+                            <GridViewColumn Header="Quyen" DisplayMemberBinding="{Binding TenPQ}"></GridViewColumn>
+                            <GridViewColumn Header="Chan" DisplayMemberBinding="{Binding Chan}"></GridViewColumn>
+
 
                         </GridView>
                     </ListView.View>
@@ -195,13 +274,61 @@
         </materialDesign:Card>
 
         <!--Button Thêm đơn hàng-->
-        <materialDesign:Card Grid.Row="6" Margin="143,15.462,0,14.538" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="2" Height="52" Width="Auto">
+        <materialDesign:Card Grid.Row="6" Margin="55,17.385,0,13.615" HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Column="3" Height="52" Width="509">
             <WrapPanel>
                 <Button Command="{Binding EditCommand}" Content="Sửa" Margin="10" Width="100"></Button>
                 <Button Command="{Binding AddCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="10" Width="100"></Button>
+                <Button Command="{Binding LoadCommand}" Content="Load" Margin="10" Width="100"></Button>
+
             </WrapPanel>
         </materialDesign:Card>
+        <Button Command="{Binding ChanCommand}" Content="Chặn" Grid.Column="5" HorizontalAlignment="Left" Margin="12,15,0,0" Grid.Row="3" VerticalAlignment="Top" Width="138" Height="49" Background="#FFF52121"/>
 
+
+        <ComboBox Grid.Column="5"  Grid.Row="1"
+            materialDesign:HintAssist.Hint="Quyen"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <ComboBoxItem
+                
+                DataContext="{Binding AdminCommand}" >
+                Admin
+            </ComboBoxItem>
+            <ComboBoxItem
+                 IsSelected="True"
+                DataContext="{Binding AllQuyenCommand}" >
+                All
+            </ComboBoxItem>
+            <ComboBoxItem
+               
+                DataContext="{Binding NhanVienCommand}"
+                >
+                Nhan Vien
+            </ComboBoxItem>
+
+        </ComboBox>
+        <ComboBox Grid.Column="5"  Grid.Row="2"
+            materialDesign:HintAssist.Hint="TinhTrang"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <ComboBoxItem
+                
+                DataContext="{Binding Khoa}" >
+                Khoa
+            </ComboBoxItem>
+
+            <ComboBoxItem
+                
+                DataContext="{Binding KhongKhoa}"
+                >
+                Khong Khoa
+            </ComboBoxItem>
+            <ComboBoxItem
+                IsSelected="True"
+                DataContext="{Binding AllKhoaCommand}" >
+                All
+            </ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Window>

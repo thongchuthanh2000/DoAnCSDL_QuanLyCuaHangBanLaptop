@@ -1,105 +1,142 @@
 ﻿using DoAnCSDL_QuanLyCuaHangBanLaptop.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 {
-    public class PhuongThucThanhToanViewModel:BaseViewModel
+    public class PhuongThucThanhToanViewModel : BaseViewModel
     {
-     
-        
-            private ObservableCollection<Model.PhuongThucThanhToan> _List;
-            public ObservableCollection<Model.PhuongThucThanhToan> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
 
-            private PhuongThucThanhToan _SelectedItem;
-            public PhuongThucThanhToan SelectedItem
+        private ObservableCollection<Model.PT_ThanhToan> _List;
+        public ObservableCollection<Model.PT_ThanhToan> List { get => _List; set { _List = value; OnPropertyChanged(); } }
+
+
+        private PT_ThanhToan _SelectedItem;
+        public PT_ThanhToan SelectedItem
+        {
+            get => _SelectedItem;
+            set
             {
-                get => _SelectedItem;
-                set
+                _SelectedItem = value;
+                OnPropertyChanged();
+                if (SelectedItem != null)
                 {
-                    _SelectedItem = value;
-                    OnPropertyChanged();
-                    if (SelectedItem != null)
-                    {
-                        MaPhuongThucThanhToan = SelectedItem.idPT_ThanhToan;
-                        TenPhuonThucThanhToan = SelectedItem.TenPT_ThanhToan;
-                    }
+                    MaPhuongThucThanhToan = SelectedItem.MaPTTT;
+                    TenPhuongThucThanhToan = SelectedItem.TenPTTT;
+                    LoadTongPTTT();
                 }
             }
+        }
+        public void LoadTongPTTT()
+        {
+            string query = string.Format(" Select dbo.fn_TongGiaTriThanhToanBangPTTT ({0}) ", MaPhuongThucThanhToan);
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+            TongPTTT = (int)data.Rows[0][0];
+        }
+
+        private int _TongPTTT;
+        public int TongPTTT { get => _TongPTTT; set { _TongPTTT = value; OnPropertyChanged(); } }
 
 
-            private int _MaPhuongThucThanhToan;
-            public int MaPhuongThucThanhToan { get => _MaPhuongThucThanhToan; set { _MaPhuongThucThanhToan = value; OnPropertyChanged(); } }
 
-            private string _TenPhuonThucThanhToan;
-            public string TenPhuonThucThanhToan { get => _TenPhuonThucThanhToan; set { _TenPhuonThucThanhToan = value; OnPropertyChanged(); } }
+        private int _MaPhuongThucThanhToan;
+        public int MaPhuongThucThanhToan { get => _MaPhuongThucThanhToan; set { _MaPhuongThucThanhToan = value; OnPropertyChanged(); } }
 
-            //public ICommand DeleteCommand { get; set; }
-            public ICommand EditCommand { get; set; }
-            public ICommand AddCommand { get; set; }
+        private string _TenPhuongThucThanhToan;
+        public string TenPhuongThucThanhToan { get => _TenPhuongThucThanhToan; set { _TenPhuongThucThanhToan = value; OnPropertyChanged(); } }
+
+        public ICommand DeleteCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand AddCommand { get; set; }
 
 
 
-            private void LoadListPTThanhToan()
+        private void LoadListPTThanhToan()
+        {
+            try
             {
-                List = new ObservableCollection<PhuongThucThanhToan>();
+                List = new ObservableCollection<PT_ThanhToan>();
 
-                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.NSX");
+                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_LIST_PhuongThucThanhToan");
 
                 foreach (DataRow item in data.Rows)
                 {
-                    PhuongThucThanhToan ptThanhToan = new PhuongThucThanhToan(item);
+                    PT_ThanhToan ptThanhToan = new PT_ThanhToan(item);
                     List.Add(ptThanhToan);
                 }
                 OnPropertyChanged();
-
             }
-
-            public PhuongThucThanhToanViewModel()
+            catch (SqlException sqlEx)
             {
-                LoadListPTThanhToan();
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
+        }
 
-                AddCommand = new RelayCommand<object>((p) =>
+        public PhuongThucThanhToanViewModel()
+        {
+            LoadListPTThanhToan();
+
+            AddCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("Exec sp_AddPT_ThanhToan @MaPTTT = {0}, @TenPTTT =N'{1}'",
+                    MaPhuongThucThanhToan, TenPhuongThucThanhToan);
+
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListPTThanhToan();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+               return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("Exec sp_DeletePT_ThanhToan @MaPTTT={0}", MaPhuongThucThanhToan);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+
+                    LoadListPTThanhToan();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            }
+            );
+            EditCommand = new RelayCommand<object>((p) =>
                 {
                     return true;
                 }, (p) =>
                 {
-                    string query = string.Format("");
+                    try
+                    {
+                        string query = string.Format("Exec sp_ChangePT_ThanhToan @MaPTTT={0}, @TenPTTT =N'{1}'", MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
-                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                    LoadListPTThanhToan();
+
+                        var Object = DataProvider.Instance.ExecuteNonQuery(query);
+
+                        LoadListPTThanhToan();
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    }
                 });
-
-                EditCommand = new RelayCommand<object>((p) =>
-                {
-                    if (SelectedItem == null)
-                        return false;
-
-                    string query = string.Format("");
-                    var displayList = DataProvider.Instance.ExecuteQuery(query);
-                    if (displayList != null)
-                        return true;
-
-                    return false;
-
-                }, (p) =>
-                {
-                    string query = string.Format("");
-
-                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
-
-                    LoadListPTThanhToan();
-
-                });
-            }
-
         }
+
     }
+}
 

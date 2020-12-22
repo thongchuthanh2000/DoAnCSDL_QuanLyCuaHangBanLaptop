@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
-    public class Nhap
+    public class Bill_Info
     {
-        public int idGiaoDich { get; set; }
+        public int idBill { get; set; }
 
         public int idSP { get; set; }
 
-        public int SoLuong  { get; set; }
+        public int SoLuong { get; set; }
 
-        public Nhap(int idGiaoDich, int idSP, int soLuong)
+
+        public Bill_Info(int idBill, int idSP, int soLuong)
         {
-            this.idGiaoDich = idGiaoDich;
+            this.idBill = idBill;
             this.idSP = idSP;
             this.SoLuong = soLuong;
         }
-        public Nhap(DataRow row)
+        public Bill_Info(DataRow row)
         {
-            this.idGiaoDich = (int)row["idGiaoDich"];
+            this.idBill = (int)row["idBill"];
             this.idSP = (int)row["idSP"];
             this.SoLuong = (int)row["SoLuong"];
         }

@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          WindowStartupLocation="CenterScreen" 
         Title="SettingsWindow" 
-        Height="584" Width="662"
+            WindowState="Maximized"
         >
 
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
@@ -16,19 +16,21 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid  Grid.Row="1" RenderTransformOrigin="0.349,0.499" >
+        <Grid RenderTransformOrigin="0.349,0.499" Margin="0,0,24,0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45*"/>
-                <ColumnDefinition Width="83*"/>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="380*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1" x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto"/>
+            <Grid Grid.Column="2" x:Name="GridPrincipal"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top" Width="Auto" Height="Auto"/>
 
 
-            <Grid Width="250" HorizontalAlignment="Left" Background="#FF673AB7" Grid.Column="0">
+            <Grid Background="#FF673AB7" Grid.Column="0" Margin="2,2,2,2" >
                 <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
                     <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
                 </materialDesign:TransitioningContent>
-                <ListView x:Name="ListViewMenu" Margin="0,28,0,10" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
+                <ListView x:Name="ListViewMenu" Margin="2,2,2,2" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
@@ -41,31 +43,7 @@
                             <TextBlock Text="PT THanh Toán" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                         </StackPanel>
                     </ListViewItem>
-                    <!--
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FormatListBulleted" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Cardápio" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="TruckDelivery" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Entrega" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Pagamento de Entrega" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AccountStar" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Clientes" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
-                        </StackPanel>
-                    </ListViewItem>-->
+
                 </ListView>
             </Grid>
         </Grid>

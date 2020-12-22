@@ -15,15 +15,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private ObservableCollection<Model.DonNhap> _List;
         public ObservableCollection<Model.DonNhap> List { get => _List; set { _List = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<Model.Nhap> _Nhap;
-        public ObservableCollection<Model.Nhap> Nhap { get => _Nhap; set { _Nhap = value; OnPropertyChanged(); } }
+        private ObservableCollection<Model.DonNhapInfo> _Nhap;
+        public ObservableCollection<Model.DonNhapInfo> Nhap { get => _Nhap; set { _Nhap = value; OnPropertyChanged(); } }
 
 
 
-        public int idSP { get; set; }
-        public int SoLuong { get; set; }
-        private Model.Nhap _SelectedNhap;
-        public Model.Nhap SelectedNhap
+       
+        private Model.DonNhapInfo _SelectedNhap;
+        public Model.DonNhapInfo SelectedNhap
         {
             get => _SelectedNhap;
             set
@@ -33,19 +32,23 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                 if (_SelectedNhap != null)
                 {
-                    idSP = _SelectedNhap.idSP;
+                    MaSP = _SelectedNhap.MaSP;
                     SoLuong = _SelectedNhap.SoLuong;
+                    TenSP = _SelectedNhap.TenSP;
                 }
             }
         }
 
-        public int idGiaoDich { get; set; }
+        private string _TenSP;
+        public string TenSP { get => _TenSP; set { _TenSP = value; OnPropertyChanged(); } }
+        public int MaSP { get; set; }
+        public int SoLuong { get; set; }
 
+        public int MaGiaoDich { get; set; }
         public int TongTien { get; set; }
-
         public DateTime? NgayGiaoDich { get; set; }
-
         public string ViTriKho { get; set; }
+
 
         private DonNhap _SelectedItem;
         public DonNhap SelectedItem
@@ -57,11 +60,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    idGiaoDich = SelectedItem.idGiaoDich;
+                    MaGiaoDich = SelectedItem.MaDonNhap;
                     TongTien = SelectedItem.TongTien;
                     NgayGiaoDich = SelectedItem.NgayGiaoDich;
                     ViTriKho = SelectedItem.ViTriKho;
-                    LoadNhap(idGiaoDich);
+                    LoadDonNhap(MaGiaoDich);
                 }
             }
         }
@@ -69,40 +72,56 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
        
 
 
-        //public ICommand DeleteCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand AddCommand { get; set; }
+
         public ICommand EditNhapCommand { get; set; }
         public ICommand AddNhapCommand { get; set; }
+        public ICommand DeleteNhapCommand { get; set; }
 
 
-        private void LoadNhap(int id)
-        {
-            Nhap = new ObservableCollection<Nhap>();
-            string query = string.Format("SELECT * FROM dbo.Nhap where idGiaoDich = {0}", id);
-            DataTable data = DataProvider.Instance.ExecuteQuery(query);
-
-            foreach (DataRow item in data.Rows)
-            {
-                Nhap nhap = new Nhap(item);
-                Nhap.Add(nhap);
-            }
-            OnPropertyChanged();
-
-        }
-
+       
         private void LoadListDonNhap()
         {
-            List = new ObservableCollection<DonNhap>();
-
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.DonNhap");
-
-            foreach (DataRow item in data.Rows)
+            try
             {
-                DonNhap donnhap = new DonNhap(item);
-                List.Add(donnhap);
+                List = new ObservableCollection<DonNhap>();
+
+                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.DonNhap");
+
+                foreach (DataRow item in data.Rows)
+                {
+                    DonNhap donnhap = new DonNhap(item);
+                    List.Add(donnhap);
+                }
+                OnPropertyChanged();
             }
-            OnPropertyChanged();
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
+
+        }
+        private void LoadDonNhap(int id)
+        {
+            try
+            {
+                Nhap = new ObservableCollection<DonNhapInfo>();
+                string query = string.Format("EXEC dbo.sp_DonNhapInfo @MaDonNhap = {0}", id);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+                foreach (DataRow item in data.Rows)
+                {
+                    DonNhapInfo nhap = new DonNhapInfo(item);
+                    Nhap.Add(nhap);
+                }
+                OnPropertyChanged();
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+            }
         }
 
         public StoreViewModel()
@@ -111,77 +130,114 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
-                {
-                    return false;
-                }
                 return true;
             }, (p) =>
             {
-                string query = string.Format("");
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadListDonNhap();
+                try
+                {
+                    string query = string.Format("Exec dbo.sp_AddDonNhap @MaDonNhap = {0}, @ThoiGian ='{1}', @DiaChi=N'{2}'",
+                    MaGiaoDich, NgayGiaoDich, ViTriKho);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListDonNhap();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             });
 
             EditCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedItem == null)
-                    return false;
-
-                string query = string.Format("");
-                var displayList = DataProvider.Instance.ExecuteQuery(query);
-                if (displayList != null)
                     return true;
+            }, (p) =>
+            {
+                try
+                {
+                    string query = string.Format("EXEC sp_ChangeDonNhap @MaDonNhap = {0}, @ThoiGian = '{1}', @DiaChi = N'{2}'", MaGiaoDich, NgayGiaoDich, ViTriKho);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                return false;
+                    LoadListDonNhap();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
 
             }, (p) =>
             {
-                string query = string.Format("");
+                try
+                {
+                    string query = string.Format("EXEC sp_DeleteDonNhap @MaDonNhap = {0}", MaGiaoDich);
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                LoadListDonNhap();
-
-
+                    LoadListDonNhap();
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             });
 
-            AddCommand = new RelayCommand<object>((p) =>
+            AddNhapCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedNhap == null)
-                {
-                    return false;
-                }
                 return true;
             }, (p) =>
             {
-                string query = string.Format("");
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
-                LoadNhap(SelectedItem.idGiaoDich);
+                try
+                {
+                    string query = string.Format("Exec AddDonNhap @MaDonNhap = {0}, @MaSP ={1}, @SoLuong={2}",
+                    MaGiaoDich, MaSP, SoLuong);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadDonNhap(SelectedItem.MaDonNhap);
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             });
 
-            EditCommand = new RelayCommand<object>((p) =>
+            EditNhapCommand = new RelayCommand<object>((p) =>
             {
-                if (SelectedNhap == null)
-                    return false;
-
-                string query = string.Format("");
-                var displayList = DataProvider.Instance.ExecuteQuery(query);
-                if (displayList != null)
                     return true;
-
-                return false;
-
             }, (p) =>
             {
-                string query = string.Format("");
+                try
+                {
+                    string query = string.Format("Exec sp_ChangeDonNhapInfo @MaDonNhap = {0}, @MaSP = {1},  @SoLuong = {2}", MaGiaoDich, MaSP, SoLuong);
 
-                var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                LoadNhap(SelectedItem.idGiaoDich);
+                    LoadDonNhap(SelectedItem.MaDonNhap);
+                }
+                catch (SqlException sqlEx)
+                {
+                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                }
             });
 
+            DeleteNhapCommand = new RelayCommand<object>((p) =>
+               {
+                   return true;
+               }, (p) =>
+               {
+                   try
+                   {
+                       string query = string.Format("Exec sp_DeleteDonNhapInfo @MaDonNhap = {0}, @MaSP = {1}", MaGiaoDich, MaSP);
 
+                       var Object = DataProvider.Instance.ExecuteNonQuery(query);
+
+                       LoadDonNhap(SelectedItem.MaDonNhap);
+                   }
+                   catch (SqlException sqlEx)
+                   {
+                       MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                   }
+               });
 
         }
 

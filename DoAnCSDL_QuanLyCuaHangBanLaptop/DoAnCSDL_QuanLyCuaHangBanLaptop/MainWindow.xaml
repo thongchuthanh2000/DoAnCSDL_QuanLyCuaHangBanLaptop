@@ -1,0 +1,263 @@
+﻿<Window x:Class="DoAnCSDL_QuanLyCuaHangBanLaptop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop"
+        mc:Ignorable="d"
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        
+        
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:uc="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        
+        Name="mainWindow"
+        DataContext="{ StaticResource MainVM}"
+        Title="Phần mền bán Laptop" Height="830" Width="1018" >
+
+    <Grid Margin="0,0,10,-152" Height="Auto">
+
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Ellipse Width="Auto" Height="Auto" Fill="#FF0E46DA" />
+                                <ContentControl Content="{TemplateBinding Content}" 
+                                                HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions >
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+            <Label Name="LiveTimeLabel" Content="%TIME%" 
+                   HorizontalAlignment="Right" 
+                   VerticalAlignment="Top" Height="55" Width="Auto" FontSize="36" 
+                   FontWeight="Bold" Foreground="Black" />
+        </Grid>
+
+        <Grid Grid.Row="1" Background="Transparent" Margin="0,0,10,-20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="auto"></RowDefinition>
+                <RowDefinition  Height="auto"></RowDefinition>
+                <RowDefinition  Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Grid.Row="0"  Height="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding   ProductCommand}" Grid.Column="0" 
+                        ToolTip="Sản Phẩm" Height="Auto" Margin="10,10,10,10">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Product" HorizontalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Dns" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding OrderCommand}" Grid.Column="1" 
+                        ToolTip="Kho" Height="Auto" Margin="10,10,10,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Order" HorizontalAlignment="Center"  FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Storage" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding KhuyenMaiCommand}" Grid.Column="2" 
+                        ToolTip="Khuyến Mại" Height="Auto" Margin="10,10,10,10">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Khuyến Mại" HorizontalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Voucher" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+            </Grid>
+
+
+            <Grid Grid.Row="1" Height="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding ReportsCommand}" Grid.Column="0" 
+                        ToolTip="Thống kê" Height="Auto" Margin="0,10,10,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Reports" HorizontalAlignment="Center"  FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="54*"/>
+                                <ColumnDefinition Width="47*"/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Report" Grid.ColumnSpan="2" Margin="26,0,25,0" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding SettingsCommand}" Grid.Column="1" 
+                        ToolTip="Settings" Height="Auto" Margin="10,10,10,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Settings" HorizontalAlignment="Center"  FontSize="30" Foreground="White" ></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Settings" Foreground="White"  />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding StoreCommand}" Grid.Column="2" 
+                        ToolTip="Sản Phẩm" Height="Auto" Margin="10,10,10,10">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Store" HorizontalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Dns" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+            </Grid>
+
+            <Grid Grid.Row="2" Height="250">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding EmployeeCommand}" Grid.Column="0" 
+                        ToolTip="Employee" Height="Auto" Margin="10,10,10,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Employee" HorizontalAlignment="Center"  FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="People" Foreground="White"/>
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding CustomerCommand}" Grid.Column="1" 
+                        ToolTip="Customer" Height="Auto" Margin="10,10,10,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Customer" HorizontalAlignment="Center" Foreground="White" FontSize="30"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="PersonBadge" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding LogoutCommand}" Grid.Column="2" 
+                        ToolTip="Logout" Height="Auto" Margin="10,10,10,10"
+                       >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Logout" HorizontalAlignment="Center" FontSize="30" Foreground="White"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
+                                                     Kind="Logout" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Button>
+
+            </Grid>
+
+        </Grid>
+
+
+
+    </Grid>
+
+</Window>
