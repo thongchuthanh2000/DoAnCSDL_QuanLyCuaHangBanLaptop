@@ -69,6 +69,7 @@
 
         <DatePicker
             x:Name="FutureDatePicker"
+            Loaded="FutureDatePicker_Loaded"
             Width="100" Grid.Row="3"  Grid.Column="1" 
               Margin="1,29,1,9.538"
              Height="44"
@@ -259,6 +260,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding TenTK}"></GridViewColumn>
                             <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding NgaySinh}"></GridViewColumn>
                             <GridViewColumn Header="Giới Tinh" DisplayMemberBinding="{Binding GioiTinh}" ></GridViewColumn>
                             <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>

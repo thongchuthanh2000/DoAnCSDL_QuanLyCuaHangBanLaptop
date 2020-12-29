@@ -41,11 +41,32 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
             }
         }
+        private int _MaBill;
+        public int MaBill { get => _MaBill; set { _MaBill = value; OnPropertyChanged(); } }
+
+        private int _TongTien;
+        public int TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
+
+        private DateTime? _ThoiGian;
+        public DateTime? ThoiGian { get => _ThoiGian; set { _ThoiGian = value; OnPropertyChanged(); } }
+
+        private int _MaKH;
+        public int MaKH { get => _MaKH; set { _MaKH = value; OnPropertyChanged(); } }
+
+        private int _MaPTTT;
+        public int MaPTTT { get => _MaPTTT; set { _MaPTTT = value; OnPropertyChanged(); } }
+
+        private int _MaKhuyenMai;
+        public int MaKhuyenMai { get => _MaKhuyenMai; set { _MaKhuyenMai = value; OnPropertyChanged(); } }
+        private int _MaNV;
+        public int MaNV { get => _MaNV; set { _MaNV = value; OnPropertyChanged(); } }
+
 
 
         private ObservableCollection<Model.BillInfo> _BillInfo;
         public ObservableCollection<Model.BillInfo> BillInfo { get => _BillInfo; set { _BillInfo = value; OnPropertyChanged(); } }
-        public int MaSP { get; set; }
+        private int _MaSP;
+        public int MaSP { get => _MaSP; set {_MaSP= value; OnPropertyChanged(); } }
 
         private int _SL;
         public int SL { get => _SL; set { _SL = value; OnPropertyChanged(); } }
@@ -72,25 +93,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         }
 
 
-        private int _MaBill;
-        public int MaBill { get => _MaBill; set { _MaBill = value; OnPropertyChanged(); } }
-
-        private int _TongTien;
-        public int TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
-
-        private DateTime? _ThoiGian;
-        public DateTime? ThoiGian { get => _ThoiGian; set { _ThoiGian = value; OnPropertyChanged(); } }
-
-        private int _MaKH;
-        public int MaKH { get => _MaKH; set { _MaKH = value; OnPropertyChanged(); } }
-
-        private int _MaPTTT;
-        public int MaPTTT { get => _MaPTTT; set { _MaPTTT = value; OnPropertyChanged(); } }
-
-        private int _MaKhuyenMai;
-        public int MaKhuyenMai { get => _MaKhuyenMai; set { _MaKhuyenMai = value; OnPropertyChanged(); } }
-        private int _MaNV;
-        public int MaNV { get => _MaNV; set { _MaNV = value; OnPropertyChanged(); } }
+       
 
        
         private void ChonPTTT()
@@ -163,9 +166,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 OnPropertyChanged();
             }
-            catch (SqlException sqlEx)
+            catch (SqlException e)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(e.Message);
             }
         }
         public BillViewModel()
@@ -187,7 +190,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -207,7 +210,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -227,7 +230,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -247,7 +250,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     }
                     catch (SqlException sqlEx)
                     {
-                        MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                        MessageBox.Show(sqlEx.Message);
                     }
                 });
         }

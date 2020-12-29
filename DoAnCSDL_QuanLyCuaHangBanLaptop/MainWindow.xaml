@@ -25,6 +25,13 @@
         DataContext="{ StaticResource MainVM}"
         Title="Phần mền bán Laptop" Height="830" Width="1018" >
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
+                                   CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid Margin="0,0,10,-152" Height="Auto">
 
         <Grid.Resources>
@@ -130,20 +137,21 @@
 
             <Grid Grid.Row="1" Height="250">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="333*"></ColumnDefinition>
+                    <ColumnDefinition Width="321"></ColumnDefinition>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="332*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Command="{Binding ReportsCommand}" Grid.Column="0" 
-                        ToolTip="Thống kê" Height="Auto" Margin="0,10,10,10">
+                <Button Command="{Binding ProducerCommand}" Grid.Column="0" 
+                        ToolTip="NSX" Height="Auto" Margin="0,10,10,10">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <TextBlock Text="Reports" HorizontalAlignment="Center"  FontSize="30" Foreground="White"></TextBlock>
+                            <TextBlock Text="Producer" HorizontalAlignment="Right"  FontSize="30" Foreground="White"></TextBlock>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -151,13 +159,13 @@
                                 <ColumnDefinition Width="47*"/>
                             </Grid.ColumnDefinitions>
                             <materialDesign:PackIcon HorizontalAlignment="Center" Width="50" Height="50"  
-                                                     Kind="Report" Grid.ColumnSpan="2" Margin="26,0,25,0" Foreground="White" />
+                                                     Kind="Home" Grid.ColumnSpan="2" Margin="26,0,25,0" Foreground="White" />
                         </Grid>
                     </Grid>
                 </Button>
 
                 <Button Command="{Binding SettingsCommand}" Grid.Column="1" 
-                        ToolTip="Settings" Height="Auto" Margin="10,10,10,10">
+                        ToolTip="Settings" Height="Auto" Margin="10,10,10,10" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -173,7 +181,7 @@
                     </Grid>
                 </Button>
 
-                <Button Command="{Binding StoreCommand}" Grid.Column="2" 
+                <Button Command="{Binding StoreCommand}" Grid.Column="3" 
                         ToolTip="Sản Phẩm" Height="Auto" Margin="10,10,10,10">
                     <Grid >
                         <Grid.RowDefinitions>

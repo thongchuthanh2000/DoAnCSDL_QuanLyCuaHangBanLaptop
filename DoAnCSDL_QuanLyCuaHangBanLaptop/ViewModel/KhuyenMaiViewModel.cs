@@ -100,7 +100,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
 
 
@@ -110,7 +110,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try
             {
                 List = new ObservableCollection<KhuyenMai>();
-                string query = string.Format("EXEC dbo.sp_TimKiemKhuyenMai @NgayBatDau = {0} ,@NgayKetThuc = {1}", dateBatDau, dateKetThuc);
+                string query = string.Format("EXEC dbo.sp_TimKiemKhuyenMai @NgayBatDau = N'{0}' ,@NgayKetThuc = N'{1}'", dateBatDau, dateKetThuc);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
                 foreach (DataRow item in data.Rows)
@@ -122,7 +122,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
 
         }
@@ -146,7 +146,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
             return;
 
@@ -173,7 +173,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
             return;
         }
@@ -214,7 +214,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });
@@ -235,7 +235,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });

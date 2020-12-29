@@ -1,20 +1,15 @@
-﻿<UserControl x:Class="DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML.NSXUserControl"
+﻿<Window x:Class="DoAnCSDL_QuanLyCuaHangBanLaptop.NSXWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
-        xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML"
-         xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        x:Name="NSX"
-        DataContext="{StaticResource NSXVM}" Height="572.5" Width="1250.5"
-      
-        >
-
-
+            DataContext="{StaticResource NSXVM}"
+        Title="NSXWindow" Height="450" Width="800">
     <Grid Margin="2,2,2,2" >
 
         <Grid.RowDefinitions>
@@ -48,7 +43,7 @@
                  FontWeight="Bold"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Text="{Binding MaNSX}"
-                 Height="44" Grid.Column="1" />
+                 Height="44" Grid.Column="1"  />
 
         <!--Tên nhà sản xuất-->
         <TextBox Grid.Row="2"
@@ -233,4 +228,4 @@
         </materialDesign:Card>
 
     </Grid>
-</UserControl>
+</Window>

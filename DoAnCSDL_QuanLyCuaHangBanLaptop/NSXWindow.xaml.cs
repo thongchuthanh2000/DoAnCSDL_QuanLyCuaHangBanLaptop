@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DoAnCSDL_QuanLyCuaHangBanLaptop.UserControlXAML
+namespace DoAnCSDL_QuanLyCuaHangBanLaptop
 {
     /// <summary>
-    /// Interaction logic for NSXUserControl.xaml
+    /// Interaction logic for NSXWindow.xaml
     /// </summary>
-    public partial class NSXUserControl : UserControl
+    public partial class NSXWindow : Window
     {
-        public NSXUserControl()
+        public NSXWindow()
         {
             InitializeComponent();
         }

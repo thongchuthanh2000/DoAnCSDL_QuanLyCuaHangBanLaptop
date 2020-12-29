@@ -171,12 +171,30 @@
                  >
             <materialDesign:HintAssist.Hint>
                 <TextBlock>
-                    <Bold>Số lượng</Bold> ()
+                    <Bold>Số lượng</Bold> 
                 </TextBlock>
             </materialDesign:HintAssist.Hint>
         </TextBox>
         <!--Button Thêm đơn hàng-->
-
+        <TextBox Grid.Row="3" 
+            Margin="0,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Height="44"
+                 Text="{Binding TenSP}" Grid.Column="2"
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Ten SP</Bold> 
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
         <!--Ảnh sản phẩm-->
 
         <!--Danh sách loại sản phẩm-->
@@ -186,10 +204,14 @@
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="436" Width="540">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Mà Giao Dịch" DisplayMemberBinding="{Binding MaDonNhap}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày Giao Dịch" DisplayMemberBinding="{Binding NgayGiaoDich}"></GridViewColumn>
-                            <GridViewColumn Header="Vị trí kho" DisplayMemberBinding="{Binding ViTriKho}" ></GridViewColumn>
+                            <GridViewColumn Header="Mà Bill" DisplayMemberBinding="{Binding MaBill}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Giao Dịch" DisplayMemberBinding="{Binding ThoiGian}"></GridViewColumn>
+                            <GridViewColumn Header="Ma KH" DisplayMemberBinding="{Binding MaKH}" ></GridViewColumn>
                             <GridViewColumn Header="Tổng Tiền" DisplayMemberBinding="{Binding TongTien}"></GridViewColumn>
+                            <GridViewColumn Header="Ma Khuyen Mai" DisplayMemberBinding="{Binding MaKhuyenMai}"></GridViewColumn>
+                            <GridViewColumn Header="Ma PTTT" DisplayMemberBinding="{Binding MaPTTT}"></GridViewColumn>
+                            <GridViewColumn Header="Ma NV" DisplayMemberBinding="{Binding MaNV}"></GridViewColumn>
+
                         </GridView>
                     </ListView.View>
                 </ListView>

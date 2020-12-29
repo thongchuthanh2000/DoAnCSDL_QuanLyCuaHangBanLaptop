@@ -110,10 +110,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private void LoadListNhanVien()
         {
-            try
-            {
+            //try
+            //{
                 List = new ObservableCollection<NhanVien>();
-                string query = string.Format("SELECT * FROM  fn_DanhSachNV @TenNV =N'{0}', @Khoa ={1}, @Quyen =N'{2}'", "", SXKhoa, SXQuyen);
+                string query = string.Format("SELECT * FROM  fn_DanhSachNV (N'{0}', {1},N'{2}')","",SXKhoa, SXQuyen);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
                 foreach (DataRow item in data.Rows)
@@ -122,11 +122,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     List.Add(nhanvien);
                 }
                 OnPropertyChanged();
-            }
-            catch (SqlException sqlEx)
-            {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
-            }
+            //}
+            //catch (SqlException sqlEx)
+            //{
+            //    MessageBox.Show(sqlEx.Message);
+            //}
         }
 
         public NhanVienViewModel()
@@ -151,7 +151,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -162,7 +162,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec dbo.sp_ChangeThongTinNhanVien @MaNV = {0}, @Hoten =N'{1}', @NgaySinh ='{2}',@GioiTinh='{3}',@DiaChi=N{4}',"
+                    string query = string.Format("Exec dbo.sp_ChangeThongTinNhanVien @MaNV = {0}, @Hoten =N'{1}', @NgaySinh ='{2}',@GioiTinh='{3}',@DiaChi=N'{4}',"
                        + "@SDT ='{5}', @TenTK = N'{6}'", MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DiaChi, SDT, TenTK);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -170,7 +170,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -187,7 +187,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                  }
                  catch (SqlException sqlEx)
                  {
-                     MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                     MessageBox.Show(sqlEx.Message);
                  }
              }
             );
@@ -206,7 +206,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             }
@@ -231,7 +231,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             }
            );
@@ -259,7 +259,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             }
            );
@@ -275,10 +275,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadListNhanVien();
+                    MessageBox.Show("ThanhCong");
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             }
            );

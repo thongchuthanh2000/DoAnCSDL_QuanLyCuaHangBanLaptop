@@ -153,7 +153,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
 
         }
@@ -168,7 +168,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
             return 0;
         }
@@ -177,7 +177,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try
             {
                 List = new ObservableCollection<HangHoa>();
-                string query = string.Format("Select * From sp_ListSXSP ({0},{1})", Ban, Con);
+                string query = string.Format("EXEC  dbo.sp_ListSXSP @Ban = {0},  @Con = {1}", Ban, Con);
 
 
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
@@ -193,15 +193,12 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                     HangHoa sanpham = new HangHoa(item, nsx);
                     List.Add(sanpham);
-
-
-
                 }
                 OnPropertyChanged();
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
         }
         private void LoadListSearchSP()
@@ -209,7 +206,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try
             {
                 List = new ObservableCollection<HangHoa>();
-                string query = string.Format("Select * From dbo.fn_GetAccountByHoTen(N'{0}')", TenSPTimKiem);
+                string query = string.Format("Select * From dbo.fn_GetLapByTenSP(N'{0}')", TenSPTimKiem);
 
 
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
@@ -229,7 +226,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
         }
 
@@ -250,7 +247,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
         }
      
@@ -258,7 +255,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         {
             LoadListNSX();
             LoadListSanPham();
-
+            Con = -1;
+            Ban = -1;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -274,7 +272,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -294,7 +292,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });
@@ -313,7 +311,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             }); LoadCommand = new RelayCommand<object>((p) =>

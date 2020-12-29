@@ -33,6 +33,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         public string ManHinh { get => _manHinh; set => _manHinh = value; }
         public string PIN { get => _pIN; set => _pIN = value; }
         public byte[] BitmapImage { get => _bitmapImage; set => _bitmapImage = value; }
+
         public HangHoa(int maSP,string tenSP,int giaBan,int  soLuong, int giaGoc, int maNSX, string cpu, string ram, string manhinh, string pin, byte[] bitmapImage, NSX nsx)
         {
             this.MaNSX = maNSX;
@@ -63,14 +64,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.RAM  = row["ram"].ToString();
             this.ManHinh = row["manhinh"].ToString();
             this.PIN  = row["pin"].ToString();
-            //try
-            //{
-            //    this.BitmapImage = (byte[])row["Hinh"];
-            //}
-            //catch
-            //{
-            //    this.BitmapImage = (new byte[]);
-            //}
+            
+                this.BitmapImage =((byte[])row["Hinh"]);
+            
             this.NSX = nsx;
         }
 

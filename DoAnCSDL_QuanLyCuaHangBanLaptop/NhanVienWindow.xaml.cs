@@ -23,5 +23,10 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
         {
             InitializeComponent();
         }
+
+        private void FutureDatePicker_Loaded(object sender, RoutedEventArgs e)
+        {
+            FutureDatePicker.SelectedDate = DateTime.Now.AddDays(0);
+        }
     }
 }
