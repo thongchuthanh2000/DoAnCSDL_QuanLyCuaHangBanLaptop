@@ -39,13 +39,24 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
         private string _TenSP;
         public string TenSP { get => _TenSP; set { _TenSP = value; OnPropertyChanged(); } }
-        public int MaSP { get; set; }
-        public int SoLuong { get; set; }
+       
+        private int _MaSP;
 
-        public int MaGiaoDich { get; set; }
-        public int TongTien { get; set; }
-        public DateTime? NgayGiaoDich { get; set; }
-        public string ViTriKho { get; set; }
+        public int MaSP { get => _MaSP; set { _MaSP = value; OnPropertyChanged(); } }
+
+        private int _SoLuong;
+        public int SoLuong { get => _SoLuong; set { _SoLuong = value;OnPropertyChanged(); } }
+
+        private int _MaGiaoDich;
+        public int MaGiaoDich { get => _MaGiaoDich; set { _MaGiaoDich = value; OnPropertyChanged(); } }
+        private int _TongTien;
+        public int TongTien { get => _TongTien; set { _TongTien = value; OnPropertyChanged(); } }
+
+        private DateTime? _ThoiGian;
+        public DateTime? ThoiGian { get => _ThoiGian; set { _ThoiGian = value; OnPropertyChanged(); } }
+
+        private string _DiaChi;
+        public string DiaChi { get => _DiaChi; set { _DiaChi = value; OnPropertyChanged(); } }
 
 
         private DonNhap _SelectedItem;
@@ -60,8 +71,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 {
                     MaGiaoDich = SelectedItem.MaDonNhap;
                     TongTien = SelectedItem.TongTien;
-                    NgayGiaoDich = SelectedItem.ThoiGian;
-                    ViTriKho = SelectedItem.DiaChi;
+                    ThoiGian = SelectedItem.ThoiGian;
+                    DiaChi = SelectedItem.DiaChi;
                     LoadDonNhap(MaGiaoDich);
                 }
             }
@@ -133,7 +144,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 try
                 {
                     string query = string.Format("Exec dbo.sp_AddDonNhap @MaDonNhap = {0}, @ThoiGian ='{1}', @DiaChi=N'{2}'",
-                    MaGiaoDich, NgayGiaoDich, ViTriKho);
+                    MaGiaoDich, ThoiGian, DiaChi);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadListDonNhap();
                 }
@@ -150,7 +161,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("EXEC sp_ChangeDonNhap @MaDonNhap = {0}, @ThoiGian = '{1}', @DiaChi = N'{2}'", MaGiaoDich, NgayGiaoDich, ViTriKho);
+                    string query = string.Format("EXEC sp_ChangeDonNhap @MaDonNhap = {0}, @ThoiGian = '{1}', @DiaChi = N'{2}'", MaGiaoDich, ThoiGian, DiaChi);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
                     LoadListDonNhap();
@@ -187,7 +198,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec AddDonNhap @MaDonNhap = {0}, @MaSP ={1}, @SoLuong={2}",
+                    string query = string.Format("Exec sp_AddKiemTraDonNhapInfo @MaDonNhap = {0}, @MaSP ={1}, @SoLuong={2}",
                     MaGiaoDich, MaSP, SoLuong);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadDonNhap(SelectedItem.MaDonNhap);

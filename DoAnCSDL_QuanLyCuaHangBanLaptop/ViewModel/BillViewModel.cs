@@ -37,7 +37,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     ChonPTTT();
                     ChonKhuyenMai();
                     MaKhuyenMai = _SelectedBill.MaKhuyenMai;
-
+                    LoadBillInfo(MaBill);
                 }
             }
         }
@@ -171,8 +171,31 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 MessageBox.Show(e.Message);
             }
         }
+
+        public void LoadListBill()
+        {
+            try
+            {
+                List = new ObservableCollection<Bill>();
+
+                DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill");
+
+                foreach (DataRow item in data.Rows)
+                {
+                    Bill bill = new Bill(item);
+                    List.Add(bill);
+                }
+                OnPropertyChanged();
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message);
+            }
+        }
         public BillViewModel()
         {
+            LoadListBill();
+
             LoadListKM();
             LoadListPTThanhToan();
 
@@ -183,10 +206,11 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddBill  @MaBill ={0},@ThoiGian = '{1}', @MaKH ={2},@MaPTTT= {3},@MaKhuyenMai={4}, @MaNV=N{5}",
-                    MaBill, ThoiGian, MaKH, MaPTTT, MaKhuyenMai, MaNV);
+                    string query = string.Format("Exec sp_AddBill  @MaBill ={0},@ThoiGian = '{1}', @MaKH ={2},@MaPTTT= {3},@MaKhuyenMai={4}, @MaNV={5}",
+                    MaBill, ThoiGian, MaKH, SelectedPT_ThanhToan.MaPTTT, SelectedKhuyenMai.MaKhuyenMai, MaNV);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
+                    LoadListBill();
                 }
                 catch (SqlException sqlEx)
                 {
@@ -206,7 +230,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
-                    //LoadListBill();
+                    LoadListBill();
                 }
                 catch (SqlException sqlEx)
                 {
@@ -227,6 +251,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     MaBill, MaSP, SL);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadBillInfo(MaBill);
+                    LoadListBill();
+
                 }
                 catch (SqlException sqlEx)
                 {
@@ -247,6 +273,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                         var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
                         LoadBillInfo(MaBill);
+                        LoadListBill();
+
                     }
                     catch (SqlException sqlEx)
                     {

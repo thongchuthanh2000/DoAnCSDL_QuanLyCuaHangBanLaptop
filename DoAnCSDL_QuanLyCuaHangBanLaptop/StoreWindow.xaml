@@ -60,7 +60,7 @@
             materialDesign:HintAssist.Hint="Thoi Gian" VerticalAlignment="Top">
             <DatePicker.SelectedDate>
                 <Binding
-                    Path="NgayGiaoDich"
+                    Path="ThoiGian"
                     UpdateSourceTrigger="PropertyChanged">
                 </Binding>
             </DatePicker.SelectedDate>
@@ -77,7 +77,7 @@
                  FontFamily="Sitka Subheading"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  Height="44"
-                 Text="{Binding ViTriKho }" Grid.Column="1" 
+                 Text="{Binding DiaChi }" Grid.Column="1" 
                  >
             <materialDesign:HintAssist.Hint>
                 <TextBlock>
@@ -178,8 +178,8 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mà Giao Dịch" DisplayMemberBinding="{Binding MaDonNhap}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày Giao Dịch" DisplayMemberBinding="{Binding NgayGiaoDich}"></GridViewColumn>
-                            <GridViewColumn Header="Vị trí kho" DisplayMemberBinding="{Binding ViTriKho}" ></GridViewColumn>
+                            <GridViewColumn Header="Ngày Giao Dịch" DisplayMemberBinding="{Binding ThoiGian}"></GridViewColumn>
+                            <GridViewColumn Header="Vị trí kho" DisplayMemberBinding="{Binding DiaChi}" ></GridViewColumn>
                             <GridViewColumn Header="Tổng Tiền" DisplayMemberBinding="{Binding TongTien}"></GridViewColumn>
                         </GridView>
                     </ListView.View>

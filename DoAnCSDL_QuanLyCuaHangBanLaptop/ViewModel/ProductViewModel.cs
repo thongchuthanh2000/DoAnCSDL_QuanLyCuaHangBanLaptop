@@ -121,7 +121,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         public string CPU { get => _cPU; set { _cPU = value; OnPropertyChanged(); } }
         public string PIN { get => _pIN; set { _pIN = value; OnPropertyChanged(); } }
         public string TenSPTimKiem { get => _TenSPTimKiem; set { _TenSPTimKiem = value; OnPropertyChanged(); } }
-        public byte[] BitmapImage { get => _BitmapImage; set => _BitmapImage = value; }
+        public byte[] BitmapImage { get => _BitmapImage; set { _BitmapImage = value; OnPropertyChanged(); }  }
 
         private byte[] _BitmapImage;
 
@@ -249,6 +249,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 MessageBox.Show(sqlEx.Message);
             }
+            OnPropertyChanged();
         }
      
         public ProductViewModel()

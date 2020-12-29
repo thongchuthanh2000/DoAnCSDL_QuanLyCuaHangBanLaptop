@@ -34,7 +34,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.MaKhuyenMai = maKhuyenMai;
             this.MaNV = maNV;
         }
-        public Bill(DataRow row, PT_ThanhToan pT_ThanhToan, KhuyenMai khuyenMai)
+        public Bill(DataRow row)
         {
             this.MaBill = (int)row["MaBill"];
             this.TongTien = (int)row["TongTien"];
