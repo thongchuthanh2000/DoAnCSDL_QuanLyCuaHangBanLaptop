@@ -1,11 +1,9 @@
 ﻿using DoAnCSDL_QuanLyCuaHangBanLaptop.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
@@ -105,8 +103,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         }
         private void LoadDonNhap(int id)
         {
-            try
-            {
+            try{
                 Nhap = new ObservableCollection<DonNhapInfo>();
                 string query = string.Format("EXEC dbo.sp_DonNhapInfo @MaDonNhap = {0}", id);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);

@@ -22,9 +22,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public int MaKhuyenMai { get; set; }
 
-        public string DiaChi { get; set; }
+        public int MaNV { get; set; }
 
-        public Bill(int maBill, int tongTien, DateTime thoiGian, int maKH, int maPTTT, int maKhuyenMai, string diaChi , PT_ThanhToan pT_ThanhToan, KhuyenMai khuyenMai)
+        public Bill(int maBill, int tongTien, DateTime thoiGian, int maKH, int maPTTT, int maKhuyenMai, int maNV )
         {
             this.MaBill = maBill;
             this.TongTien = tongTien;
@@ -32,9 +32,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.MaKH = maKH;
             this.MaPTTT = MaPTTT;
             this.MaKhuyenMai = maKhuyenMai;
-            this.DiaChi = diaChi;
-            this.PT_ThanhToan = pT_ThanhToan;
-            this.KhuyenMai = khuyenMai;
+            this.MaNV = maNV;
         }
         public Bill(DataRow row, PT_ThanhToan pT_ThanhToan, KhuyenMai khuyenMai)
         {
@@ -44,15 +42,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.MaKH = (int)row["MaKH"];
             this.MaPTTT = (int)row["MaPTTT"];
             this.MaKhuyenMai = (int)row["MaKhuyenMai"];
-            this.DiaChi = row["DiaChi"].ToString();
-            this.PT_ThanhToan = pT_ThanhToan;
-            this.KhuyenMai = khuyenMai;
+            this.MaNV =(int) row["MaNV"];
         }
 
-        private PT_ThanhToan _PT_ThanhToan;
-        public PT_ThanhToan PT_ThanhToan { get => _PT_ThanhToan; set { _PT_ThanhToan = value; OnPropertyChanged(); } }
-
-        private KhuyenMai _KhuyenMai;
-        public KhuyenMai KhuyenMai { get => _KhuyenMai; set { _KhuyenMai = value; OnPropertyChanged(); } }
     }
 }
