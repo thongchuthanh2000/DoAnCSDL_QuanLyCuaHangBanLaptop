@@ -243,7 +243,7 @@
             <WrapPanel Margin="0,0,-18,0">
                 <Button Command="{Binding AddBillInfoCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteBillInfoCommand}" Content="Xóa" Margin="10" Width="100"></Button>
-                <Button Command="{Binding SuaBillInfoCommand}" Content="Sua" Margin="10" Width="100"/>
+                <Button Command="{Binding EditBillInfoCommand}" Content="Sua" Margin="10" Width="100"/>
 
             </WrapPanel>
         </materialDesign:Card>

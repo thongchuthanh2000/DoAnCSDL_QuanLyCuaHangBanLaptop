@@ -108,6 +108,16 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         private string _TenSPTimKiem;
         private int _TongBan;
         public int TongBan { get => _TongBan; set { _TongBan = value; OnPropertyChanged(); } }
+
+        private string _TenCommand;
+        public string TenCommand { get => _TenCommand; set { _TenCommand = value; OnPropertyChanged(); } }
+
+
+
+        private string _TenBanCommand;
+        public string TenBanCommand { get => _TenBanCommand; set { _TenBanCommand = value; OnPropertyChanged(); } }
+
+
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -135,7 +145,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
                 foreach (DataRow item in data.Rows)
                 {
-                    string qu = string.Format("Select * From  fn_TimKiemNSXByMaNSX ({0})", (int)item["MaNSX"]);
+                    string qu = string.Format("Select * From  dbo.fn_TimKiemNSXByMaNSX ({0})", (int)item["MaNSX"]);
 
 
                     DataTable dataNSX = DataProvider.Instance.ExecuteQuery(qu);
@@ -258,6 +268,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             LoadListSanPham();
             Con = -1;
             Ban = -1;
+            TenCommand = "All";
+            TenBanCommand = "All";
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -265,7 +277,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddHangHoa @MaSP= {0}, @MaNSX ={1}, @TenSP =N'{2}', @CPU =N'{3}', @RAM =N'{4}', @ManHinh = N'{5}', @PIN=N'{6}',@giaGoc= {7},@giaBan={8},@SoLuong ={9}",
+                    string query = string.Format("Exec dbo.sp_AddHangHoa @MaSP= {0}, @MaNSX ={1}, @TenSP =N'{2}', @CPU =N'{3}', @RAM =N'{4}', @ManHinh = N'{5}', @PIN=N'{6}',@giaGoc= {7},@giaBan={8},@SoLuong ={9}",
                        MaHang, SelectedNSX.MaNSX, TenSanPham, CPU.Trim(), RAM.Trim(), ManHinh.Trim(), PIN.Trim(), GiaGoc, GiaBan, SoLuong);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -284,7 +296,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_ChangeHangHoa @MaSP = {0}, @MaNSX ={1}, @TenSP =N'{2}',@CPU =N'{3}', @RAM =N'{4}', @ManHinh = N'{5}', @PIN=N'{6}', @giaGoc= {7},@giaBan={8},@SoLuong ={9}",
+                    string query = string.Format("Exec dbo.sp_ChangeHangHoa @MaSP = {0}, @MaNSX ={1}, @TenSP =N'{2}',@CPU =N'{3}', @RAM =N'{4}', @ManHinh = N'{5}', @PIN=N'{6}', @giaGoc= {7},@giaBan={8},@SoLuong ={9}",
                         MaHang, SelectedNSX.MaNSX, TenSanPham, CPU.Trim(), RAM.Trim(), ManHinh.Trim(), PIN.Trim(), GiaGoc, GiaBan, SoLuong);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -304,7 +316,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_DeleteHangHoa @MaSP = {0}", MaHang);
+                    string query = string.Format("Exec dbo.sp_DeleteHangHoa @MaSP = {0}", MaHang);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -360,46 +372,45 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                Con = 1;
+                Con++;
+                if (Con == 2)
+                {
+                    Con = -1;
+                }
+                if (Con == -1)
+                {
+                    TenCommand = "All";
+                }
+                if (Con == 0)
+                {
+                    TenCommand = "HetHang";
+                }
+                if (Con == 1)
+                    TenCommand = "ConHang";
             });
-            HetHangCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                Con = 0;
-            });
-            AllHangCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                Con = -1;
-            });
-
-
-            TonKhoCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                 Ban= 0;
-            });
+  
             BanChayCommand = new RelayCommand<object>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                Ban = 1;
-            });
-            AllBanCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            }, (p) =>
-            {
-                Ban = -1;
-            });
 
+                Ban++;
+                if (Ban == 2)
+                {
+                    Ban = -1;
+                }
+                if (Ban == -1)
+                {
+                    TenBanCommand = "All";
+                }
+                if (Ban == 0)
+                {
+                    TenBanCommand = "TonKho";
+                }
+                if (Ban == 1)
+                    TenBanCommand = "BanChay";
+            });
             SapXepCommand = new RelayCommand<object>((p) =>
             {
                 return true;

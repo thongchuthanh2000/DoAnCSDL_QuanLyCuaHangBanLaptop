@@ -105,7 +105,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
 
 
         }
-        private void LoadListKM(DateTime? dateBatDau = null, DateTime? dateKetThuc = null)
+        private void LoadListKM(DateTime dateBatDau, DateTime dateKetThuc)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     dateKetThuc = new DateTime(3000, 01, 01);
                 }
 
-                string query = string.Format(" Select * From fn_LoiNhuanKhuyenMai({0},'{1}','{2}')", MaKhuyenMai, dateBatDau, dateKetThuc);
+                string query = string.Format(" Select * From dbo.fn_LoiNhuanKhuyenMai({0},'{1}','{2}')", MaKhuyenMai, dateBatDau, dateKetThuc);
                 DataTable table = DataProvider.Instance.ExecuteQuery(query);
 
                 ChenhLech = (int)table.Rows[0][0];
@@ -206,7 +206,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
+                    string query = string.Format("Exec dbo.sp_AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
                     MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -226,7 +226,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
+                    string query = string.Format("Exec dbo.sp_ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
                                    MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -246,7 +246,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec sp_DeleteKhuyenMai  @MaKhuyenMai = {0}", MaKhuyenMai);
+                string query = string.Format("Exec dbo.sp_DeleteKhuyenMai  @MaKhuyenMai = {0}", MaKhuyenMai);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 

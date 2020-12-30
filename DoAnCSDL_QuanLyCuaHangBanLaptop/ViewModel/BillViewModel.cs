@@ -156,7 +156,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try
             {
                 BillInfo = new ObservableCollection<BillInfo>();
-                string query = string.Format("Exec sp_GetBillInfoByMaBill @MaBill = {0}", Ma);
+                string query = string.Format("Exec dbo.sp_GetBillInfoByMaBill @MaBill = {0}", Ma);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
                 foreach (DataRow item in data.Rows)
@@ -206,7 +206,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddBill  @MaBill ={0},@ThoiGian = '{1}', @MaKH ={2},@MaPTTT= {3},@MaKhuyenMai={4}, @MaNV={5}",
+                    string query = string.Format("Exec dbo.sp_AddBill  @MaBill ={0},@ThoiGian = '{1}', @MaKH ={2},@MaPTTT= {3},@MaKhuyenMai={4}, @MaNV={5}",
                     MaBill, ThoiGian, MaKH, SelectedPT_ThanhToan.MaPTTT, SelectedKhuyenMai.MaKhuyenMai, MaNV);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -225,7 +225,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_ChangeBill  @MaBill = {0}, @ThoiGian ={1},@MaKH= {2},@MaPTTT={3}, @MaKhuyenMai={4}, @MaNV=N{5}",
+                    string query = string.Format("Exec dbo.sp_ChangeBill  @MaBill = {0}, @ThoiGian ={1},@MaKH= {2},@MaPTTT={3}, @MaKhuyenMai={4}, @MaNV=N{5}",
                     MaBill, TongTien, ThoiGian, MaKH, MaPTTT, MaKhuyenMai, MaNV);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -247,7 +247,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddKiemTraBillInfo @MaBill={0},@MaSP ={1}, @SoLuong={2}",
+                    string query = string.Format("Exec dbo.sp_AddKiemTraBillInfo @MaBill={0},@MaSP ={1}, @SoLuong={2}",
                     MaBill, MaSP, SL);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadBillInfo(MaBill);
@@ -267,7 +267,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 {
                     try
                     {
-                        string query = string.Format("Exec sp_ChangeBillInfo @MaBill = {0}, @MaSP ={1}, @SoLuong={2}",
+                        string query = string.Format("Exec dbo.sp_ChangeBillInfo @MaBill = {0}, @MaSP ={1}, @SoLuong={2}",
                         MaBill, MaSP, SL);
 
                         var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -291,7 +291,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         {
             ListPTThanhToan = new ObservableCollection<PT_ThanhToan>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_LIST_PhuongThucThanhToan");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.V_LIST_PhuongThucThanhToan");
 
             foreach (DataRow item in data.Rows)
             {
@@ -307,7 +307,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         {
             ListKhuyenMai = new ObservableCollection<KhuyenMai>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("Exec sp_KhuyenMaiHienTai");
+            DataTable data = DataProvider.Instance.ExecuteQuery("Exec dbo.sp_KhuyenMaiHienTai");
 
             foreach (DataRow item in data.Rows)
             {

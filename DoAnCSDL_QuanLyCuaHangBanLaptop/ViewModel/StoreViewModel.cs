@@ -161,7 +161,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("EXEC sp_ChangeDonNhap @MaDonNhap = {0}, @ThoiGian = '{1}', @DiaChi = N'{2}'", MaGiaoDich, ThoiGian, DiaChi);
+                    string query = string.Format("EXEC dbo.sp_ChangeDonNhap @MaDonNhap = {0}, @ThoiGian = '{1}', @DiaChi = N'{2}'", MaGiaoDich, ThoiGian, DiaChi);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
                     LoadListDonNhap();
@@ -179,7 +179,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("EXEC sp_DeleteDonNhap @MaDonNhap = {0}", MaGiaoDich);
+                    string query = string.Format("EXEC dbo.sp_DeleteDonNhap @MaDonNhap = {0}", MaGiaoDich);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -198,7 +198,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddKiemTraDonNhapInfo @MaDonNhap = {0}, @MaSP ={1}, @SoLuong={2}",
+                    string query = string.Format("Exec dbo.sp_AddKiemTraDonNhapInfo @MaDonNhap = {0}, @MaSP ={1}, @SoLuong={2}",
                     MaGiaoDich, MaSP, SoLuong);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadDonNhap(SelectedItem.MaDonNhap);
@@ -216,7 +216,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_ChangeDonNhapInfo @MaDonNhap = {0}, @MaSP = {1},  @SoLuong = {2}", MaGiaoDich, MaSP, SoLuong);
+                    string query = string.Format("Exec dbo.sp_ChangeDonNhapInfo @MaDonNhap = {0}, @MaSP = {1},  @SoLuong = {2}", MaGiaoDich, MaSP, SoLuong);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -235,7 +235,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                {
                    try
                    {
-                       string query = string.Format("Exec sp_DeleteDonNhapInfo @MaDonNhap = {0}, @MaSP = {1}", MaGiaoDich, MaSP);
+                       string query = string.Format("Exec dbo.sp_DeleteDonNhapInfo @MaDonNhap = {0}, @MaSP = {1}", MaGiaoDich, MaSP);
 
                        var Object = DataProvider.Instance.ExecuteNonQuery(query);
 

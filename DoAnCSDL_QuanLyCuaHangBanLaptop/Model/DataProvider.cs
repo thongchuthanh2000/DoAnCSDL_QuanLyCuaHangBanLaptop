@@ -30,7 +30,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         private DataProvider() { }
 
-        private static string connectionSTR = "Data Source=(local);Initial Catalog=CSDL;Integrated Security=True";
+        public static string connectionSTR = "Data Source=(local);Initial Catalog=CSDL;Integrated Security=True";
 
         public DataTable ExecuteQuery(string query,object[] parameter = null)
         {

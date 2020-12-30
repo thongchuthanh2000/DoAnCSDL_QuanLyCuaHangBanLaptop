@@ -40,7 +40,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (loginVM.IsLogin)
                 {
                     p.Show();
-                    //LoadTonKhoData();
+                 
                 }
                 else
                 {

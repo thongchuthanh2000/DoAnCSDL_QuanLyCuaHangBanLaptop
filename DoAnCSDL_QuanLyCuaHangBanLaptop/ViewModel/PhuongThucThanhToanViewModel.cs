@@ -99,7 +99,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddPT_ThanhToan @MaPTTT = {0}, @TenPTTT =N'{1}'",
+                    string query = string.Format("Exec dbo.sp_AddPT_ThanhToan @MaPTTT = {0}, @TenPTTT =N'{1}'",
                     MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -117,7 +117,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_DeletePT_ThanhToan @MaPTTT={0}", MaPhuongThucThanhToan);
+                    string query = string.Format("Exec dbo.sp_DeletePT_ThanhToan @MaPTTT={0}", MaPhuongThucThanhToan);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
                     LoadListPTThanhToan();
@@ -135,7 +135,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 {
                     try
                     {
-                        string query = string.Format("Exec sp_ChangePT_ThanhToan @MaPTTT={0}, @TenPTTT =N'{1}'", MaPhuongThucThanhToan, TenPhuongThucThanhToan);
+                        string query = string.Format("Exec dbo.sp_ChangePT_ThanhToan @MaPTTT={0}, @TenPTTT =N'{1}'", MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
 
                         var Object = DataProvider.Instance.ExecuteNonQuery(query);

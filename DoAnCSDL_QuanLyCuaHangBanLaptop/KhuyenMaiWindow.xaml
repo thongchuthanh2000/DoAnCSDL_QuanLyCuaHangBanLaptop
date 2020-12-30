@@ -138,14 +138,14 @@
                     <Grid Grid.Row="0">
 
                         <DatePicker
-                            x:Name="ngBatDauXet" Grid.Row="4"  Grid.Column="1" 
-                            Loaded="ngKetThucDate_Loaded"
+                            x:Name="NgBatDauXet" Grid.Row="4"  Grid.Column="1" 
+                            Loaded="ngBatDauXet_Loaded"
                             Margin="1,2,0,0"
                             
                             materialDesign:HintAssist.Hint="Ngày Bắt Đầu">
                             <DatePicker.SelectedDate>
                                 <Binding
-                                     Path="ngBatDauXet"
+                                     Path="NgBatDauXet"
                                     UpdateSourceTrigger="PropertyChanged">
                                 </Binding>
 
@@ -156,18 +156,20 @@
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="26*"/>
-                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="13*"/>
+                            <ColumnDefinition Width="21*"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="87*"/>
                         </Grid.ColumnDefinitions>
 
                         <DatePicker
-                             x:Name="ngKetThucXet" 
+                             x:Name="NgKetThucXet" 
                             Margin="1,2,0,0"
-                           
-                            materialDesign:HintAssist.Hint="Ngày Kết Thúc" Grid.ColumnSpan="2">
+                           Loaded="NgKetThucXet_Loaded"
+                            materialDesign:HintAssist.Hint="Ngày Kết Thúc" Grid.ColumnSpan="4">
                             <DatePicker.SelectedDate>
                                 <Binding
-                                    Path="ngKetThucXet"
+                                    Path="NgKetThucXet"
                                     UpdateSourceTrigger="PropertyChanged">
                                 </Binding>
 

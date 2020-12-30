@@ -55,7 +55,9 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.Chan = row["Chan"].ToString();
             this.TenPQ = row["TenPQ"].ToString();
         }
-       
 
+        public NhanVien()
+        {
+        }
     }
 }

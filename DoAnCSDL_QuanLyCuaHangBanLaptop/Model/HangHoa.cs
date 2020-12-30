@@ -64,9 +64,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
             this.RAM  = row["ram"].ToString();
             this.ManHinh = row["manhinh"].ToString();
             this.PIN  = row["pin"].ToString();
-            
-                this.BitmapImage =((byte[])row["Hinh"]);
-            
+            try
+            {
+                this.BitmapImage = ((byte[])row["Hinh"]);
+            }
+            catch
+            {
+
+            }
             this.NSX = nsx;
         }
 
