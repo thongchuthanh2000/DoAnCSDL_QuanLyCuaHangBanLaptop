@@ -15,9 +15,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         public int MaSP { get; set; }
 
         public int SoLuong  { get; set; }
-
-
         public string TenSP { get; set; }
+
         public DonNhapInfo(int maDonNhap, int maSP, int soLuong, string tenSP)
         {
             this.MaDonNhap = maDonNhap;

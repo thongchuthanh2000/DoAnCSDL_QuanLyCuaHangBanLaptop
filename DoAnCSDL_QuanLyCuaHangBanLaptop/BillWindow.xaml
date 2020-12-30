@@ -126,8 +126,8 @@
             TextAlignment="Center"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="58,6,285,10"
-            Text="Nhập kho"
+            Margin="10,10,94,10"
+            Text="Bill"
             FontSize="15"
             FontWeight="Bold"
             FontFamily="Sitka Subheading"
@@ -167,33 +167,50 @@
             VerticalAlignment="Top"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             Height="44"
-                 Text="{Binding SoLuong}" Grid.Column="2"
+                 Text="{Binding SL}" Grid.Column="2"
                  >
             <materialDesign:HintAssist.Hint>
                 <TextBlock>
-                    <Bold>Số lượng</Bold> ()
+                    <Bold>Số lượng</Bold> 
                 </TextBlock>
             </materialDesign:HintAssist.Hint>
         </TextBox>
         <!--Button Thêm đơn hàng-->
-
+        <TextBox Grid.Row="3" 
+            Margin="0,20,11,0"
+             
+            FontSize="15"
+            FontWeight="Bold"
+            FontFamily="Sitka Subheading"
+            AcceptsReturn="True"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            Height="44"
+                 Text="{Binding TenSP}" Grid.Column="2"
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>Ten SP</Bold> 
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
         <!--Ảnh sản phẩm-->
 
         <!--Danh sách loại sản phẩm-->
-        <materialDesign:Card Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="1" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,23,0,22.231">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <materialDesign:Card Grid.Row="0" Grid.Column="3" Grid.RowSpan="6"  VerticalAlignment="Center" Height="452" Margin="0,2,0,1.545">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="21,0,0,0">
                 <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Height="442" Width="600" >
+                          SelectedItem="{Binding SelectedBill, Mode=TwoWay}" Height="436" Width="540">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Tên Sản Phẩm" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
-                            <GridViewColumn Header="Giá bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
-                            <GridViewColumn Header="Nhà Sản Xuất" DisplayMemberBinding="{Binding NSX.TenNSX}" ></GridViewColumn>
-                            <GridViewColumn Header="Số lương" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                            <GridViewColumn Header="Ram" DisplayMemberBinding="{Binding RAM}"></GridViewColumn>
-                            <GridViewColumn Header="Màn Hình" DisplayMemberBinding="{Binding ManHinh}"></GridViewColumn>
-
-
+                            <GridViewColumn Header="Mà Bill" DisplayMemberBinding="{Binding MaBill}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Giao Dịch" DisplayMemberBinding="{Binding ThoiGian}"></GridViewColumn>
+                            <GridViewColumn Header="Ma KH" DisplayMemberBinding="{Binding MaKH}" ></GridViewColumn>
+                            <GridViewColumn Header="Tổng Tiền" DisplayMemberBinding="{Binding TongTien}"></GridViewColumn>
+                            <GridViewColumn Header="Ma Khuyen Mai" DisplayMemberBinding="{Binding MaKhuyenMai}"></GridViewColumn>
+                            <GridViewColumn Header="Ma PTTT" DisplayMemberBinding="{Binding MaPTTT}"></GridViewColumn>
+                            <GridViewColumn Header="Ma NV" DisplayMemberBinding="{Binding MaNV}"></GridViewColumn>
 
                         </GridView>
                     </ListView.View>
@@ -209,7 +226,7 @@
                           SelectedItem="{Binding SelectedBillInfo, Mode=TwoWay}" Height="436" Width="326">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="ID SanPHam" DisplayMemberBinding="{Binding MaSP}"></GridViewColumn>
+                            <GridViewColumn Header="Ma SanPHam" DisplayMemberBinding="{Binding MaSP}"></GridViewColumn>
                             <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
                             <GridViewColumn Header="TenSP" DisplayMemberBinding="{Binding TenSP}"></GridViewColumn>
 
@@ -226,7 +243,7 @@
             <WrapPanel Margin="0,0,-18,0">
                 <Button Command="{Binding AddBillInfoCommand}" Content="Thêm" Margin="10" Width="100"></Button>
                 <Button Command="{Binding DeleteBillInfoCommand}" Content="Xóa" Margin="10" Width="100"></Button>
-                <Button Command="{Binding SuaBillInfoCommand}" Content="Sua" Margin="10" Width="100"/>
+                <Button Command="{Binding EditBillInfoCommand}" Content="Sua" Margin="10" Width="100"/>
 
             </WrapPanel>
         </materialDesign:Card>
@@ -260,5 +277,22 @@
                   materialDesign:HintAssist.Hint="PTTT" IsEditable="True" 
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="40">
         </ComboBox>
+        <!--ViTriKho -->
+        <TextBox Grid.Row="6"
+                 VerticalAlignment="Top"
+                 Margin="1,20,2,0"
+                 FontWeight ="Bold"
+                 FontSize="15"
+                 FontFamily="Sitka Subheading"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Height="44"
+                 Text="{Binding MaNV }" Grid.Column="2" 
+                 >
+            <materialDesign:HintAssist.Hint>
+                <TextBlock>
+                    <Bold>MaNV</Bold>
+                </TextBlock>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
     </Grid>
 </Window>

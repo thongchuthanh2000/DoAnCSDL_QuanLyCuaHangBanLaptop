@@ -22,8 +22,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         public NSX(int maNSX, string tenNSX, string diaChi)
         {
             this.MaNSX = maNSX;
-            this.TenNSX = (string)tenNSX;
-            this.DiaChi = (string)diaChi;
+            this.TenNSX = tenNSX;
+            this.DiaChi = diaChi;
         }
         public NSX(DataRow row)
         {

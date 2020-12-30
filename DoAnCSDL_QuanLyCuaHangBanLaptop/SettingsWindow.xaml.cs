@@ -40,14 +40,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
         {
             int index = ListViewMenu.SelectedIndex;
             MoveCursorMenu(index);
-            GridPrincipal.Children.Add(new NSXUserControl());
+            GridPrincipal.Children.Add(new PhuongThucThanhToanUserControl());
 
             switch (index)
             {
-                case 0:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new NSXUserControl());
-                    break;
+                //case 0:
+                //    GridPrincipal.Children.Clear();
+                //    GridPrincipal.Children.Add(new NSXUserControl());
+                //    break;
                 case 1:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new PhuongThucThanhToanUserControl());

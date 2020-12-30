@@ -303,52 +303,22 @@
             TextWrapping="Wrap"
            Height="32" Width="198" Grid.Column="4" Grid.ColumnSpan="2" />
 
-        <ComboBox Grid.Column="5"  Grid.Row="1"
-            materialDesign:HintAssist.Hint="Hang"
-            IsEditable="True"
-            Style="{StaticResource MaterialDesignFloatingHintComboBox}" RenderTransformOrigin="1.779,0.775" Margin="0,24,0,18.615">
-            <ComboBoxItem
-                IsSelected="True"
-                DataContext="{Binding HangConCommand }" >
-                Hàng Còn
-            </ComboBoxItem>
-            <ComboBoxItem
-               
-                DataContext="{Binding HetHangCommand }" >
-                Hết Hàng
-            </ComboBoxItem>
-            <ComboBoxItem
-               
-                DataContext="{Binding AllHangCommand }" >
-                All
-            </ComboBoxItem>
-
-        </ComboBox>
-
-        <ComboBox Grid.Column="5"  Grid.Row="2"
-            materialDesign:HintAssist.Hint="Ban"
-            IsEditable="True"
-            Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,24,0,19">
-            <ComboBoxItem
-               
-                DataContext="{Binding TonKhoCommand }" >
-                Tồn Kho
-            </ComboBoxItem>
-            <ComboBoxItem
-                IsSelected="True"
-                DataContext="{Binding BanChayCommand}"
-                >
-                Bán Chạy Gần Đây
-            </ComboBoxItem>
-            <ComboBoxItem
-                IsSelected="True"
-                DataContext="{Binding AllBanCommand}"
-                >
-                All
-            </ComboBoxItem>
+        <Button Command="{Binding HangConCommand}"
+                Content="{Binding TenCommand }" Grid.Column="5"
+                HorizontalAlignment="Center" 
+                Margin="2,2,2,2" Grid.Row="1" 
+                VerticalAlignment="Center" Width="137"
+                Height="49"/>
 
 
-        </ComboBox>
+        <Button Command="{Binding BanChayCommand}"
+                Content="{Binding TenBanCommand }" Grid.Column="5"
+                HorizontalAlignment="Center" 
+                Margin="2,2,2,2" Grid.Row="2" 
+                VerticalAlignment="Center" Width="137"
+                Height="49"/>
+        
+
         <Button Command="{Binding SapXepCommand}" Content="Sắp Xếp" Grid.Column="5" HorizontalAlignment="Left" Margin="5,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="63" Width="84" />
 
 

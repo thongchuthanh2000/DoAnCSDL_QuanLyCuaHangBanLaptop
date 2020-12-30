@@ -24,6 +24,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
         public MainWindow()
         {
             InitializeComponent();
+           
             DispatcherTimer LiveTime = new DispatcherTimer();
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;

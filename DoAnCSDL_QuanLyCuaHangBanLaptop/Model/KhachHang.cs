@@ -20,14 +20,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
         public string SDT { get; set; }
 
         public int TongTien{get; set;}
-        public KhachHang(int maKH, string hoTen, string gioiTinh, string diaChi, string sDT, int TongTien)
+        public KhachHang(int maKH, string hoTen, string gioiTinh, string diaChi, string sDT, int tongTien)
         {
             this.MaKH = maKH;
             this.HoTen = hoTen;
             this.GioiTinh = gioiTinh;
             this.DiaChi = diaChi;
             this.SDT = sDT;
-            this.TongTien = TongTien;
+            this.TongTien = tongTien;
         }
         public KhachHang(DataRow row)
         {

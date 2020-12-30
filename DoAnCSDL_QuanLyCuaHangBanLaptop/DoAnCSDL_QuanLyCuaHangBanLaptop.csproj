@@ -94,6 +94,9 @@
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NSXWindow.xaml.cs">
+      <DependentUpon>NSXWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProductDetailPage.xaml.cs">
       <DependentUpon>ProductDetailPage.xaml</DependentUpon>
     </Compile>
@@ -102,9 +105,6 @@
     </Compile>
     <Compile Include="StoreWindow.xaml.cs">
       <DependentUpon>StoreWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlXAML\NSXUserControl.xaml.cs">
-      <DependentUpon>NSXUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlXAML\PhuongThucThanhToanUserControl.xaml.cs">
       <DependentUpon>PhuongThucThanhToanUserControl.xaml</DependentUpon>
@@ -152,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="NSXWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProductDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,10 +169,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StoreWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControlXAML\NSXUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

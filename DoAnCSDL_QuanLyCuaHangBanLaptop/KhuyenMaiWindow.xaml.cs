@@ -34,5 +34,16 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop
             ngKetThucDate.SelectedDate = DateTime.Now.AddDays(0);
 
         }
+
+        private void NgKetThucXet_Loaded(object sender, RoutedEventArgs e)
+        {
+            NgBatDauXet.SelectedDate = DateTime.Now.AddDays(0);
+
+        }
+
+        private void ngBatDauXet_Loaded(object sender, RoutedEventArgs e)
+        {
+            NgKetThucXet.SelectedDate = DateTime.Now.AddDays(0);
+        }
     }
 }

@@ -39,17 +39,26 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         }
         public void LoadGiaTriThuongHieu(int maNSX)
         {
-            String query = string.Format("Select dbo.fn_GiaTriThuongHieuCuaNSXX({0})", maNSX );
+            String query = string.Format("Select dbo.fn_GiaTriThuongHieuCuaNSX({0})", maNSX );
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
-            GiaTriThuongHieu = (int)data.Rows[0][0];
+            try { GiaTriThuongHieu = (int)data.Rows[0][0]; }
+            catch { GiaTriThuongHieu = 0; }
         }
         public void LoadSoLuong(int maNSX)
         {
+            try
+            {
+                String query = string.Format("Select dbo.fn_TongHangHoaCuaNSX({0})", maNSX);
+                DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
-            String query = string.Format("Select dbo.fn_TongHangHoaCuaNSX({0})", maNSX);
-            DataTable data = DataProvider.Instance.ExecuteQuery(query);
-            TongSP = (int)data.Rows[0][0];
-        }
+            
+                TongSP = (int)data.Rows[0][0];
+            }
+            catch
+            {
+                TongSP = 0;
+            }
+           }
         
         private int _TangDan;
         public int TangDan { get => _TangDan; set { _TangDan = value; OnPropertyChanged(); } }
@@ -83,6 +92,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         public ICommand LoadCommand { get; set; }
         public ICommand UncheckedCommand { get; set; }
         public ICommand TheoCommand { get; set; }
+        private string _TenCommand;
+        public string TenCommand { get => _TenCommand; set { _TenCommand = value; OnPropertyChanged(); } }
         public ICommand SapXepCommand { get; set; }
 
         private void LoadListNSX()
@@ -90,7 +101,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try { 
             List = new ObservableCollection<NSX>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM V_List_NSX");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.V_List_NSX");
 
 
             foreach (DataRow item in data.Rows)
@@ -103,7 +114,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
              catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
         }
         private void LoadListTheoTongHang()
@@ -111,7 +122,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try
             {
                 List = new ObservableCollection<NSX>();
-                string query = string.Format("EXEC sp_SapXepHangHoaTongHangCuaNSX @Tang ={0}", TangDan);
+                string query = string.Format("EXEC dbo.sp_SapXepHangHoaTongHangCuaNSX @Tang ={0}", TangDan);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
 
@@ -126,7 +137,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
 
         }
@@ -135,7 +146,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             try
             {
                 List = new ObservableCollection<NSX>();
-                string query = string.Format("EXEC sp_GiaTriThuongHieu @Tang ={0}", TangDan);
+                string query = string.Format("EXEC dbo.sp_GiaTriThuongHieu @Tang ={0}", TangDan);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
 
@@ -149,7 +160,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
         }
         public NSXViewModel()
@@ -157,6 +168,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             LoadListNSX();
             TangDan = 0;
             Theo = 0;
+            TenCommand = "GiaTriThuongHieu";
             AddCommand = new RelayCommand<object>((p) =>
             {
                 return true;
@@ -164,14 +176,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddNSX @MaNSX = {0}, @TenNSX =N'{1}', @DiaChi =N'{2}'", MaNSX, TenNSX.Trim(), DiaChi.Trim());
+                    string query = string.Format("Exec dbo.sp_AddNSX @MaNSX = {0}, @TenNSX =N'{1}', @DiaChi =N'{2}'", MaNSX, TenNSX.Trim(), DiaChi.Trim());
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
                     LoadListNSX();
                 }
                 catch(SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -182,7 +194,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_DeleteNSX @MaNSX = {0}", MaNSX);
+                    string query = string.Format("Exec dbo.sp_DeleteNSX @MaNSX = {0}", MaNSX);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
@@ -190,7 +202,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });
@@ -211,7 +223,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });
@@ -229,7 +241,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
 
@@ -241,6 +253,15 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }, (p) =>
             {
                 Theo = 1 - Theo;
+                if (Theo == 1)
+                {
+                    TenCommand = "Tong SP";
+
+                }
+                else
+                {
+                    TenCommand = "GiaTriThuongHieu";
+                }
 
             });
             SapXepCommand = new RelayCommand<object>((p) =>

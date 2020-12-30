@@ -19,6 +19,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         public ICommand KhuyenMaiCommand { get; set; }
         public ICommand StoreCommand { get; set; }
         public ICommand KhachHangCommand { get; set; }
+        public ICommand ProducerCommand { get; set; }
+        public ICommand OrderCommand { get; set; }
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -38,7 +40,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 if (loginVM.IsLogin)
                 {
                     p.Show();
-                    //LoadTonKhoData();
+                 
                 }
                 else
                 {
@@ -56,6 +58,8 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             KhuyenMaiCommand = new RelayCommand<object>((p) => { return true; }, (p) => { KhuyenMaiWindow wd = new KhuyenMaiWindow(); wd.ShowDialog(); });
             StoreCommand = new RelayCommand<object>((p) => { return true; }, (p) => {StoreWindow  wd = new StoreWindow(); wd.ShowDialog(); });
             KhachHangCommand = new RelayCommand<object>((p) => { return true; }, (p) => { KhachHangWindow wd = new KhachHangWindow(); wd.ShowDialog(); });
+            ProducerCommand = new RelayCommand<object>((p) => { return true; }, (p) => { NSXWindow wd = new NSXWindow(); wd.ShowDialog(); });
+            OrderCommand = new RelayCommand<object>((p) => { return true; }, (p) => { BillWindow wd = new BillWindow(); wd.ShowDialog(); });
         }
 
 

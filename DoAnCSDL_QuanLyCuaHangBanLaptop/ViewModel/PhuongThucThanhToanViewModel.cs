@@ -35,7 +35,19 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
         {
             string query = string.Format(" Select dbo.fn_TongGiaTriThanhToanBangPTTT ({0}) ", MaPhuongThucThanhToan);
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
-            TongPTTT = (int)data.Rows[0][0];
+            try
+            {
+                TongPTTT = (int)data.Rows[0][0];
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show(sqlEx.Message);
+
+            }
+            catch
+            {
+                TongPTTT = 0;
+            }
         }
 
         private int _TongPTTT;
@@ -72,7 +84,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
         }
 
@@ -87,7 +99,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddPT_ThanhToan @MaPTTT = {0}, @TenPTTT =N'{1}'",
+                    string query = string.Format("Exec dbo.sp_AddPT_ThanhToan @MaPTTT = {0}, @TenPTTT =N'{1}'",
                     MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -95,7 +107,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             });
             DeleteCommand = new RelayCommand<object>((p) =>
@@ -105,14 +117,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_DeletePT_ThanhToan @MaPTTT={0}", MaPhuongThucThanhToan);
+                    string query = string.Format("Exec dbo.sp_DeletePT_ThanhToan @MaPTTT={0}", MaPhuongThucThanhToan);
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
 
                     LoadListPTThanhToan();
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
             }
             );
@@ -123,7 +135,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 {
                     try
                     {
-                        string query = string.Format("Exec sp_ChangePT_ThanhToan @MaPTTT={0}, @TenPTTT =N'{1}'", MaPhuongThucThanhToan, TenPhuongThucThanhToan);
+                        string query = string.Format("Exec dbo.sp_ChangePT_ThanhToan @MaPTTT={0}, @TenPTTT =N'{1}'", MaPhuongThucThanhToan, TenPhuongThucThanhToan);
 
 
                         var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -132,7 +144,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     }
                     catch (SqlException sqlEx)
                     {
-                        MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                        MessageBox.Show(sqlEx.Message);
                     }
                 });
         }

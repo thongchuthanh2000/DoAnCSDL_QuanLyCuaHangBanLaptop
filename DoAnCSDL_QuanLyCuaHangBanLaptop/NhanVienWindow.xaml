@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DoAnCSDL_QuanLyCuaHangBanLaptop"
         mc:Ignorable="d"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         
         Title="NhanVienWindow" Height="568.421" Width="1210.111"
          DataContext="{StaticResource NhanVienVM}"
@@ -69,6 +70,7 @@
 
         <DatePicker
             x:Name="FutureDatePicker"
+            Loaded="FutureDatePicker_Loaded"
             Width="100" Grid.Row="3"  Grid.Column="1" 
               Margin="1,29,1,9.538"
              Height="44"
@@ -259,6 +261,7 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding TenTK}"></GridViewColumn>
                             <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding NgaySinh}"></GridViewColumn>
                             <GridViewColumn Header="Giới Tinh" DisplayMemberBinding="{Binding GioiTinh}" ></GridViewColumn>
                             <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
@@ -283,52 +286,37 @@
 
             </WrapPanel>
         </materialDesign:Card>
-        <Button Command="{Binding ChanCommand}" Content="Chặn" Grid.Column="5" HorizontalAlignment="Left" Margin="12,15,0,0" Grid.Row="3" VerticalAlignment="Top" Width="138" Height="49" Background="#FFF52121"/>
+        <Button Command="{Binding SapXepCommand}" Content="Sắp Xếp" Grid.Column="5" HorizontalAlignment="Center" Margin="2,2,2,2" Grid.Row="3" VerticalAlignment="Top" Width="137" Height="49"/>
+        <Button Command="{Binding ChanCommand}" Content="Chặn" Grid.Column="5" HorizontalAlignment="Left" Margin="12,15,0,0" Grid.Row="4" VerticalAlignment="Top" Width="138" Height="49" Background="#FFF52121"/>
 
 
-        <ComboBox Grid.Column="5"  Grid.Row="1"
-            materialDesign:HintAssist.Hint="Quyen"
-            IsEditable="True"
-            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-            <ComboBoxItem
-                
-                DataContext="{Binding AdminCommand}" >
-                Admin
-            </ComboBoxItem>
-            <ComboBoxItem
-                 IsSelected="True"
-                DataContext="{Binding AllQuyenCommand}" >
-                All
-            </ComboBoxItem>
-            <ComboBoxItem
-               
-                DataContext="{Binding NhanVienCommand}"
-                >
-                Nhan Vien
-            </ComboBoxItem>
-
-        </ComboBox>
-        <ComboBox Grid.Column="5"  Grid.Row="2"
-            materialDesign:HintAssist.Hint="TinhTrang"
-            IsEditable="True"
-            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-            <ComboBoxItem
-                
-                DataContext="{Binding Khoa}" >
-                Khoa
-            </ComboBoxItem>
-
-            <ComboBoxItem
-                
-                DataContext="{Binding KhongKhoa}"
-                >
-                Khong Khoa
-            </ComboBoxItem>
-            <ComboBoxItem
-                IsSelected="True"
-                DataContext="{Binding AllKhoaCommand}" >
-                All
-            </ComboBoxItem>
-        </ComboBox>
+        <!--Quyen-->
+        <TextBox Grid.Row="1"
+                 materialDesign:HintAssist.Hint="Xep Quyen(Admin,Emp)"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="1,20.462,2,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding SXQuyen}" Grid.Column="5" 
+                 />
+        <!--Quyen-->
+        <TextBox Grid.Row="2"
+                 materialDesign:HintAssist.Hint="Khoa(-1:All,0:KoKhoa,1:Khoa)"
+                VerticalAlignment="Top"
+                 FontSize="15"
+                 Margin="1,20.462,2,0"
+                  
+                 Background="Transparent"
+                 FontFamily="Sitka Subheading"
+                 FontWeight="Bold"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                  Height="44"
+                 Text="{Binding SXKhoa}" Grid.Column="5" 
+                 />
     </Grid>
 </Window>

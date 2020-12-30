@@ -100,17 +100,17 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
 
 
         }
-        private void LoadListKM(DateTime? dateBatDau = null, DateTime? dateKetThuc = null)
+        private void LoadListKM(DateTime dateBatDau, DateTime dateKetThuc)
         {
             try
             {
                 List = new ObservableCollection<KhuyenMai>();
-                string query = string.Format("EXEC dbo.sp_TimKiemKhuyenMai @NgayBatDau = {0} ,@NgayKetThuc = {1}", dateBatDau, dateKetThuc);
+                string query = string.Format("EXEC dbo.sp_TimKiemKhuyenMai @NgayBatDau = N'{0}' ,@NgayKetThuc = N'{1}'", dateBatDau, dateKetThuc);
                 DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
                 foreach (DataRow item in data.Rows)
@@ -122,7 +122,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
 
         }
@@ -146,7 +146,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
             return;
 
@@ -165,7 +165,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                     dateKetThuc = new DateTime(3000, 01, 01);
                 }
 
-                string query = string.Format(" Select * From fn_LoiNhuanKhuyenMai({0},'{1}','{2}')", MaKhuyenMai, dateBatDau, dateKetThuc);
+                string query = string.Format(" Select * From dbo.fn_LoiNhuanKhuyenMai({0},'{1}','{2}')", MaKhuyenMai, dateBatDau, dateKetThuc);
                 DataTable table = DataProvider.Instance.ExecuteQuery(query);
 
                 ChenhLech = (int)table.Rows[0][0];
@@ -173,7 +173,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                MessageBox.Show(sqlEx.Message);
             }
             return;
         }
@@ -206,7 +206,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
+                    string query = string.Format("Exec dbo.sp_AddKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
                     MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -214,7 +214,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });
@@ -226,7 +226,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
             {
                 try
                 {
-                    string query = string.Format("Exec sp_ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
+                    string query = string.Format("Exec dbo.sp_ChangeKhuyenMai @MaKhuyenMai = {0}, @GiaTriKhuyenMai ={1}, @NgayBatDau ='{2}',@NgayKetThuc= '{3}'",
                                    MaKhuyenMai, GiaTriKhuyenMai, NgBatDau, NgKetThuc);
 
                     var Object = DataProvider.Instance.ExecuteNonQuery(query);
@@ -235,7 +235,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 }
                 catch (SqlException sqlEx)
                 {
-                    MessageBox.Show("Khong co quyen truy cap Hoac loi du lieu");
+                    MessageBox.Show(sqlEx.Message);
                 }
 
             });
@@ -246,7 +246,7 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.ViewModel
                 return true;
             }, (p) =>
             {
-                string query = string.Format("Exec sp_DeleteKhuyenMai  @MaKhuyenMai = {0}", MaKhuyenMai);
+                string query = string.Format("Exec dbo.sp_DeleteKhuyenMai  @MaKhuyenMai = {0}", MaKhuyenMai);
 
                 var Object = DataProvider.Instance.ExecuteNonQuery(query);
 

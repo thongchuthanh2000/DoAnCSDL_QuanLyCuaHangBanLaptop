@@ -13,23 +13,23 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 
         public int TongTien { get; set; }
 
-        public DateTime? NgayGiaoDich { get; set; }
+        public DateTime? ThoiGian { get; set; }
 
-        public string ViTriKho { get; set; }
+        public string DiaChi { get; set; }
 
-        public DonNhap(int maGiaoDich, int tongTien, DateTime ngayGiaoDich, string viTriKho)
+        public DonNhap(int maGiaoDich, int tongTien, DateTime thoiGian, string diaChi)
         {
             this.MaDonNhap = maGiaoDich;
             this.TongTien = tongTien;
-            this.NgayGiaoDich = ngayGiaoDich;
-            this.ViTriKho = viTriKho;
+            this.ThoiGian = thoiGian;
+            this.DiaChi = diaChi;
         }
         public DonNhap(DataRow row)
         {
             this.MaDonNhap = (int)row["MaDonNhap"];
             this.TongTien = (int)row["TongTien"];
-            this.NgayGiaoDich = (DateTime)row["ThoiGian"];
-            this.ViTriKho = row["DiaChi"].ToString();
+            this.ThoiGian = (DateTime)row["ThoiGian"];
+            this.DiaChi = row["DiaChi"].ToString();
         }
     }
 }

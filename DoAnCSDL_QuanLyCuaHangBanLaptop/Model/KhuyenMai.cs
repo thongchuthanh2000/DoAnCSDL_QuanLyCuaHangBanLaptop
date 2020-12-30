@@ -9,14 +9,14 @@ namespace DoAnCSDL_QuanLyCuaHangBanLaptop.Model
 {
     public class KhuyenMai
     {
-        private int _maKhuyenMai;
+        private int _MaKhuyenMai;
 
         public int GiaTriKhuyenMai { get; set; }
 
         public DateTime NgayBatDau { get; set; }
 
         public DateTime NgayKetThuc { get; set; }
-        public int MaKhuyenMai { get => _maKhuyenMai; set => _maKhuyenMai = value; }
+        public int MaKhuyenMai { get => _MaKhuyenMai; set => _MaKhuyenMai = value; }
 
         public KhuyenMai(int maKhuyenMai, int giaTriKhuyenMai, DateTime ngayBatDau, DateTime ngayKetThuc)
         {
